@@ -1,0 +1,2522 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="@string/settings" >
+        <PreferenceScreen android:title="@string/post" >
+            <PreferenceCategory
+                android:key="post"
+                android:title="@string/post" >
+                <CheckBoxPreference
+                    android:defaultValue="false"
+                    android:key="pref_enable_updatetweet_auto_inituser"
+                    android:title="@string/enable_updatetweet_auto_inituser" />
+
+                <EditTextPreference
+                    android:defaultValue="RT @%USER%: %TEXT%"
+                    android:key="pref_userrt_format"
+                    android:summary="%USER%: ScreenName, %TEXT%: Text"
+                    android:title="@string/userrt_format" />
+
+                <CheckBoxPreference
+                    android:defaultValue="false"
+                    android:key="pref_enable_userrt_format_via"
+                    android:title="@string/enable_userrt_format_via" />
+
+                <PreferenceScreen android:title="@string/notification" >
+                    <PreferenceCategory
+                        android:key="notification"
+                        android:title="@string/notification" >
+                        <PreferenceScreen android:title="@string/notification_done_tweet" >
+                            <PreferenceCategory
+                                android:key="notification_done_tweet"
+                                android:title="@string/notification_done_tweet" >
+                                <CheckBoxPreference
+                                    android:defaultValue="true"
+                                    android:key="pref_enable_notification_done_tweet"
+                                    android:title="@string/enable_notification_done_tweet" />
+
+                                <EditTextPreference
+                                    android:defaultValue="5000"
+                                    android:inputType="number"
+                                    android:key="pref_notification_duration_done_tweet"
+                                    android:maxLength="6"
+                                    android:summary="@string/millisecond"
+                                    android:title="@string/notification_duration_done_tweet" />
+
+                                <PreferenceScreen android:title="@string/notification_vibration_and_led" >
+                                    <PreferenceCategory
+                                        android:key="notification_vibration_and_led"
+                                        android:title="@string/notification_vibration_and_led" >
+                                        <CheckBoxPreference
+                                            android:defaultValue="false"
+                                            android:key="pref_enable_notification_vibration_done_tweet"
+                                            android:title="@string/enable_notification_vibration_done_tweet" />
+                                        <CheckBoxPreference
+                                            android:defaultValue="true"
+                                            android:key="pref_enable_notification_led_done_tweet"
+                                            android:title="@string/enable_notification_led_done_tweet" />
+
+                                        <EditTextPreference
+                                            android:defaultValue="#0000ff"
+                                            android:key="pref_notification_led_color_done_tweet"
+                                            android:maxLength="14"
+                                            android:summary="@string/colorcode"
+                                            android:title="@string/notification_led_color_done_tweet" />
+
+                                        <CheckBoxPreference
+                                            android:defaultValue="false"
+                                            android:key="pref_enable_notification_vibration_onaction_block_create"
+                                            android:title="@string/enable_notification_vibration_onaction_block_create" />
+                                        <CheckBoxPreference
+                                            android:defaultValue="true"
+                                            android:key="pref_enable_notification_led_onaction_block_create"
+                                            android:title="@string/enable_notification_led_onaction_block_create" />
+
+                                        <EditTextPreference
+                                            android:defaultValue="#ff0000"
+                                            android:key="pref_notification_led_color_onaction_block_create"
+                                            android:maxLength="14"
+                                            android:summary="@string/colorcode"
+                                            android:title="@string/notification_led_color_onaction_block_create" />
+
+                                        <CheckBoxPreference
+                                            android:defaultValue="false"
+                                            android:key="pref_enable_notification_vibration_onaction_block_destroy"
+                                            android:title="@string/enable_notification_vibration_onaction_block_destroy" />
+                                        <CheckBoxPreference
+                                            android:defaultValue="true"
+                                            android:key="pref_enable_notification_led_onaction_block_destroy"
+                                            android:title="@string/enable_notification_led_onaction_block_destroy" />
+
+                                        <EditTextPreference
+                                            android:defaultValue="#ff0000"
+                                            android:key="pref_notification_led_color_onaction_block_destroy"
+                                            android:maxLength="14"
+                                            android:summary="@string/colorcode"
+                                            android:title="@string/notification_led_color_onaction_block_destroy" />
+
+                                        <CheckBoxPreference
+                                            android:defaultValue="false"
+                                            android:key="pref_enable_notification_vibration_onaction_del"
+                                            android:title="@string/enable_notification_vibration_onaction_del" />
+                                        <CheckBoxPreference
+                                            android:defaultValue="true"
+                                            android:key="pref_enable_notification_led_onaction_del"
+                                            android:title="@string/enable_notification_led_onaction_del" />
+
+                                        <EditTextPreference
+                                            android:defaultValue="#ff0000"
+                                            android:key="pref_notification_led_color_onaction_del"
+                                            android:maxLength="14"
+                                            android:summary="@string/colorcode"
+                                            android:title="@string/notification_led_color_onaction_del" />
+
+                                        <CheckBoxPreference
+                                            android:defaultValue="false"
+                                            android:key="pref_enable_notification_vibration_onaction_fav_create"
+                                            android:title="@string/enable_notification_vibration_onaction_fav_create" />
+                                        <CheckBoxPreference
+                                            android:defaultValue="true"
+                                            android:key="pref_enable_notification_led_onaction_fav_create"
+                                            android:title="@string/enable_notification_led_onaction_fav_create" />
+
+                                        <EditTextPreference
+                                            android:defaultValue="#ffff00"
+                                            android:key="pref_notification_led_color_onaction_fav_create"
+                                            android:maxLength="14"
+                                            android:summary="@string/colorcode"
+                                            android:title="@string/notification_led_color_onaction_fav_create" />
+
+                                        <CheckBoxPreference
+                                            android:defaultValue="false"
+                                            android:key="pref_enable_notification_vibration_onaction_fav_destroy"
+                                            android:title="@string/enable_notification_vibration_onaction_fav_destroy" />
+                                        <CheckBoxPreference
+                                            android:defaultValue="true"
+                                            android:key="pref_enable_notification_led_onaction_fav_destroy"
+                                            android:title="@string/enable_notification_led_onaction_fav_destroy" />
+
+                                        <EditTextPreference
+                                            android:defaultValue="#ff0000"
+                                            android:key="pref_notification_led_color_onaction_fav_destroy"
+                                            android:maxLength="14"
+                                            android:summary="@string/colorcode"
+                                            android:title="@string/notification_led_color_onaction_fav_destroy" />
+
+                                        <CheckBoxPreference
+                                            android:defaultValue="false"
+                                            android:key="pref_enable_notification_vibration_onaction_favrt"
+                                            android:title="@string/enable_notification_vibration_onaction_favrt" />
+                                        <CheckBoxPreference
+                                            android:defaultValue="true"
+                                            android:key="pref_enable_notification_led_onaction_favrt"
+                                            android:title="@string/enable_notification_led_onaction_favrt" />
+
+                                        <EditTextPreference
+                                            android:defaultValue="#bfff00"
+                                            android:key="pref_notification_led_color_onaction_favrt"
+                                            android:maxLength="14"
+                                            android:summary="@string/colorcode"
+                                            android:title="@string/notification_led_color_onaction_favrt" />
+
+                                        <CheckBoxPreference
+                                            android:defaultValue="false"
+                                            android:key="pref_enable_notification_vibration_onaction_favuserrt"
+                                            android:title="@string/enable_notification_vibration_onaction_favuserrt" />
+                                        <CheckBoxPreference
+                                            android:defaultValue="true"
+                                            android:key="pref_enable_notification_led_onaction_favuserrt"
+                                            android:title="@string/enable_notification_led_onaction_favuserrt" />
+
+                                        <EditTextPreference
+                                            android:defaultValue="#bfff00"
+                                            android:key="pref_notification_led_color_onaction_favuserrt"
+                                            android:maxLength="14"
+                                            android:summary="@string/colorcode"
+                                            android:title="@string/notification_led_color_onaction_favuserrt" />
+
+                                        <CheckBoxPreference
+                                            android:defaultValue="false"
+                                            android:key="pref_enable_notification_vibration_onaction_follow_create"
+                                            android:title="@string/enable_notification_vibration_onaction_follow_create" />
+                                        <CheckBoxPreference
+                                            android:defaultValue="true"
+                                            android:key="pref_enable_notification_led_onaction_follow_create"
+                                            android:title="@string/enable_notification_led_onaction_follow_create" />
+
+                                        <EditTextPreference
+                                            android:defaultValue="#00ffff"
+                                            android:key="pref_notification_led_color_onaction_follow_create"
+                                            android:maxLength="14"
+                                            android:summary="@string/colorcode"
+                                            android:title="@string/notification_led_color_onaction_follow_create" />
+
+                                        <CheckBoxPreference
+                                            android:defaultValue="false"
+                                            android:key="pref_enable_notification_vibration_onaction_follow_destroy"
+                                            android:title="@string/enable_notification_vibration_onaction_follow_destroy" />
+                                        <CheckBoxPreference
+                                            android:defaultValue="true"
+                                            android:key="pref_enable_notification_led_onaction_follow_destroy"
+                                            android:title="@string/enable_notification_led_onaction_follow_destroy" />
+
+                                        <EditTextPreference
+                                            android:defaultValue="#ff0000"
+                                            android:key="pref_notification_led_color_onaction_follow_destroy"
+                                            android:maxLength="14"
+                                            android:summary="@string/colorcode"
+                                            android:title="@string/notification_led_color_onaction_follow_destroy" />
+
+                                        <CheckBoxPreference
+                                            android:defaultValue="false"
+                                            android:key="pref_enable_notification_vibration_onaction_list_add"
+                                            android:title="@string/enable_notification_vibration_onaction_list_add" />
+                                        <CheckBoxPreference
+                                            android:defaultValue="true"
+                                            android:key="pref_enable_notification_led_onaction_list_add"
+                                            android:title="@string/enable_notification_led_onaction_list_add" />
+
+                                        <EditTextPreference
+                                            android:defaultValue="#00ffff"
+                                            android:key="pref_notification_led_color_onaction_list_add"
+                                            android:maxLength="14"
+                                            android:summary="@string/colorcode"
+                                            android:title="@string/notification_led_color_onaction_list_add" />
+
+                                        <CheckBoxPreference
+                                            android:defaultValue="false"
+                                            android:key="pref_enable_notification_vibration_onaction_list_remove"
+                                            android:title="@string/enable_notification_vibration_onaction_list_remove" />
+                                        <CheckBoxPreference
+                                            android:defaultValue="true"
+                                            android:key="pref_enable_notification_led_onaction_list_remove"
+                                            android:title="@string/enable_notification_led_onaction_list_remove" />
+
+                                        <EditTextPreference
+                                            android:defaultValue="#ff0000"
+                                            android:key="pref_notification_led_color_onaction_list_remove"
+                                            android:maxLength="14"
+                                            android:summary="@string/colorcode"
+                                            android:title="@string/notification_led_color_onaction_list_remove" />
+
+                                        <CheckBoxPreference
+                                            android:defaultValue="false"
+                                            android:key="pref_enable_notification_vibration_onaction_pak"
+                                            android:title="@string/enable_notification_vibration_onaction_pak" />
+                                        <CheckBoxPreference
+                                            android:defaultValue="true"
+                                            android:key="pref_enable_notification_led_onaction_pak"
+                                            android:title="@string/enable_notification_led_onaction_pak" />
+
+                                        <EditTextPreference
+                                            android:defaultValue="#0000ff"
+                                            android:key="pref_notification_led_color_onaction_pak"
+                                            android:maxLength="14"
+                                            android:summary="@string/colorcode"
+                                            android:title="@string/notification_led_color_onaction_pak" />
+
+                                        <CheckBoxPreference
+                                            android:defaultValue="false"
+                                            android:key="pref_enable_notification_vibration_onaction_r4s"
+                                            android:title="@string/enable_notification_vibration_onaction_r4s" />
+                                        <CheckBoxPreference
+                                            android:defaultValue="true"
+                                            android:key="pref_enable_notification_led_onaction_r4s"
+                                            android:title="@string/enable_notification_led_onaction_r4s" />
+
+                                        <EditTextPreference
+                                            android:defaultValue="#ff0000"
+                                            android:key="pref_notification_led_color_onaction_r4s"
+                                            android:maxLength="14"
+                                            android:summary="@string/colorcode"
+                                            android:title="@string/notification_led_color_onaction_r4s" />
+
+                                        <CheckBoxPreference
+                                            android:defaultValue="false"
+                                            android:key="pref_enable_notification_vibration_onaction_rt"
+                                            android:title="@string/enable_notification_vibration_onaction_rt" />
+                                        <CheckBoxPreference
+                                            android:defaultValue="true"
+                                            android:key="pref_enable_notification_led_onaction_rt"
+                                            android:title="@string/enable_notification_led_onaction_rt" />
+
+                                        <EditTextPreference
+                                            android:defaultValue="#00ff00"
+                                            android:key="pref_notification_led_color_onaction_rt"
+                                            android:maxLength="14"
+                                            android:summary="@string/colorcode"
+                                            android:title="@string/notification_led_color_onaction_rt" />
+
+                                        <CheckBoxPreference
+                                            android:defaultValue="false"
+                                            android:key="pref_enable_notification_vibration_onaction_userrt"
+                                            android:title="@string/enable_notification_vibration_onaction_userrt" />
+                                        <CheckBoxPreference
+                                            android:defaultValue="true"
+                                            android:key="pref_enable_notification_led_onaction_userrt"
+                                            android:title="@string/enable_notification_led_onaction_userrt" />
+
+                                        <EditTextPreference
+                                            android:defaultValue="#00ff00"
+                                            android:key="pref_notification_led_color_onaction_userrt"
+                                            android:maxLength="14"
+                                            android:summary="@string/colorcode"
+                                            android:title="@string/notification_led_color_onaction_userrt" />
+                                    </PreferenceCategory>
+                                </PreferenceScreen>
+                            </PreferenceCategory>
+                        </PreferenceScreen>
+                        <PreferenceScreen android:title="@string/notification_doing_tweet" >
+                            <PreferenceCategory
+                                android:key="notification_doing_tweet"
+                                android:title="@string/notification_doing_tweet" >
+                                <CheckBoxPreference
+                                    android:defaultValue="true"
+                                    android:key="pref_enable_notification_doing_tweet"
+                                    android:title="@string/enable_notification_doing_tweet" />
+                                <CheckBoxPreference
+                                    android:defaultValue="false"
+                                    android:key="pref_enable_notification_vibration_doing_tweet"
+                                    android:title="@string/enable_notification_vibration_doing_tweet" />
+                                <CheckBoxPreference
+                                    android:defaultValue="false"
+                                    android:key="pref_enable_notification_led_doing_tweet"
+                                    android:title="@string/enable_notification_led_doing_tweet" />
+
+                                <EditTextPreference
+                                    android:defaultValue="#00ffff"
+                                    android:key="pref_notification_led_color_doing_tweet"
+                                    android:maxLength="14"
+                                    android:summary="@string/colorcode"
+                                    android:title="@string/notification_led_color_doing_tweet" />
+                            </PreferenceCategory>
+                        </PreferenceScreen>
+                        <PreferenceScreen android:title="@string/notification_twitterexception" >
+                            <PreferenceCategory
+                                android:key="notification_twitterexception"
+                                android:title="@string/notification_twitterexception" >
+                                <CheckBoxPreference
+                                    android:defaultValue="true"
+                                    android:key="pref_enable_notification_twitterexception"
+                                    android:title="@string/enable_notification_twitterexception" />
+                                <CheckBoxPreference
+                                    android:defaultValue="false"
+                                    android:key="pref_enable_notification_vibration_twitterexception"
+                                    android:title="@string/enable_notification_vibration_twitterexception" />
+                                <CheckBoxPreference
+                                    android:defaultValue="false"
+                                    android:key="pref_enable_notification_led_twitterexception"
+                                    android:title="@string/enable_notification_led_twitterexception" />
+
+                                <EditTextPreference
+                                    android:defaultValue="#ffff00"
+                                    android:key="pref_notification_led_color_twitterexception"
+                                    android:maxLength="14"
+                                    android:summary="@string/colorcode"
+                                    android:title="@string/notification_led_color_twitterexception" />
+                            </PreferenceCategory>
+                        </PreferenceScreen>
+                    </PreferenceCategory>
+                </PreferenceScreen>
+                <PreferenceScreen android:title="@string/show_datetime" >
+                    <PreferenceCategory
+                        android:key="show_datetime"
+                        android:title="@string/show_datetime" >
+                        <EditTextPreference
+                            android:defaultValue="500"
+                            android:key="pref_show_datetime_interval"
+                            android:summary="@string/show_datetime_interval_summary"
+                            android:title="@string/show_datetime_interval" />
+                        <EditTextPreference
+                            android:defaultValue="yyyy/MM/dd HH:mm:ss.SSS"
+                            android:key="pref_show_datetime_format"
+                            android:title="@string/show_datetime_format" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+                <PreferenceScreen android:title="@string/uri_shorten" >
+                    <PreferenceCategory
+                        android:key="uri_shorten"
+                        android:title="@string/uri_shorten" >
+                        <ListPreference
+                            android:defaultValue="TinyURL"
+                            android:entries="@array/pref_uri_shorten_site_entries"
+                            android:entryValues="@array/pref_uri_shorten_site_entries"
+                            android:key="pref_uri_shorten_site"
+                            android:title="@string/uri_shorten_site" />
+
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_uri_shorten_withhttp"
+                            android:title="@string/uri_shorten_withhttp" />
+
+                        <EditTextPreference
+                            android:key="pref_bitly_apikey"
+                            android:title="@string/bitly_apikey" />
+                        <EditTextPreference
+                            android:key="pref_bitly_username"
+                            android:title="@string/bitly_username" />
+                        <EditTextPreference
+                            android:defaultValue="22"
+                            android:inputType="number"
+                            android:key="pref_short_url_length"
+                            android:maxLength="2"
+                            android:summary="@string/short_url_length_summary"
+                            android:title="@string/short_url_length" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+                <PreferenceScreen android:title="@string/pictureappended" >
+                    <PreferenceCategory
+                        android:key="capture_thumbnail"
+                        android:title="@string/capture_thumbnail" >
+                        <ListPreference
+                            android:defaultValue="TWITTER"
+                            android:entries="@array/pref_pictureuploadsite_entries"
+                            android:entryValues="@array/pref_pictureuploadsite_entries"
+                            android:key="pref_pictureuploadsite"
+                            android:title="@string/pictureuploadsite" />
+
+                        <PreferenceScreen android:title="@string/capture_thumbnail" >
+                            <PreferenceCategory
+                                android:key="capture_thumbnail"
+                                android:title="@string/capture_thumbnail" >
+                                <CheckBoxPreference
+                                    android:defaultValue="false"
+                                    android:key="pref_capture_thumbnail_fullpage"
+                                    android:title="@string/capture_thumbnail_fullpage" />
+                                <CheckBoxPreference
+                                    android:defaultValue="false"
+                                    android:key="pref_capture_thumbnail_use_picturelistener"
+                                    android:summary="@string/capture_thumbnail_use_picturelistener"
+                                    android:title="@string/capture_thumbnail_method" />
+
+                                <EditTextPreference
+                                    android:defaultValue="4"
+                                    android:inputType="number"
+                                    android:key="pref_capture_thumbnail_retry"
+                                    android:maxLength="2"
+                                    android:summary=""
+                                    android:title="@string/capture_thumbnail_retry" />
+                                <EditTextPreference
+                                    android:inputType="number"
+                                    android:key="pref_capture_thumbnail_height"
+                                    android:maxLength="4"
+                                    android:summary=""
+                                    android:title="@string/capture_thumbnail_height" />
+                                <EditTextPreference
+                                    android:inputType="number"
+                                    android:key="pref_capture_thumbnail_width"
+                                    android:maxLength="4"
+                                    android:summary=""
+                                    android:title="@string/capture_thumbnail_width" />
+                            </PreferenceCategory>
+                        </PreferenceScreen>
+
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_pictureappended_oome_argb4444"
+                            android:title="@string/pictureappended_oome_argb4444" />
+
+                        <EditTextPreference
+                            android:defaultValue="2"
+                            android:inputType="number"
+                            android:key="pref_pictureappended_oome_insamplesize"
+                            android:maxLength="4"
+                            android:title="@string/pictureappended_oome_insamplesize" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+                <PreferenceScreen android:title="@string/common_header_footer" >
+                    <PreferenceCategory
+                        android:key="common_header_footer"
+                        android:title="@string/common_header_footer" >
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_enable_common_header"
+                            android:title="@string/enable_common_header" />
+
+                        <EditTextPreference
+                            android:key="pref_common_header"
+                            android:title="@string/common_header" />
+
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_enable_common_footer"
+                            android:title="@string/enable_common_footer" />
+
+                        <EditTextPreference
+                            android:key="pref_common_footer"
+                            android:title="@string/common_footer" />
+
+                        <PreferenceScreen android:title="@string/common_header_footer_wear" >
+                            <PreferenceCategory
+                                android:key="common_header_footer_wear"
+                                android:title="@string/common_header_footer_wear" >
+                                <CheckBoxPreference
+                                    android:defaultValue="false"
+                                    android:key="pref_enable_common_header_wear"
+                                    android:title="@string/enable_common_header_wear" />
+
+                                <EditTextPreference
+                                    android:key="pref_common_header_wear"
+                                    android:title="@string/common_header_wear" />
+
+                                <CheckBoxPreference
+                                    android:defaultValue="false"
+                                    android:key="pref_enable_common_footer_wear"
+                                    android:title="@string/enable_common_footer_wear" />
+
+                                <EditTextPreference
+                                    android:key="pref_common_footer_wear"
+                                    android:title="@string/common_footer_wear" />
+                            </PreferenceCategory>
+                        </PreferenceScreen>
+                    </PreferenceCategory>
+                </PreferenceScreen>
+
+                <CheckBoxPreference
+                    android:defaultValue="false"
+                    android:key="pref_enable_header_athome"
+                    android:title="@string/enable_header_athome" />
+                <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:key="pref_enable_keep_headerfooter"
+                    android:title="@string/enable_keep_headerfooter" />
+                <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:key="pref_enable_Kiriban"
+                    android:title="@string/enable_kiriban" />
+
+                <PreferenceScreen android:title="@string/check_ratelimit" >
+                    <PreferenceCategory
+                        android:key="check_ratelimit"
+                        android:title="@string/check_ratelimit" >
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_check_ratelimit_allacounts"
+                            android:title="@string/check_ratelimit_allacounts" />
+                        <CheckBoxPreference
+                            android:defaultValue="true"
+                            android:key="pref_check_ratelimit_detail"
+                            android:title="@string/check_ratelimit_detail" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+                <PreferenceScreen android:title="@string/autotweet" >
+                    <PreferenceCategory
+                        android:key="autotweet"
+                        android:title="@string/autotweet" >
+                        <EditTextPreference
+                            android:defaultValue="0"
+                            android:inputType="number"
+                            android:key="pref_autotweet_wait"
+                            android:summary="@string/millisecond"
+                            android:title="@string/autotweet_wait" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+            </PreferenceCategory>
+        </PreferenceScreen>
+        <PreferenceScreen android:title="@string/receiveintent" >
+            <PreferenceCategory
+                android:key="receiveintent"
+                android:title="@string/receiveintent" >
+                <PreferenceScreen android:title="@string/receivedintent_check" >
+                    <PreferenceCategory
+                        android:key="receivedintent_check"
+                        android:title="@string/receivedintent_check" >
+                        <CheckBoxPreference
+                            android:defaultValue="true"
+                            android:key="pref_receivedintent_check_isbn"
+                            android:title="@string/receivedintent_check_isbn" />
+                        <CheckBoxPreference
+                            android:defaultValue="true"
+                            android:key="pref_receivedintent_check_googlemap"
+                            android:title="@string/receivedintent_check_googlemap" />
+                        <CheckBoxPreference
+                            android:defaultValue="true"
+                            android:key="pref_receivedintent_check_mapion"
+                            android:title="@string/receivedintent_check_mapion" />
+                        <CheckBoxPreference
+                            android:defaultValue="true"
+                            android:key="pref_receivedintent_check_evernote"
+                            android:title="@string/receivedintent_check_evernote" />
+                        <CheckBoxPreference
+                            android:defaultValue="true"
+                            android:key="pref_receivedintent_check_statusuri"
+                            android:title="@string/receivedintent_check_statusuri" />
+                        <CheckBoxPreference
+                            android:defaultValue="true"
+                            android:key="pref_receivedintent_check_uri"
+                            android:title="@string/receivedintent_check_uri" />
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_receivedintent_check_uri_expand"
+                            android:title="@string/receivedintent_check_uri_expand" />
+                        <CheckBoxPreference
+                            android:defaultValue="true"
+                            android:key="pref_receivedintent_check_tweet"
+                            android:title="@string/receivedintent_check_tweet" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+
+                <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:key="pref_receivedintent_charset_autodetection"
+                    android:title="@string/receivedintent_charset_autodetection" />
+
+                <ListPreference
+                    android:defaultValue="UTF-8"
+                    android:entries="@array/pref_receivedintent_charset_entries"
+                    android:entryValues="@array/pref_receivedintent_charset_entries"
+                    android:key="pref_receivedintent_charset"
+                    android:summary=""
+                    android:title="@string/receivedintent_charset" />
+
+                <CheckBoxPreference
+                    android:defaultValue="false"
+                    android:key="pref_receivedintent_uri_add"
+                    android:title="@string/receivedintent_uri_add" />
+                <CheckBoxPreference
+                    android:defaultValue="false"
+                    android:key="pref_receivedintent_uri_webview"
+                    android:title="@string/receivedintent_uri_webview" />
+            </PreferenceCategory>
+        </PreferenceScreen>
+        <PreferenceScreen android:title="@string/sendintent" >
+            <PreferenceCategory
+                android:key="sendintent"
+                android:title="@string/sendintent" >
+                <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:key="pref_add_send_extra"
+                    android:title="@string/add_send_extra" />
+                <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:key="pref_sendintent_text_expanduri"
+                    android:title="@string/sendintent_text_expanduri" />
+
+                <EditTextPreference
+                    android:defaultValue="20"
+                    android:inputType="number"
+                    android:key="pref_map_zoom"
+                    android:maxLength="2"
+                    android:summary="1 - 23"
+                    android:title="@string/map_zoom" />
+            </PreferenceCategory>
+        </PreferenceScreen>
+        <PreferenceScreen android:title="@string/screen" >
+            <PreferenceCategory
+                android:key="screen"
+                android:title="@string/screen" >
+                <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:key="pref_showIcon"
+                    android:title="@string/showicon" />
+                <CheckBoxPreference
+                    android:defaultValue="false"
+                    android:key="pref_showIconWear"
+                    android:title="@string/showiconwear" />
+                <CheckBoxPreference
+                    android:defaultValue="false"
+                    android:key="pref_keepScreenOn"
+                    android:title="@string/keepscreenon" />
+
+                <PreferenceScreen android:title="@string/screen_orientation" >
+                    <PreferenceCategory
+                        android:key="screen_orientation"
+                        android:title="@string/screen_orientation" >
+                        <ListPreference
+                            android:defaultValue="0"
+                            android:entries="@array/pref_screen_orientation_entries"
+                            android:entryValues="@array/pref_screen_orientation_entryvalues"
+                            android:key="pref_screen_orientation_tweet"
+                            android:title="@string/screen_orientation_tweet" />
+                        <ListPreference
+                            android:defaultValue="0"
+                            android:entries="@array/pref_screen_orientation_entries"
+                            android:entryValues="@array/pref_screen_orientation_entryvalues"
+                            android:key="pref_screen_orientation_timeline"
+                            android:title="@string/screen_orientation_timeline" />
+                        <ListPreference
+                            android:defaultValue="0"
+                            android:entries="@array/pref_screen_orientation_entries"
+                            android:entryValues="@array/pref_screen_orientation_entryvalues"
+                            android:key="pref_screen_orientation_twinactivity"
+                            android:title="@string/screen_orientation_twinactivity" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+            </PreferenceCategory>
+        </PreferenceScreen>
+        <PreferenceScreen android:title="@string/network" >
+            <PreferenceCategory
+                android:key="network"
+                android:title="@string/network" >
+                <PreferenceScreen android:title="@string/timeout" >
+                    <PreferenceCategory
+                        android:key="timeout"
+                        android:title="@string/timeout" >
+                        <PreferenceScreen android:title="@string/timeout_t4j" >
+                            <PreferenceCategory
+                                android:key="timeout_t4j"
+                                android:title="@string/timeout_t4j" >
+                                <EditTextPreference
+                                    android:defaultValue="60000"
+                                    android:inputType="number"
+                                    android:key="pref_timeout_t4j_connection"
+                                    android:maxLength="6"
+                                    android:summary="@string/millisecond"
+                                    android:title="@string/timeout_t4j_connection" />
+                                <EditTextPreference
+                                    android:defaultValue="60000"
+                                    android:inputType="number"
+                                    android:key="pref_timeout_t4j_read"
+                                    android:maxLength="6"
+                                    android:summary="@string/millisecond"
+                                    android:title="@string/timeout_t4j_read" />
+                            </PreferenceCategory>
+                        </PreferenceScreen>
+                        <PreferenceScreen android:title="@string/timeout_connection" >
+                            <PreferenceCategory
+                                android:key="timeout_connection"
+                                android:title="@string/timeout_connection" >
+                                <EditTextPreference
+                                    android:defaultValue="60000"
+                                    android:inputType="number"
+                                    android:key="pref_timeout_connection"
+                                    android:maxLength="6"
+                                    android:summary="@string/millisecond"
+                                    android:title="@string/timeout_connection" />
+                                <EditTextPreference
+                                    android:defaultValue="60000"
+                                    android:inputType="number"
+                                    android:key="pref_timeout_connection_expanduri"
+                                    android:maxLength="6"
+                                    android:summary="@string/millisecond"
+                                    android:title="@string/timeout_connection_expanduri" />
+                                <EditTextPreference
+                                    android:defaultValue="60000"
+                                    android:inputType="number"
+                                    android:key="pref_timeout_connection_shortenuri"
+                                    android:maxLength="6"
+                                    android:summary="@string/millisecond"
+                                    android:title="@string/timeout_connection_shortenuri" />
+                                <EditTextPreference
+                                    android:defaultValue="60000"
+                                    android:inputType="number"
+                                    android:key="pref_timeout_connection_imgtag"
+                                    android:maxLength="6"
+                                    android:summary="@string/millisecond"
+                                    android:title="@string/timeout_connection_imgtag" />
+                            </PreferenceCategory>
+                        </PreferenceScreen>
+                        <PreferenceScreen android:title="@string/timeout_so" >
+                            <PreferenceCategory
+                                android:key="timeout_so"
+                                android:title="@string/timeout_so" >
+                                <EditTextPreference
+                                    android:defaultValue="60000"
+                                    android:inputType="number"
+                                    android:key="pref_timeout_so"
+                                    android:maxLength="6"
+                                    android:summary="@string/millisecond"
+                                    android:title="@string/timeout_so" />
+                                <EditTextPreference
+                                    android:defaultValue="60000"
+                                    android:inputType="number"
+                                    android:key="pref_timeout_so_expanduri"
+                                    android:maxLength="6"
+                                    android:summary="@string/millisecond"
+                                    android:title="@string/timeout_so_expanduri" />
+                                <EditTextPreference
+                                    android:defaultValue="60000"
+                                    android:inputType="number"
+                                    android:key="pref_timeout_so_shortenuri"
+                                    android:maxLength="6"
+                                    android:summary="@string/millisecond"
+                                    android:title="@string/timeout_so_shortenuri" />
+                                <EditTextPreference
+                                    android:defaultValue="60000"
+                                    android:inputType="number"
+                                    android:key="pref_timeout_so_imgtag"
+                                    android:maxLength="6"
+                                    android:summary="@string/millisecond"
+                                    android:title="@string/timeout_so_imgtag" />
+                            </PreferenceCategory>
+                        </PreferenceScreen>
+
+                        <EditTextPreference
+                            android:defaultValue="60000"
+                            android:inputType="number"
+                            android:key="pref_timeout_ntp_server"
+                            android:maxLength="6"
+                            android:summary="@string/millisecond"
+                            android:title="@string/timeout_ntp_server" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+                <PreferenceScreen android:title="@string/enable_network_auto_reconnect" >
+                    <PreferenceCategory
+                        android:key="enable_network_auto_reconnect"
+                        android:title="@string/enable_network_auto_reconnect" >
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_enable_network_auto_reconnect_wifi"
+                            android:title="@string/enable_network_auto_reconnect_wifi" />
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_enable_network_auto_reconnect_mobile"
+                            android:title="@string/enable_network_auto_reconnect_mobile" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+                <PreferenceScreen android:title="@string/enable_network_auto_disconnect" >
+                    <PreferenceCategory
+                        android:key="enable_network_auto_disconnect"
+                        android:title="@string/enable_network_auto_disconnect" >
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_enable_network_auto_disconnect_wifi"
+                            android:title="@string/enable_network_auto_disconnect_wifi" />
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_enable_network_auto_disconnect_mobile"
+                            android:title="@string/enable_network_auto_disconnect_mobile" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+                <PreferenceScreen android:title="@string/networkcheck" >
+                    <PreferenceCategory
+                        android:key="networkcheck"
+                        android:title="@string/networkcheck" >
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_enable_networkcheck_wifi_mobile_as_wifi"
+                            android:title="@string/enable_networkcheck_wifi_mobile_as_wifi" />
+
+                        <EditTextPreference
+                            android:defaultValue="27"
+                            android:key="pref_networkcheck_wifi_mobile_as_wifi_linkspeed_threshold"
+                            android:summary="@string/networkcheck_wifi_mobile_as_wifi_linkspeed_threshold_summary"
+                            android:title="@string/networkcheck_wifi_mobile_as_wifi_linkspeed_threshold" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+
+                <EditTextPreference
+                    android:defaultValue=""
+                    android:key="pref_network_wifi_ssid_exception"
+                    android:summary="@string/csv"
+                    android:title="@string/network_wifi_ssid_exception" />
+                <EditTextPreference
+                    android:defaultValue="ntp.jst.mfeed.ad.jp"
+                    android:key="pref_ntp_server"
+                    android:title="@string/ntp_server" />
+            </PreferenceCategory>
+        </PreferenceScreen>
+        <PreferenceScreen android:title="@string/timeline" >
+            <PreferenceCategory
+                android:key="timeline"
+                android:title="@string/timeline" >
+                <PreferenceScreen android:title="@string/enable_expand_uri" >
+                    <PreferenceCategory
+                        android:key="enable_expand_uri"
+                        android:title="@string/enable_expand_uri" >
+                        <PreferenceScreen android:title="@string/enable_expand_uri_wifi" >
+                            <PreferenceCategory
+                                android:key="enable_expand_uri_wifi"
+                                android:title="@string/enable_expand_uri_wifi" >
+                                <PreferenceScreen android:title="@string/enable_expand_uri_timeline" >
+                                    <PreferenceCategory
+                                        android:key="enable_expand_uri_timeline"
+                                        android:title="@string/enable_expand_uri_timeline" >
+                                        <CheckBoxPreference
+                                            android:defaultValue="true"
+                                            android:key="pref_enable_expand_uri_twitter_wifi"
+                                            android:title="@string/enable_expand_uri_twitter_wifi" />
+                                        <CheckBoxPreference
+                                            android:defaultValue="false"
+                                            android:key="pref_enable_expand_uri_thirdparty_wifi"
+                                            android:title="@string/enable_expand_uri_thirdparty_wifi" />
+                                    </PreferenceCategory>
+                                </PreferenceScreen>
+                                <PreferenceScreen android:title="@string/enable_expand_uri_tweetmenu" >
+                                    <PreferenceCategory
+                                        android:key="enable_expand_uri_tweetmenu"
+                                        android:title="@string/enable_expand_uri_tweetmenu" >
+                                        <CheckBoxPreference
+                                            android:defaultValue="true"
+                                            android:key="pref_enable_expand_uri_twitter_tweetmenu_wifi"
+                                            android:title="@string/enable_expand_uri_twitter_tweetmenu_wifi" />
+                                        <CheckBoxPreference
+                                            android:defaultValue="true"
+                                            android:key="pref_enable_expand_uri_thirdparty_tweetmenu_wifi"
+                                            android:title="@string/enable_expand_uri_thirdparty_tweetmenu_wifi" />
+                                    </PreferenceCategory>
+                                </PreferenceScreen>
+                            </PreferenceCategory>
+                        </PreferenceScreen>
+                        <PreferenceScreen android:title="@string/enable_expand_uri_mobile" >
+                            <PreferenceCategory
+                                android:key="enable_expand_uri_mobile"
+                                android:title="@string/enable_expand_uri_mobile" >
+                                <PreferenceScreen android:title="@string/enable_expand_uri_timeline" >
+                                    <PreferenceCategory
+                                        android:key="enable_expand_uri_timeline"
+                                        android:title="@string/enable_expand_uri_timeline" >
+                                        <CheckBoxPreference
+                                            android:defaultValue="true"
+                                            android:key="pref_enable_expand_uri_twitter_mobile"
+                                            android:title="@string/enable_expand_uri_twitter_mobile" />
+                                        <CheckBoxPreference
+                                            android:defaultValue="false"
+                                            android:key="pref_enable_expand_uri_thirdparty_mobile"
+                                            android:title="@string/enable_expand_uri_thirdparty_mobile" />
+                                    </PreferenceCategory>
+                                </PreferenceScreen>
+                                <PreferenceScreen android:title="@string/enable_expand_uri_tweetmenu" >
+                                    <PreferenceCategory
+                                        android:key="enable_expand_uri_tweetmenu"
+                                        android:title="@string/enable_expand_uri_tweetmenu" >
+                                        <CheckBoxPreference
+                                            android:defaultValue="true"
+                                            android:key="pref_enable_expand_uri_twitter_tweetmenu_mobile"
+                                            android:title="@string/enable_expand_uri_twitter_tweetmenu_mobile" />
+                                        <CheckBoxPreference
+                                            android:defaultValue="true"
+                                            android:key="pref_enable_expand_uri_thirdparty_tweetmenu_mobile"
+                                            android:title="@string/enable_expand_uri_thirdparty_tweetmenu_mobile" />
+                                    </PreferenceCategory>
+                                </PreferenceScreen>
+                            </PreferenceCategory>
+                        </PreferenceScreen>
+
+                        <EditTextPreference
+                            android:defaultValue="30"
+                            android:inputType="number"
+                            android:key="pref_enable_expand_uri_string_length"
+                            android:maxLength="3"
+                            android:title="@string/enable_expand_uri_string_length" />
+
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_enable_expand_uri_fullurl"
+                            android:title="@string/enable_expand_uri_fullurl" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+                <PreferenceScreen android:title="@string/tl_autorefresh" >
+                    <PreferenceCategory
+                        android:key="tl_autorefresh"
+                        android:title="@string/tl_autorefresh" >
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_enable_tl_interval"
+                            android:summary="@string/enable_tl_interval_summary"
+                            android:title="@string/enable_tl_interval" />
+
+                        <EditTextPreference
+                            android:defaultValue="300"
+                            android:inputType="number"
+                            android:key="pref_tl_interval"
+                            android:maxLength="4"
+                            android:title="@string/tl_interval" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+                <PreferenceScreen android:title="@string/tl_count" >
+                    <PreferenceCategory
+                        android:key="tl_count"
+                        android:title="@string/tl_count" >
+                        <PreferenceScreen android:title="@string/tl_count_wifi" >
+                            <PreferenceCategory
+                                android:key="tl_count_wifi"
+                                android:title="@string/tl_count_wifi" >
+                                <EditTextPreference
+                                    android:defaultValue="200"
+                                    android:inputType="number"
+                                    android:key="pref_home_count"
+                                    android:maxLength="3"
+                                    android:title="@string/home_count" />
+                                <EditTextPreference
+                                    android:defaultValue="20"
+                                    android:inputType="number"
+                                    android:key="pref_mention_count"
+                                    android:maxLength="3"
+                                    android:title="@string/mention_count" />
+                                <EditTextPreference
+                                    android:defaultValue="200"
+                                    android:inputType="number"
+                                    android:key="pref_search_count"
+                                    android:maxLength="3"
+                                    android:title="@string/search_count" />
+                                <EditTextPreference
+                                    android:defaultValue="200"
+                                    android:inputType="number"
+                                    android:key="pref_user_count"
+                                    android:maxLength="3"
+                                    android:title="@string/user_count" />
+                                <EditTextPreference
+                                    android:defaultValue="200"
+                                    android:inputType="number"
+                                    android:key="pref_userfav_count"
+                                    android:maxLength="3"
+                                    android:title="@string/userfav_count" />
+                                <EditTextPreference
+                                    android:defaultValue="200"
+                                    android:inputType="number"
+                                    android:key="pref_userlist_count"
+                                    android:maxLength="3"
+                                    android:title="@string/userlist_count" />
+                                <EditTextPreference
+                                    android:defaultValue="20"
+                                    android:inputType="number"
+                                    android:key="pref_mention_count_mentiontlwidget"
+                                    android:maxLength="3"
+                                    android:title="@string/mention_count_mentiontlwidget" />
+                            </PreferenceCategory>
+                        </PreferenceScreen>
+                        <PreferenceScreen android:title="@string/tl_count_mobile" >
+                            <PreferenceCategory
+                                android:key="tl_count_mobile"
+                                android:title="@string/tl_count_mobile" >
+                                <EditTextPreference
+                                    android:defaultValue="50"
+                                    android:inputType="number"
+                                    android:key="pref_home_count_mobile"
+                                    android:maxLength="3"
+                                    android:title="@string/home_count_mobile" />
+                                <EditTextPreference
+                                    android:defaultValue="20"
+                                    android:inputType="number"
+                                    android:key="pref_mention_count_mobile"
+                                    android:maxLength="3"
+                                    android:title="@string/mention_count_mobile" />
+                                <EditTextPreference
+                                    android:defaultValue="50"
+                                    android:inputType="number"
+                                    android:key="pref_search_count_mobile"
+                                    android:maxLength="3"
+                                    android:title="@string/search_count_mobile" />
+                                <EditTextPreference
+                                    android:defaultValue="50"
+                                    android:inputType="number"
+                                    android:key="pref_user_count_mobile"
+                                    android:maxLength="3"
+                                    android:title="@string/user_count_mobile" />
+                                <EditTextPreference
+                                    android:defaultValue="50"
+                                    android:inputType="number"
+                                    android:key="pref_userfav_count_mobile"
+                                    android:maxLength="3"
+                                    android:title="@string/userfav_count_mobile" />
+                                <EditTextPreference
+                                    android:defaultValue="50"
+                                    android:inputType="number"
+                                    android:key="pref_userlist_count_mobile"
+                                    android:maxLength="3"
+                                    android:title="@string/userlist_count_mobile" />
+                                <EditTextPreference
+                                    android:defaultValue="20"
+                                    android:inputType="number"
+                                    android:key="pref_mention_count_mentiontlwidget_mobile"
+                                    android:maxLength="3"
+                                    android:title="@string/mention_count_mentiontlwidget_mobile" />
+                            </PreferenceCategory>
+                        </PreferenceScreen>
+                    </PreferenceCategory>
+                </PreferenceScreen>
+                <PreferenceScreen android:title="@string/search_unread" >
+                    <PreferenceCategory
+                        android:key="search_unread"
+                        android:title="@string/search_unread" >
+                        <CheckBoxPreference
+                            android:defaultValue="true"
+                            android:key="pref_search_unread_timeline"
+                            android:title="@string/search_unread_timeline" />
+                        <CheckBoxPreference
+                            android:defaultValue="true"
+                            android:key="pref_search_unread_mylasttweet"
+                            android:title="@string/search_unread_mylasttweet" />
+
+                        <EditTextPreference
+                            android:defaultValue="300"
+                            android:inputType="number"
+                            android:key="pref_search_unread_mylasttweet_timeout"
+                            android:maxLength="4"
+                            android:summary="@string/second"
+                            android:title="@string/search_unread_mylasttweet_timeout" />
+                        <EditTextPreference
+                            android:defaultValue=""
+                            android:key="pref_search_unread_mylasttweet_mute_source"
+                            android:summary="@string/csv"
+                            android:title="@string/search_unread_mylasttweet_mute_source" />
+                        <EditTextPreference
+                            android:defaultValue=""
+                            android:key="pref_search_unread_mylasttweet_mute_text"
+                            android:summary="@string/csv"
+                            android:title="@string/search_unread_mylasttweet_mute_text" />
+
+                        <CheckBoxPreference
+                            android:defaultValue="true"
+                            android:key="pref_search_unread_mylastfav"
+                            android:title="@string/search_unread_mylastfav" />
+
+                        <EditTextPreference
+                            android:defaultValue="300"
+                            android:inputType="number"
+                            android:key="pref_search_unread_mylastfav_timeout"
+                            android:maxLength="4"
+                            android:summary="@string/second"
+                            android:title="@string/search_unread_mylastfav_timeout" />
+                        <EditTextPreference
+                            android:defaultValue=""
+                            android:key="pref_search_unread_mylastfav_mute_source"
+                            android:summary="@string/csv"
+                            android:title="@string/search_unread_mylastfav_mute_source" />
+                        <EditTextPreference
+                            android:defaultValue=""
+                            android:key="pref_search_unread_mylastfav_mute_text"
+                            android:summary="@string/csv"
+                            android:title="@string/search_unread_mylastfav_mute_text" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+                <PreferenceScreen android:title="@string/at_the_same_time_pak" >
+                    <PreferenceCategory
+                        android:key="at_the_same_time_pak"
+                        android:title="@string/at_the_same_time_pak" >
+                        <CheckBoxPreference
+                            android:defaultValue="true"
+                            android:key="pref_fav_at_the_same_time_pak"
+                            android:title="@string/fav_at_the_same_time_pak" />
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_retweet_at_the_same_time_pak"
+                            android:title="@string/retweet_at_the_same_time_pak" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+                <PreferenceScreen android:title="@string/mute" >
+                    <PreferenceCategory
+                        android:key="mute"
+                        android:title="@string/mute" >
+                        <EditTextPreference
+                            android:defaultValue=""
+                            android:key="pref_mute_screenname"
+                            android:summary="@string/csv"
+                            android:title="@string/mute_screenname" />
+                        <EditTextPreference
+                            android:defaultValue=""
+                            android:key="pref_mute_text"
+                            android:summary="@string/csv"
+                            android:title="@string/mute_text" />
+                        <EditTextPreference
+                            android:defaultValue=""
+                            android:key="pref_mute_source"
+                            android:summary="@string/csv"
+                            android:title="@string/mute_source" />
+
+                        <PreferenceScreen android:title="@string/mute_time_disc" >
+                            <PreferenceCategory
+                                android:key="mute_time_disc"
+                                android:title="@string/mute_time_disc" >
+                                <EditTextPreference
+                                    android:defaultValue=""
+                                    android:key="pref_mute_time_screenname"
+                                    android:summary="@string/csv"
+                                    android:title="@string/mute_time_screenname" />
+                                <EditTextPreference
+                                    android:defaultValue="600"
+                                    android:inputType="number"
+                                    android:key="pref_mute_time"
+                                    android:maxLength="4"
+                                    android:summary="@string/second"
+                                    android:title="@string/mute_time" />
+                            </PreferenceCategory>
+                        </PreferenceScreen>
+                    </PreferenceCategory>
+                </PreferenceScreen>
+                <PreferenceScreen android:title="@string/tweetmenu" >
+                    <PreferenceCategory
+                        android:key="tweetmenu"
+                        android:title="@string/tweetmenu" >
+                        <CheckBoxPreference
+                            android:defaultValue="true"
+                            android:key="pref_enable_tweetmenu_check_tweet"
+                            android:title="@string/tweetmenu_check_tweet" />
+                        <CheckBoxPreference
+                            android:defaultValue="true"
+                            android:key="pref_enable_tweetmenu_check_favednum"
+                            android:title="@string/tweetmenu_check_favednum" />
+                        <CheckBoxPreference
+                            android:defaultValue="true"
+                            android:key="pref_enable_tweetmenu_check_retweetednum"
+                            android:title="@string/tweetmenu_check_retweetednum" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+                <PreferenceScreen android:title="@string/enable_confirmdialog" >
+                    <PreferenceCategory
+                        android:key="enable_confirmdialog"
+                        android:summary="@string/confirmdialog_summary"
+                        android:title="@string/enable_confirmdialog" >
+                        <CheckBoxPreference
+                            android:defaultValue="true"
+                            android:key="pref_enable_confirmdialog_hidden_allaccount"
+                            android:title="@string/confirmdialog_hidden_allaccount" />
+                        <CheckBoxPreference
+                            android:defaultValue="true"
+                            android:key="pref_confirmdialog_rt"
+                            android:title="@string/confirmdialog_rt" />
+                        <CheckBoxPreference
+                            android:defaultValue="true"
+                            android:key="pref_confirmdialog_userrt"
+                            android:title="@string/confirmdialog_userrt" />
+                        <CheckBoxPreference
+                            android:defaultValue="true"
+                            android:key="pref_confirmdialog_fav"
+                            android:title="@string/confirmdialog_fav" />
+                        <CheckBoxPreference
+                            android:defaultValue="true"
+                            android:key="pref_confirmdialog_block"
+                            android:title="@string/confirmdialog_block" />
+                        <CheckBoxPreference
+                            android:defaultValue="true"
+                            android:key="pref_confirmdialog_r4s"
+                            android:title="@string/confirmdialog_r4s" />
+                        <CheckBoxPreference
+                            android:defaultValue="true"
+                            android:key="pref_confirmdialog_pak"
+                            android:title="@string/confirmdialog_pak" />
+
+                        <EditTextPreference
+                            android:defaultValue=""
+                            android:key="pref_confirmdialog_checkeditems"
+                            android:summary="@string/confirmdialog_checkeditems_summary"
+                            android:title="@string/confirmdialog_checkeditems" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+                <PreferenceScreen android:title="@string/search_lang" >
+                    <PreferenceCategory
+                        android:key="search_lang"
+                        android:title="@string/search_lang" >
+                        <EditTextPreference
+                            android:defaultValue=""
+                            android:key="pref_search_lang_searchtl"
+                            android:title="@string/search_lang_searchtl" />
+                        <EditTextPreference
+                            android:defaultValue=""
+                            android:key="pref_search_lang_strsearchtl"
+                            android:title="@string/search_lang_strsearchtl" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+
+                <ListPreference
+                    android:defaultValue="0"
+                    android:entries="@array/pref_fav_site_entries"
+                    android:entryValues="@array/pref_fav_site_entryvalues"
+                    android:key="pref_fav_site"
+                    android:title="@string/fav_site" />
+
+                <CheckBoxPreference
+                    android:defaultValue="false"
+                    android:key="pref_tl_reload_wifistate_changed"
+                    android:title="@string/tl_reload_wifistate_changed" />
+                <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:key="pref_streaminguserlisttl_track_follow"
+                    android:title="@string/streaminguserlisttl_track_follow" />
+                <CheckBoxPreference
+                    android:defaultValue="false"
+                    android:key="pref_tl_load_direction"
+                    android:summary="@string/tl_load_direction"
+                    android:title="@string/tl_load_direction" />
+                <CheckBoxPreference
+                    android:defaultValue="false"
+                    android:key="pref_userinfo_show_my_profile"
+                    android:title="@string/userinfo_show_my_profile" />
+                <CheckBoxPreference
+                    android:defaultValue="false"
+                    android:key="pref_enable_htmlescape"
+                    android:title="@string/enable_htmlescape" />
+            </PreferenceCategory>
+        </PreferenceScreen>
+        <PreferenceScreen android:title="@string/style" >
+            <PreferenceCategory
+                android:key="style"
+                android:title="@string/style" >
+                <PreferenceScreen android:title="@string/tl_itemsize" >
+                    <PreferenceCategory
+                        android:key="tl_itemsize"
+                        android:title="@string/tl_itemsize" >
+                        <EditTextPreference
+                            android:defaultValue="1"
+                            android:inputType="numberDecimal"
+                            android:key="pref_tl_iconsize"
+                            android:maxLength="3"
+                            android:title="@string/tl_iconsize" />
+                        <EditTextPreference
+                            android:defaultValue="1"
+                            android:inputType="numberDecimal"
+                            android:key="pref_tl_imagesize"
+                            android:maxLength="3"
+                            android:title="@string/tl_imagesize" />
+                        <EditTextPreference
+                            android:defaultValue="-1"
+                            android:inputType="numberSigned"
+                            android:key="pref_header_height"
+                            android:maxLength="5"
+                            android:title="@string/header_height" />
+
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_enable_singleline"
+                            android:title="@string/enable_singleline" />
+
+                        <ListPreference
+                            android:defaultValue="3"
+                            android:entries="@array/pref_tl_retweetedby_multiline_entries"
+                            android:entryValues="@array/pref_tl_retweetedby_multiline_entryvalues"
+                            android:key="pref_tl_retweetedby_multiline"
+                            android:title="@string/tl_retweetedby_multiline" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+                <PreferenceScreen android:title="@string/tl_font" >
+                    <PreferenceCategory
+                        android:key="tl_font"
+                        android:title="@string/tl_font" >
+                        <PreferenceScreen android:title="@string/fontsize" >
+                            <PreferenceCategory
+                                android:key="fontsize"
+                                android:title="@string/fontsize" >
+                                <EditTextPreference
+                                    android:defaultValue="14"
+                                    android:inputType="number"
+                                    android:key="pref_tl_fontsize"
+                                    android:maxLength="3"
+                                    android:title="@string/tl_fontsize" />
+                                <EditTextPreference
+                                    android:defaultValue="14"
+                                    android:inputType="number"
+                                    android:key="pref_tl_fontsize_mentiontlwidget"
+                                    android:title="@string/tl_fontsize_mentiontlwidget" />
+
+                                <PreferenceScreen android:title="@string/fontsize_updatetweet" >
+                                    <PreferenceCategory
+                                        android:key="fontsize_updatetweet"
+                                        android:title="@string/fontsize_updatetweet" >
+                                        <EditTextPreference
+                                            android:defaultValue="14"
+                                            android:inputType="number"
+                                            android:key="pref_tl_fontsize_updatetweet"
+                                            android:title="@string/tl_fontsize_updatetweet" />
+                                        <EditTextPreference
+                                            android:defaultValue="12"
+                                            android:inputType="number"
+                                            android:key="pref_tl_fontsize_updatetweet_button"
+                                            android:title="@string/tl_fontsize_updatetweet_button" />
+                                    </PreferenceCategory>
+                                </PreferenceScreen>
+                                <PreferenceScreen android:title="@string/tl_fontsize_large" >
+                                    <PreferenceCategory
+                                        android:key="tl_fontsize_large"
+                                        android:title="@string/tl_fontsize_large" >
+                                        <CheckBoxPreference
+                                            android:defaultValue="true"
+                                            android:key="pref_tl_fontsize_large_screenname"
+                                            android:title="@string/tl_fontsize_large_screenname" />
+                                        <CheckBoxPreference
+                                            android:defaultValue="true"
+                                            android:key="pref_tl_fontsize_large_url"
+                                            android:title="@string/tl_fontsize_large_url" />
+                                    </PreferenceCategory>
+                                </PreferenceScreen>
+                                <PreferenceScreen android:title="@string/tl_fontsize_small" >
+                                    <PreferenceCategory
+                                        android:key="tl_fontsize_small"
+                                        android:title="@string/tl_fontsize_small" >
+                                        <CheckBoxPreference
+                                            android:defaultValue="true"
+                                            android:key="pref_tl_fontsize_small_username"
+                                            android:title="@string/tl_fontsize_small_username" />
+                                        <CheckBoxPreference
+                                            android:defaultValue="true"
+                                            android:key="pref_tl_fontsize_small_createdat"
+                                            android:title="@string/tl_fontsize_small_createdat" />
+                                        <CheckBoxPreference
+                                            android:defaultValue="true"
+                                            android:key="pref_tl_fontsize_small_source"
+                                            android:title="@string/tl_fontsize_small_source" />
+                                        <CheckBoxPreference
+                                            android:defaultValue="true"
+                                            android:key="pref_tl_fontsize_small_action"
+                                            android:title="@string/tl_fontsize_small_action" />
+                                        <CheckBoxPreference
+                                            android:defaultValue="true"
+                                            android:key="pref_tl_fontsize_small_old_retweet"
+                                            android:title="@string/tl_fontsize_small_old_retweet" />
+                                    </PreferenceCategory>
+                                </PreferenceScreen>
+                            </PreferenceCategory>
+                        </PreferenceScreen>
+
+                        <EditTextPreference
+                            android:defaultValue=""
+                            android:key="pref_tl_fontfilename"
+                            android:summary="@string/tl_fontfilename_summary"
+                            android:title="@string/tl_fontfilename" />
+
+                        <PreferenceScreen android:title="@string/tl_fontfamily_name" >
+                            <PreferenceCategory
+                                android:key="tl_fontfile_name"
+                                android:title="@string/tl_fontfamily_name" >
+                                <ListPreference
+                                    android:defaultValue="0"
+                                    android:entries="@array/pref_tl_fontfamily_name_entries"
+                                    android:entryValues="@array/pref_tl_fontfamily_name_entryvalues"
+                                    android:key="pref_tl_fontfamily_name"
+                                    android:title="@string/tl_fontfamily_name" />
+                                <ListPreference
+                                    android:defaultValue="0"
+                                    android:entries="@array/pref_tl_fontstyle_name_entries"
+                                    android:entryValues="@array/pref_tl_fontstyle_name_entryvalues"
+                                    android:key="pref_tl_fontstyle_name"
+                                    android:title="@string/tl_fontstyle_name" />
+                            </PreferenceCategory>
+                        </PreferenceScreen>
+                    </PreferenceCategory>
+                </PreferenceScreen>
+                <PreferenceScreen android:title="@string/fontcolor" >
+                    <PreferenceCategory
+                        android:key="fontcolor"
+                        android:title="@string/fontcolor" >
+                        <PreferenceScreen android:title="@string/timeline" >
+                            <PreferenceCategory
+                                android:key="timeline"
+                                android:title="@string/timeline" >
+                                <EditTextPreference
+                                    android:defaultValue="#ffffff"
+                                    android:key="pref_tl_fontcolor_screenname"
+                                    android:maxLength="14"
+                                    android:title="@string/tl_fontcolor_screenname" />
+                                <EditTextPreference
+                                    android:defaultValue="#ffffff"
+                                    android:key="pref_tl_fontcolor_username"
+                                    android:maxLength="14"
+                                    android:title="@string/tl_fontcolor_username" />
+
+                                <PreferenceScreen android:title="@string/tl_fontcolor_statustext" >
+                                    <PreferenceCategory
+                                        android:key="tl_fontcolor_statustext"
+                                        android:title="@string/tl_fontcolor_statustext" >
+                                        <EditTextPreference
+                                            android:defaultValue="#ffffff"
+                                            android:key="pref_tl_fontcolor_statustext"
+                                            android:maxLength="14"
+                                            android:title="@string/tl_fontcolor_statustext" />
+                                        <EditTextPreference
+                                            android:defaultValue="#0000ff"
+                                            android:key="pref_tl_fontcolor_statustext_hashtag"
+                                            android:maxLength="14"
+                                            android:title="@string/tl_fontcolor_statustext_hashtag" />
+                                        <EditTextPreference
+                                            android:defaultValue="#0000ff"
+                                            android:key="pref_tl_fontcolor_statustext_location"
+                                            android:maxLength="14"
+                                            android:title="@string/tl_fontcolor_statustext_location" />
+                                        <EditTextPreference
+                                            android:defaultValue="#0000ff"
+                                            android:key="pref_tl_fontcolor_statustext_screenname"
+                                            android:maxLength="14"
+                                            android:title="@string/tl_fontcolor_statustext_screenname" />
+                                        <EditTextPreference
+                                            android:defaultValue="#0000ff"
+                                            android:key="pref_tl_fontcolor_statustext_uri"
+                                            android:maxLength="14"
+                                            android:title="@string/tl_fontcolor_statustext_uri" />
+                                    </PreferenceCategory>
+                                </PreferenceScreen>
+
+                                <EditTextPreference
+                                    android:defaultValue="#ffffff"
+                                    android:key="pref_tl_fontcolor_createdat"
+                                    android:maxLength="14"
+                                    android:title="@string/tl_fontcolor_createdat" />
+                                <EditTextPreference
+                                    android:defaultValue="#ffffff"
+                                    android:key="pref_tl_fontcolor_source"
+                                    android:maxLength="14"
+                                    android:title="@string/tl_fontcolor_source" />
+
+                                <PreferenceScreen android:title="@string/tl_fontcolor_fav" >
+                                    <PreferenceCategory
+                                        android:key="tl_fontcolor_fav"
+                                        android:title="@string/tl_fontcolor_fav" >
+                                        <EditTextPreference
+                                            android:defaultValue="#ffff00"
+                                            android:key="pref_tl_fontcolor_screenname_favedby"
+                                            android:maxLength="14"
+                                            android:title="@string/tl_fontcolor_screenname_favedby" />
+                                        <EditTextPreference
+                                            android:defaultValue="#ffff00"
+                                            android:key="pref_tl_fontcolor_statustext_faved"
+                                            android:maxLength="14"
+                                            android:title="@string/tl_fontcolor_statustext_faved" />
+                                    </PreferenceCategory>
+                                </PreferenceScreen>
+                                <PreferenceScreen android:title="@string/tl_fontcolor_rt" >
+                                    <PreferenceCategory
+                                        android:key="tl_fontcolor_rt"
+                                        android:title="@string/tl_fontcolor_rt" >
+                                        <EditTextPreference
+                                            android:defaultValue="#00cc00"
+                                            android:key="pref_tl_fontcolor_screenname_retweeted"
+                                            android:maxLength="14"
+                                            android:title="@string/tl_fontcolor_screenname_retweeted" />
+                                        <EditTextPreference
+                                            android:defaultValue="#00cc00"
+                                            android:key="pref_tl_fontcolor_username_retweeted"
+                                            android:maxLength="14"
+                                            android:title="@string/tl_fontcolor_username_retweeted" />
+                                        <EditTextPreference
+                                            android:defaultValue="#00cc00"
+                                            android:key="pref_tl_fontcolor_statustext_retweeted"
+                                            android:maxLength="14"
+                                            android:title="@string/tl_fontcolor_statustext_retweeted" />
+                                        <EditTextPreference
+                                            android:defaultValue="#00cc00"
+                                            android:key="pref_tl_fontcolor_createdat_retweeted"
+                                            android:maxLength="14"
+                                            android:title="@string/tl_fontcolor_createdat_retweeted" />
+                                        <EditTextPreference
+                                            android:defaultValue="#00cc00"
+                                            android:key="pref_tl_fontcolor_source_retweeted"
+                                            android:maxLength="14"
+                                            android:title="@string/tl_fontcolor_source_retweeted" />
+                                        <EditTextPreference
+                                            android:defaultValue="#ffffff"
+                                            android:key="pref_tl_fontcolor_screenname_retweetedby"
+                                            android:maxLength="14"
+                                            android:title="@string/tl_fontcolor_screenname_retweetedby" />
+                                        <EditTextPreference
+                                            android:defaultValue="#ffffff"
+                                            android:key="pref_tl_fontcolor_createdat_retweetedby"
+                                            android:maxLength="14"
+                                            android:title="@string/tl_fontcolor_createdat_retweetedby" />
+                                        <EditTextPreference
+                                            android:defaultValue="#ffffff"
+                                            android:key="pref_tl_fontcolor_source_retweetedby"
+                                            android:maxLength="14"
+                                            android:title="@string/tl_fontcolor_source_retweetedby" />
+                                    </PreferenceCategory>
+                                </PreferenceScreen>
+                                <PreferenceScreen android:title="@string/tl_fontcolor_action" >
+                                    <PreferenceCategory
+                                        android:key="tl_fontcolor_action"
+                                        android:title="@string/tl_fontcolor_action" >
+                                        <EditTextPreference
+                                            android:defaultValue="#ff0000"
+                                            android:key="pref_tl_fontcolor_screenname_actedby"
+                                            android:maxLength="14"
+                                            android:title="@string/tl_fontcolor_screenname_actedby" />
+                                        <EditTextPreference
+                                            android:defaultValue="#ff0000"
+                                            android:key="pref_tl_fontcolor_statustext_acted"
+                                            android:maxLength="14"
+                                            android:title="@string/tl_fontcolor_statustext_acted" />
+                                    </PreferenceCategory>
+                                </PreferenceScreen>
+
+                                <EditTextPreference
+                                    android:defaultValue="#ffffff"
+                                    android:key="pref_userinfo_fontcolor_my_profile"
+                                    android:maxLength="14"
+                                    android:title="@string/userinfo_fontcolor_my_profile" />
+                            </PreferenceCategory>
+                        </PreferenceScreen>
+                        <PreferenceScreen android:title="@string/updatetweet" >
+                            <PreferenceCategory
+                                android:key="updatetweet"
+                                android:title="@string/updatetweet" >
+                                <EditTextPreference
+                                    android:defaultValue="#ffffff"
+                                    android:key="pref_tl_fontcolor_text_updatetweet"
+                                    android:maxLength="14"
+                                    android:title="@string/tl_fontcolor_text_updatetweet" />
+                                <EditTextPreference
+                                    android:defaultValue="#ffffff"
+                                    android:key="pref_tl_fontcolor_text_updatetweet_over"
+                                    android:maxLength="14"
+                                    android:title="@string/tl_fontcolor_text_updatetweet_over" />
+                                <EditTextPreference
+                                    android:defaultValue="#000000"
+                                    android:key="pref_tl_fontcolor_text_updatetweet_button_tweet"
+                                    android:maxLength="14"
+                                    android:title="@string/tl_fontcolor_text_updatetweet_button_tweet" />
+                                <EditTextPreference
+                                    android:defaultValue="#000000"
+                                    android:key="pref_tl_fontcolor_text_updatetweet_button_tweet_over"
+                                    android:maxLength="14"
+                                    android:title="@string/tl_fontcolor_text_updatetweet_button_tweet_over" />
+                            </PreferenceCategory>
+                        </PreferenceScreen>
+                        <PreferenceScreen android:title="@string/mentiontlwidget" >
+                            <PreferenceCategory
+                                android:key="mentiontlwidget"
+                                android:title="@string/mentiontlwidget" >
+                                <PreferenceScreen android:title="@string/tl_fontcolor_screenname" >
+                                    <PreferenceCategory
+                                        android:key="tl_fontcolor_screenname"
+                                        android:title="@string/tl_fontcolor_screenname" >
+                                        <EditTextPreference
+                                            android:defaultValue="#000000"
+                                            android:key="pref_tl_fontcolor_screenname_mentiontlwidget"
+                                            android:maxLength="14"
+                                            android:summary="@string/tl_fontcolor_mentiontlwidget_summary"
+                                            android:title="@string/tl_fontcolor_screenname_mentiontlwidget" />
+                                        <EditTextPreference
+                                            android:defaultValue="#00CCFF"
+                                            android:key="pref_tl_fontcolor_screenname_mentiontlwidget_ff"
+                                            android:maxLength="14"
+                                            android:summary="@string/tl_fontcolor_mentiontlwidget_summary"
+                                            android:title="@string/tl_fontcolor_screenname_mentiontlwidget_ff" />
+                                        <EditTextPreference
+                                            android:defaultValue="#00CCFF"
+                                            android:key="pref_tl_fontcolor_screenname_mentiontlwidget_ffnew"
+                                            android:maxLength="14"
+                                            android:summary="@string/tl_fontcolor_mentiontlwidget_summary"
+                                            android:title="@string/tl_fontcolor_screenname_mentiontlwidget_ffnew" />
+                                        <EditTextPreference
+                                            android:defaultValue="#00CCFF"
+                                            android:key="pref_tl_fontcolor_screenname_mentiontlwidget_new"
+                                            android:maxLength="14"
+                                            android:summary="@string/tl_fontcolor_mentiontlwidget_summary"
+                                            android:title="@string/tl_fontcolor_screenname_mentiontlwidget_new" />
+                                    </PreferenceCategory>
+                                </PreferenceScreen>
+                                <PreferenceScreen android:title="@string/tl_fontcolor_statustext" >
+                                    <PreferenceCategory
+                                        android:key="tl_fontcolor_statustext"
+                                        android:title="@string/tl_fontcolor_statustext" >
+                                        <EditTextPreference
+                                            android:defaultValue="#000000"
+                                            android:key="pref_tl_fontcolor_statustext_mentiontlwidget"
+                                            android:maxLength="14"
+                                            android:summary="@string/tl_fontcolor_mentiontlwidget_summary"
+                                            android:title="@string/tl_fontcolor_statustext_mentiontlwidget" />
+                                        <EditTextPreference
+                                            android:defaultValue="#FFFF00"
+                                            android:key="pref_tl_fontcolor_statustext_mentiontlwidget_ff"
+                                            android:maxLength="14"
+                                            android:summary="@string/tl_fontcolor_mentiontlwidget_summary"
+                                            android:title="@string/tl_fontcolor_statustext_mentiontlwidget_ff" />
+                                        <EditTextPreference
+                                            android:defaultValue="#FFFF00"
+                                            android:key="pref_tl_fontcolor_statustext_mentiontlwidget_ffnew"
+                                            android:maxLength="14"
+                                            android:summary="@string/tl_fontcolor_mentiontlwidget_summary"
+                                            android:title="@string/tl_fontcolor_statustext_mentiontlwidget_ffnew" />
+                                        <EditTextPreference
+                                            android:defaultValue="#FFFF00"
+                                            android:key="pref_tl_fontcolor_statustext_mentiontlwidget_new"
+                                            android:maxLength="14"
+                                            android:summary="@string/tl_fontcolor_mentiontlwidget_summary"
+                                            android:title="@string/tl_fontcolor_statustext_mentiontlwidget_new" />
+                                    </PreferenceCategory>
+                                </PreferenceScreen>
+                                <PreferenceScreen android:title="@string/tl_fontcolor_statustext_uri" >
+                                    <PreferenceCategory
+                                        android:key="tl_fontcolor_statustext_uri"
+                                        android:title="@string/tl_fontcolor_statustext_uri" >
+                                        <EditTextPreference
+                                            android:defaultValue="#000000"
+                                            android:key="pref_tl_fontcolor_statustext_uri_mentiontlwidget"
+                                            android:maxLength="14"
+                                            android:summary="@string/tl_fontcolor_mentiontlwidget_summary"
+                                            android:title="@string/tl_fontcolor_statustext_uri_mentiontlwidget" />
+                                        <EditTextPreference
+                                            android:defaultValue="#0000FF"
+                                            android:key="pref_tl_fontcolor_statustext_uri_mentiontlwidget_ff"
+                                            android:maxLength="14"
+                                            android:summary="@string/tl_fontcolor_mentiontlwidget_summary"
+                                            android:title="@string/tl_fontcolor_statustext_uri_mentiontlwidget_ff" />
+                                        <EditTextPreference
+                                            android:defaultValue="#0000FF"
+                                            android:key="pref_tl_fontcolor_statustext_uri_mentiontlwidget_ffnew"
+                                            android:maxLength="14"
+                                            android:summary="@string/tl_fontcolor_mentiontlwidget_summary"
+                                            android:title="@string/tl_fontcolor_statustext_uri_mentiontlwidget_ffnew" />
+                                        <EditTextPreference
+                                            android:defaultValue="#0000FF"
+                                            android:key="pref_tl_fontcolor_statustext_uri_mentiontlwidget_new"
+                                            android:maxLength="14"
+                                            android:summary="@string/tl_fontcolor_mentiontlwidget_summary"
+                                            android:title="@string/tl_fontcolor_statustext_uri_mentiontlwidget_new" />
+                                    </PreferenceCategory>
+                                </PreferenceScreen>
+                            </PreferenceCategory>
+                        </PreferenceScreen>
+
+                        <EditTextPreference
+                            android:defaultValue="#ffffff"
+                            android:key="pref_header_fontcolor"
+                            android:maxLength="14"
+                            android:title="@string/header_fontcolor" />
+                        <EditTextPreference
+                            android:defaultValue="#ffffff"
+                            android:key="pref_tl_fontcolor_buttons"
+                            android:maxLength="14"
+                            android:title="@string/tl_fontcolor_buttons" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+                <PreferenceScreen android:title="@string/bgcolor" >
+                    <PreferenceCategory
+                        android:key="bgcolor"
+                        android:title="@string/bgcolor" >
+                        <EditTextPreference
+                            android:defaultValue="#000000"
+                            android:key="pref_listview_bgcolor"
+                            android:maxLength="14"
+                            android:title="@string/listview_bgcolor" />
+                        <EditTextPreference
+                            android:defaultValue="#000000"
+                            android:key="pref_tl_bgcolor"
+                            android:maxLength="14"
+                            android:title="@string/tl_bgcolor" />
+                        <EditTextPreference
+                            android:defaultValue="#99000000"
+                            android:key="pref_header_bgcolor"
+                            android:maxLength="14"
+                            android:title="@string/header_bgcolor" />
+                        <EditTextPreference
+                            android:defaultValue="#000000"
+                            android:key="pref_tl_bgcolor_buttons"
+                            android:maxLength="14"
+                            android:title="@string/tl_bgcolor_buttons" />
+                        <EditTextPreference
+                            android:defaultValue="#000000"
+                            android:key="pref_tl_bgcolor_updatetweet"
+                            android:maxLength="14"
+                            android:title="@string/tl_bgcolor_updatetweet" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+                <PreferenceScreen android:title="@string/hide_item" >
+                    <PreferenceCategory
+                        android:key="hide_item"
+                        android:title="@string/hide_item" >
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_hide_tl_headericon"
+                            android:title="@string/hide_tl_headericon" />
+
+                        <EditTextPreference
+                            android:key="pref_filter_tl_headericon"
+                            android:maxLength="14"
+                            android:summary="@string/filter_tl_headericon_summary"
+                            android:title="@string/filter_tl_headericon" />
+
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_hide_item_myname"
+                            android:title="@string/hide_item_myname" />
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_hide_item_myicon"
+                            android:title="@string/hide_item_myicon" />
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_hide_item_usericon"
+                            android:title="@string/hide_item_usericon" />
+
+                        <EditTextPreference
+                            android:key="pref_filter_item_usericon"
+                            android:maxLength="14"
+                            android:summary="@string/filter_item_usericon_summary"
+                            android:title="@string/filter_item_usericon" />
+
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_hide_tweet_footer_action"
+                            android:title="@string/hide_tweet_footer_action" />
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_hide_statustl_header"
+                            android:title="@string/hide_statustl_header" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+                <PreferenceScreen android:title="@string/hide_link" >
+                    <PreferenceCategory
+                        android:key="hide_link"
+                        android:title="@string/hide_link" >
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_hide_link_screenname"
+                            android:title="@string/hide_link_screenname" />
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_hide_link_createdat"
+                            android:title="@string/hide_link_createdat" />
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_hide_link_source"
+                            android:title="@string/hide_link_source" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+                <PreferenceScreen android:title="@string/inline_img" >
+                    <PreferenceCategory
+                        android:key="inline_img"
+                        android:title="@string/inline_img" >
+                        <CheckBoxPreference
+                            android:defaultValue="true"
+                            android:key="pref_enable_inline_img_wifi"
+                            android:title="@string/enable_inline_img_wifi" />
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_enable_inline_img_mobile"
+                            android:title="@string/enable_inline_img_mobile" />
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_enable_inline_img_async"
+                            android:title="@string/enable_inline_img_async" />
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_enable_inline_img_volley"
+                            android:title="@string/enable_inline_img_volley" />
+                        <CheckBoxPreference
+                            android:defaultValue="true"
+                            android:key="pref_enable_inline_img_volley_cancel"
+                            android:title="@string/enable_inline_img_volley_cancel" />
+
+                        <EditTextPreference
+                            android:key="pref_filter_item_inline_img"
+                            android:maxLength="14"
+                            android:summary="@string/filter_item_inline_img_summary"
+                            android:title="@string/filter_item_inline_img" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+
+                <CheckBoxPreference
+                    android:defaultValue="false"
+                    android:key="pref_enable_fastscroll"
+                    android:title="@string/enable_fastscroll" />
+
+                <PreferenceScreen android:title="@string/smoothscroll" >
+                    <PreferenceCategory
+                        android:key="smoothscroll"
+                        android:title="@string/smoothscroll" >
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_enable_smoothscroll_load"
+                            android:title="@string/enable_smoothscroll_load" />
+                        <CheckBoxPreference
+                            android:defaultValue="true"
+                            android:key="pref_enable_smoothscroll_search"
+                            android:title="@string/enable_smoothscroll_search" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+                <PreferenceScreen android:title="@string/setselection" >
+                    <PreferenceCategory
+                        android:key="setselection"
+                        android:title="@string/setselection" >
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_setselection_requestfocus"
+                            android:title="@string/setselection_requestfocus" />
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_setselection_requestfocusfromtouch"
+                            android:title="@string/setselection_requestfocusfromtouch" />
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_setselection_setfocusable"
+                            android:title="@string/setselection_setfocusable" />
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_setselection_setfocusableintouchmode"
+                            android:title="@string/setselection_setfocusableintouchmode" />
+                        <CheckBoxPreference
+                            android:defaultValue="true"
+                            android:key="pref_setselection_setselected"
+                            android:title="@string/setselection_setselected" />
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_setselection_setitemchecked"
+                            android:title="@string/setselection_setitemchecked" />
+                        <CheckBoxPreference
+                            android:defaultValue="true"
+                            android:key="pref_setselection_triple"
+                            android:title="@string/setselection_triple" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+
+                <CheckBoxPreference
+                    android:defaultValue="false"
+                    android:key="pref_show_profilebannerimage"
+                    android:title="@string/show_profilebannerimage" />
+            </PreferenceCategory>
+        </PreferenceScreen>
+        <PreferenceScreen android:title="@string/sound" >
+            <PreferenceCategory
+                android:key="sound"
+                android:title="@string/sound" >
+                <PreferenceScreen android:title="@string/tts" >
+                    <PreferenceCategory
+                        android:key="tts"
+                        android:title="@string/tts" >
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_enable_tts"
+                            android:summary="@string/enable_tts_streamingtl_summary"
+                            android:title="@string/enable_tts_streamingtl" />
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_enable_tts_english"
+                            android:title="@string/enable_tts_streamingtl_english" />
+
+                        <EditTextPreference
+                            android:defaultValue="1.0"
+                            android:key="pref_tts_set_pitch"
+                            android:maxLength="3"
+                            android:summary="@string/tts_set_summary"
+                            android:title="@string/tts_set_pitch" />
+                        <EditTextPreference
+                            android:defaultValue="1.0"
+                            android:key="pref_tts_set_rate"
+                            android:maxLength="3"
+                            android:summary="@string/tts_set_summary"
+                            android:title="@string/tts_set_rate" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+                <PreferenceScreen android:title="@string/ringtone_onstart" >
+                    <PreferenceCategory
+                        android:key="ringtone_onstart"
+                        android:title="@string/ringtone_onstart" >
+                        <CheckBoxPreference
+                            android:defaultValue="true"
+                            android:key="pref_enable_ringtone_onstart"
+                            android:title="@string/enable_ringtone_onstart" />
+
+                        <RingtonePreference
+                            android:key="pref_ringtone_onstart_shiobeforandroidactivity"
+                            android:ringtoneType="all"
+                            android:showDefault="true"
+                            android:showSilent="true"
+                            android:title="@string/ringtone_onstart_shiobeforandroidactivity" />
+                        <RingtonePreference
+                            android:key="pref_ringtone_onstart_updatetweet"
+                            android:ringtoneType="all"
+                            android:showDefault="true"
+                            android:showSilent="true"
+                            android:title="@string/ringtone_onstart_updatetweet" />
+                        <RingtonePreference
+                            android:key="pref_ringtone_onstart_updatetweetmultiple"
+                            android:ringtoneType="all"
+                            android:showDefault="true"
+                            android:showSilent="true"
+                            android:title="@string/ringtone_onstart_updatetweetmultiple" />
+                        <RingtonePreference
+                            android:key="pref_ringtone_onstart_tabsactivity"
+                            android:ringtoneType="all"
+                            android:showDefault="true"
+                            android:showSilent="true"
+                            android:title="@string/ringtone_onstart_tabsactivity" />
+                        <RingtonePreference
+                            android:key="pref_ringtone_onstart_twinactivity"
+                            android:ringtoneType="all"
+                            android:showDefault="true"
+                            android:showSilent="true"
+                            android:title="@string/ringtone_onstart_twinactivity" />
+                        <RingtonePreference
+                            android:key="pref_ringtone_onstart_hometl"
+                            android:ringtoneType="all"
+                            android:showDefault="true"
+                            android:showSilent="true"
+                            android:title="@string/ringtone_onstart_hometl" />
+                        <RingtonePreference
+                            android:key="pref_ringtone_onstart_mentiontl"
+                            android:ringtoneType="all"
+                            android:showDefault="true"
+                            android:showSilent="true"
+                            android:title="@string/ringtone_onstart_mentiontl" />
+                        <RingtonePreference
+                            android:key="pref_ringtone_onstart_searchtl"
+                            android:ringtoneType="all"
+                            android:showDefault="true"
+                            android:showSilent="true"
+                            android:title="@string/ringtone_onstart_searchtl" />
+                        <RingtonePreference
+                            android:key="pref_ringtone_onstart_strhometl"
+                            android:ringtoneType="all"
+                            android:showDefault="true"
+                            android:showSilent="true"
+                            android:title="@string/ringtone_onstart_strhometl" />
+                        <RingtonePreference
+                            android:key="pref_ringtone_onstart_strsearchtl"
+                            android:ringtoneType="all"
+                            android:showDefault="true"
+                            android:showSilent="true"
+                            android:title="@string/ringtone_onstart_strsearchtl" />
+                        <RingtonePreference
+                            android:key="pref_ringtone_onstart_struserlisttl"
+                            android:ringtoneType="all"
+                            android:showDefault="true"
+                            android:showSilent="true"
+                            android:title="@string/ringtone_onstart_struserlisttl" />
+                        <RingtonePreference
+                            android:key="pref_ringtone_onstart_userfavtl"
+                            android:ringtoneType="all"
+                            android:showDefault="true"
+                            android:showSilent="true"
+                            android:title="@string/ringtone_onstart_userfavtl" />
+                        <RingtonePreference
+                            android:key="pref_ringtone_onstart_userlisttl"
+                            android:ringtoneType="all"
+                            android:showDefault="true"
+                            android:showSilent="true"
+                            android:title="@string/ringtone_onstart_userlisttl" />
+                        <RingtonePreference
+                            android:key="pref_ringtone_onstart_usertl"
+                            android:ringtoneType="all"
+                            android:showDefault="true"
+                            android:showSilent="true"
+                            android:title="@string/ringtone_onstart_usertl" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+                <PreferenceScreen android:title="@string/ringtone_ontweet" >
+                    <PreferenceCategory
+                        android:key="ringtone_ontweet"
+                        android:title="@string/ringtone_ontweet" >
+                        <CheckBoxPreference
+                            android:defaultValue="true"
+                            android:key="pref_enable_ringtone_ontweet"
+                            android:title="@string/enable_ringtone_ontweet" />
+
+                        <RingtonePreference
+                            android:key="pref_ringtone_ontweet_updatetweet"
+                            android:ringtoneType="all"
+                            android:showDefault="true"
+                            android:showSilent="true"
+                            android:title="@string/ringtone_ontweet_updatetweet" />
+                        <RingtonePreference
+                            android:key="pref_ringtone_ontweet_updatetweetmultiple"
+                            android:ringtoneType="all"
+                            android:showDefault="true"
+                            android:showSilent="true"
+                            android:title="@string/ringtone_ontweet_updatetweetmultiple" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+                <PreferenceScreen android:title="@string/ringtone_onaction" >
+                    <PreferenceCategory
+                        android:key="ringtone_onaction"
+                        android:title="@string/ringtone_onaction" >
+                        <CheckBoxPreference
+                            android:defaultValue="true"
+                            android:key="pref_enable_ringtone_onaction"
+                            android:title="@string/enable_ringtone_onaction" />
+
+                        <RingtonePreference
+                            android:key="pref_ringtone_onaction_block_create"
+                            android:ringtoneType="all"
+                            android:showDefault="true"
+                            android:showSilent="true"
+                            android:title="@string/ringtone_onaction_block_create" />
+                        <RingtonePreference
+                            android:key="pref_ringtone_onaction_block_destroy"
+                            android:ringtoneType="all"
+                            android:showDefault="true"
+                            android:showSilent="true"
+                            android:title="@string/ringtone_onaction_block_destroy" />
+                        <RingtonePreference
+                            android:key="pref_ringtone_onaction_del"
+                            android:ringtoneType="all"
+                            android:showDefault="true"
+                            android:showSilent="true"
+                            android:title="@string/ringtone_onaction_del" />
+                        <RingtonePreference
+                            android:key="pref_ringtone_onaction_fav_create"
+                            android:ringtoneType="all"
+                            android:showDefault="true"
+                            android:showSilent="true"
+                            android:title="@string/ringtone_onaction_fav_create" />
+                        <RingtonePreference
+                            android:key="pref_ringtone_onaction_fav_destroy"
+                            android:ringtoneType="all"
+                            android:showDefault="true"
+                            android:showSilent="true"
+                            android:title="@string/ringtone_onaction_fav_destroy" />
+                        <RingtonePreference
+                            android:key="pref_ringtone_onaction_favrt"
+                            android:ringtoneType="all"
+                            android:showDefault="true"
+                            android:showSilent="true"
+                            android:title="@string/ringtone_onaction_favrt" />
+                        <RingtonePreference
+                            android:key="pref_ringtone_onaction_favuserrt"
+                            android:ringtoneType="all"
+                            android:showDefault="true"
+                            android:showSilent="true"
+                            android:title="@string/ringtone_onaction_favuserrt" />
+                        <RingtonePreference
+                            android:key="pref_ringtone_onaction_follow_create"
+                            android:ringtoneType="all"
+                            android:showDefault="true"
+                            android:showSilent="true"
+                            android:title="@string/ringtone_onaction_follow_create" />
+                        <RingtonePreference
+                            android:key="pref_ringtone_onaction_follow_destroy"
+                            android:ringtoneType="all"
+                            android:showDefault="true"
+                            android:showSilent="true"
+                            android:title="@string/ringtone_onaction_follow_destroy" />
+                        <RingtonePreference
+                            android:key="pref_ringtone_onaction_list_add"
+                            android:ringtoneType="all"
+                            android:showDefault="true"
+                            android:showSilent="true"
+                            android:title="@string/ringtone_onaction_list_add" />
+                        <RingtonePreference
+                            android:key="pref_ringtone_onaction_list_remove"
+                            android:ringtoneType="all"
+                            android:showDefault="true"
+                            android:showSilent="true"
+                            android:title="@string/ringtone_onaction_list_remove" />
+                        <RingtonePreference
+                            android:key="pref_ringtone_onaction_pak"
+                            android:ringtoneType="all"
+                            android:showDefault="true"
+                            android:showSilent="true"
+                            android:title="@string/ringtone_onaction_pak" />
+                        <RingtonePreference
+                            android:key="pref_ringtone_onaction_r4s"
+                            android:ringtoneType="all"
+                            android:showDefault="true"
+                            android:showSilent="true"
+                            android:title="@string/ringtone_onaction_r4s" />
+                        <RingtonePreference
+                            android:key="pref_ringtone_onaction_rt"
+                            android:ringtoneType="all"
+                            android:showDefault="true"
+                            android:showSilent="true"
+                            android:title="@string/ringtone_onaction_rt" />
+                        <RingtonePreference
+                            android:key="pref_ringtone_onaction_userrt"
+                            android:ringtoneType="all"
+                            android:showDefault="true"
+                            android:showSilent="true"
+                            android:title="@string/ringtone_onaction_userrt" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+                <PreferenceScreen android:title="@string/ringtone_onmention" >
+                    <PreferenceCategory
+                        android:key="ringtone_onmention"
+                        android:title="@string/ringtone_onmention" >
+                        <CheckBoxPreference
+                            android:defaultValue="true"
+                            android:key="pref_enable_ringtone_onmention"
+                            android:title="@string/enable_ringtone_onmention" />
+
+                        <EditTextPreference
+                            android:defaultValue="10000"
+                            android:inputType="number"
+                            android:key="pref_ringtone_onmention_mentiontlwidget_length"
+                            android:summary="@string/millisecond"
+                            android:title="@string/ringtone_onmention_mentiontlwidget_length" />
+
+                        <RingtonePreference
+                            android:key="pref_ringtone_onmention_mentiontlwidget"
+                            android:ringtoneType="all"
+                            android:showDefault="true"
+                            android:showSilent="true"
+                            android:title="@string/ringtone_onmention_mentiontlwidget" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+            </PreferenceCategory>
+        </PreferenceScreen>
+        <PreferenceScreen android:title="@string/locationinfo" >
+            <PreferenceCategory
+                android:key="locationinfo"
+                android:title="@string/locationinfo" >
+                <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:key="pref_enable_update_locationinfo"
+                    android:title="@string/enable_update_locationinfo" />
+                <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:key="pref_enable_show_gpssetting_onexit"
+                    android:title="@string/enable_show_gpssetting_onexit" />
+
+                <EditTextPreference
+                    android:defaultValue="300000"
+                    android:inputType="number"
+                    android:key="pref_locationinfo_mintime"
+                    android:title="@string/locationinfo_mintime" />
+
+                <ListPreference
+                    android:defaultValue="0"
+                    android:entries="@array/pref_map_site_entries"
+                    android:entryValues="@array/pref_map_site_entryvalues"
+                    android:key="pref_map_site"
+                    android:title="@string/map_site" />
+                <ListPreference
+                    android:defaultValue="0"
+                    android:entries="@array/pref_reversegeocoding_site_entries"
+                    android:entryValues="@array/pref_reversegeocoding_site_entryvalues"
+                    android:key="pref_reversegeocoding_site"
+                    android:title="@string/reversegeocoding_site" />
+
+                <EditTextPreference
+                    android:defaultValue=""
+                    android:key="pref_reversegeocoding_yahoo_apikey"
+                    android:title="@string/reversegeocoding_yahoo_apikey" />
+
+                <PreferenceScreen android:title="@string/locationinfo_exception" >
+                    <PreferenceCategory
+                        android:key="locationinfo_exception"
+                        android:title="@string/locationinfo_exception" />
+
+                    <CheckBoxPreference
+                        android:defaultValue="false"
+                        android:key="pref_enable_locationinfo_exception"
+                        android:title="@string/enable_locationinfo_exception" />
+
+                    <EditTextPreference
+                        android:defaultValue="35.685326,139.7531 35.681382,139.766084"
+                        android:key="pref_locationinfo_exception_latlng"
+                        android:summary="@string/locationinfo_exception_latlng_summary"
+                        android:title="@string/locationinfo_exception_latlng" />
+                    <EditTextPreference
+                        android:defaultValue="500"
+                        android:inputType="number"
+                        android:key="pref_locationinfo_exception_radius"
+                        android:title="@string/locationinfo_exception_radius" />
+                </PreferenceScreen>
+            </PreferenceCategory>
+        </PreferenceScreen>
+        <PreferenceScreen android:title="@string/batterywidget" >
+            <PreferenceCategory
+                android:key="batterywidget"
+                android:title="@string/batterywidget" >
+                <CheckBoxPreference
+                    android:defaultValue="false"
+                    android:key="pref_enable_batterywidget_tweet"
+                    android:title="@string/enable_batterywidget_tweet" />
+
+                <EditTextPreference
+                    android:defaultValue="0"
+                    android:inputType="number"
+                    android:key="pref_batterywidget_tweet_index"
+                    android:title="@string/batterywidget_tweet_index" />
+                <EditTextPreference
+                    android:defaultValue="10"
+                    android:inputType="number"
+                    android:key="pref_batterywidget_tweet_interval"
+                    android:summary="@string/batterywidget_tweet_interval_summary"
+                    android:title="@string/batterywidget_tweet_interval" />
+                <EditTextPreference
+                    android:defaultValue="100"
+                    android:inputType="number"
+                    android:key="pref_batterywidget_tweet_upper"
+                    android:title="@string/batterywidget_tweet_upper" />
+                <EditTextPreference
+                    android:defaultValue="0"
+                    android:inputType="number"
+                    android:key="pref_batterywidget_tweet_lower"
+                    android:title="@string/batterywidget_tweet_lower" />
+                <EditTextPreference
+                    android:defaultValue=""
+                    android:key="pref_batterywidget_tweet_prefix"
+                    android:title="@string/batterywidget_tweet_prefix" />
+            </PreferenceCategory>
+        </PreferenceScreen>
+        <PreferenceScreen android:title="@string/mentiontlwidget" >
+            <PreferenceCategory
+                android:key="mentiontlwidget"
+                android:title="@string/mentiontlwidget" >
+                <PreferenceScreen android:title="@string/when_to_update" >
+                    <PreferenceCategory
+                        android:key="when_to_update"
+                        android:title="@string/when_to_update" >
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_mentiontlwidget_action_battery_changed"
+                            android:title="@string/mentiontlwidget_action_battery_changed" />
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_mentiontlwidget_action_wifistate_changed"
+                            android:title="@string/mentiontlwidget_action_wifistate_changed" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+
+                <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:key="pref_mentiontlwidget_enable_expand_uri"
+                    android:title="@string/mentiontlwidget_enable_expand_uri" />
+                <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:key="pref_mentiontlwidget_enable_check_mutualfollow"
+                    android:summary="@string/mentiontlwidget_enable_check_mutualfollow"
+                    android:title="@string/mentiontlwidget_enable_check_mutualfollow" />
+                <CheckBoxPreference
+                    android:defaultValue="false"
+                    android:key="pref_mentiontlwidget_only_mutualfollow"
+                    android:summary="@string/mentiontlwidget_only_mutualfollow"
+                    android:title="@string/mentiontlwidget_only_mutualfollow" />
+                <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:key="pref_mentiontlwidget_enable_notification"
+                    android:title="@string/mentiontlwidget_enable_notification" />
+                <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:key="pref_mentiontlwidget_enable_notification_only_newest"
+                    android:title="@string/mentiontlwidget_enable_notification_only_newest" />
+                <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:key="pref_mentiontlwidget_enable_notification_only_mutualfollow"
+                    android:summary="@string/mentiontlwidget_enable_notification_only_mutualfollow"
+                    android:title="@string/mentiontlwidget_enable_notification_only_mutualfollow" />
+
+                <EditTextPreference
+                    android:defaultValue="60"
+                    android:inputType="number"
+                    android:key="pref_mentiontlwidget_interval"
+                    android:summary="@string/second"
+                    android:title="@string/mentiontlwidget_interval" />
+                <EditTextPreference
+                    android:defaultValue="3600"
+                    android:inputType="number"
+                    android:key="pref_mentiontlwidget_new"
+                    android:summary="@string/second"
+                    android:title="@string/mentiontlwidget_new" />
+            </PreferenceCategory>
+        </PreferenceScreen>
+        <PreferenceScreen android:title="@string/androidwear" >
+            <PreferenceCategory
+                android:key="androidwear"
+                android:title="@string/androidwear" >
+                <CheckBoxPreference
+                    android:defaultValue="false"
+                    android:key="pref_enable_wear_replace_dictionary"
+                    android:title="@string/enable_wear_replace_dictionary" />
+
+                <EditTextPreference
+                    android:defaultValue=""
+                    android:key="pref_wear_replace_dictionary"
+                    android:summary="@string/wear_replace_dictionary_summary"
+                    android:title="@string/wear_replace_dictionary" />
+
+                <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:key="pref_enable_wear_rome2kana"
+                    android:title="@string/enable_wear_rome2kana" />
+
+                <EditTextPreference
+                    android:defaultValue="@string/develop_updatetweet_androidwear_choice_defaultvalue"
+                    android:key="pref_develop_updatetweet_androidwear_choice"
+                    android:summary="@string/csv"
+                    android:title="@string/develop_updatetweet_androidwear_choice" />
+                <EditTextPreference
+                    android:defaultValue="@string/develop_mentiontlwidget_androidwear_choice_defaultvalue"
+                    android:key="pref_develop_mentiontlwidget_androidwear_choice"
+                    android:summary="@string/csv"
+                    android:title="@string/develop_mentiontlwidget_androidwear_choice" />
+            </PreferenceCategory>
+        </PreferenceScreen>
+        <PreferenceScreen android:title="@string/twin" >
+            <PreferenceCategory
+                android:key="twin"
+                android:title="@string/twin" >
+                <EditTextPreference
+                    android:defaultValue=""
+                    android:key="pref_twin_uri"
+                    android:summary="@string/twin_uri_summary"
+                    android:title="@string/twin_uri" />
+                <EditTextPreference
+                    android:defaultValue="100"
+                    android:key="pref_twin_width"
+                    android:title="@string/twin_width" />
+            </PreferenceCategory>
+        </PreferenceScreen>
+        <PreferenceScreen android:title="@string/hardkey" >
+            <PreferenceCategory
+                android:key="hardkey"
+                android:title="@string/hardkey" >
+                <PreferenceScreen android:title="@string/hardkey_tl" >
+                    <PreferenceCategory
+                        android:key="hardkey_tl"
+                        android:title="@string/hardkey_tl" >
+                        <ListPreference
+                            android:defaultValue="0"
+                            android:entries="@array/pref_hardkey_tl_volumeup_entries"
+                            android:entryValues="@array/pref_hardkey_tl_volumeup_entryvalues"
+                            android:key="pref_hardkey_tl_volumeup"
+                            android:title="@string/hardkey_tl_volumeup" />
+                        <ListPreference
+                            android:defaultValue="0"
+                            android:entries="@array/pref_hardkey_tl_volumedown_entries"
+                            android:entryValues="@array/pref_hardkey_tl_volumedown_entryvalues"
+                            android:key="pref_hardkey_tl_volumedown"
+                            android:title="@string/hardkey_tl_volumedown" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+                <PreferenceScreen android:title="@string/hardkey_updatetweet" >
+                    <PreferenceCategory
+                        android:key="hardkey_updatetweet"
+                        android:title="@string/hardkey_updatetweet" >
+                        <ListPreference
+                            android:defaultValue="0"
+                            android:entries="@array/pref_hardkey_updatetweet_volumeup_entries"
+                            android:entryValues="@array/pref_hardkey_updatetweet_volumeup_entryvalues"
+                            android:key="pref_hardkey_updatetweet_volumeup"
+                            android:title="@string/hardkey_updatetweet_volumeup" />
+                        <ListPreference
+                            android:defaultValue="0"
+                            android:entries="@array/pref_hardkey_updatetweet_volumedown_entries"
+                            android:entryValues="@array/pref_hardkey_updatetweet_volumedown_entryvalues"
+                            android:key="pref_hardkey_updatetweet_volumedown"
+                            android:title="@string/hardkey_updatetweet_volumedown" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+            </PreferenceCategory>
+        </PreferenceScreen>
+        <PreferenceScreen android:title="@string/etc" >
+            <PreferenceCategory
+                android:key="etc"
+                android:title="@string/etc" >
+                <EditTextPreference
+                    android:defaultValue="4"
+                    android:key="pref_user_index_size"
+                    android:summary="@string/user_index_size_summary"
+                    android:title="@string/user_index_size" />
+                <EditTextPreference
+                    android:defaultValue="0"
+                    android:key="pref_user_index_offset"
+                    android:summary="@string/user_index_offset_summary"
+                    android:title="@string/user_index_offset" />
+                <EditTextPreference
+                    android:key="pref_appPassword"
+                    android:summary="@string/apppassword_summary"
+                    android:title="@string/apppassword" />
+                <EditTextPreference
+                    android:key="pref_useragent"
+                    android:title="@string/useragent" />
+                <EditTextPreference
+                    android:defaultValue=""
+                    android:key="pref_shiobeforandroidactivity_make_shortcut_urls"
+                    android:summary="@string/shiobeforandroidactivity_make_shortcut_urls_summary"
+                    android:title="@string/shiobeforandroidactivity_make_shortcut_urls" />
+
+                <CheckBoxPreference
+                    android:defaultValue="false"
+                    android:key="pref_enable_httpurlconnection_follow_redirects"
+                    android:title="@string/enable_httpurlconnection_follow_redirects" />
+
+                <PreferenceScreen android:title="@string/cooperation_with_webver" >
+                    <PreferenceCategory
+                        android:key="cooperation_with_webver"
+                        android:title="@string/cooperation_with_webver" >
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_enable_cooperation_url"
+                            android:title="@string/enable_cooperation_url" />
+
+                        <EditTextPreference
+                            android:defaultValue="http://www5.pf-x.net/~shiobe/streaming/"
+                            android:key="pref_cooperation_url"
+                            android:summary="@string/cooperation_with_webver"
+                            android:title="@string/cooperation_url" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+                <PreferenceScreen android:title="@string/update_check" >
+                    <PreferenceCategory
+                        android:key="update_check"
+                        android:title="@string/update_check" >
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_enable_update_check"
+                            android:title="@string/enable_update_check" />
+
+                        <EditTextPreference
+                            android:defaultValue="http://localhost/s4a"
+                            android:key="pref_update_check_url"
+                            android:title="@string/update_check_url" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+                <PreferenceScreen android:title="@string/consumerkey" >
+                    <PreferenceCategory
+                        android:key="consumerkey"
+                        android:title="@string/consumerkey" >
+                        <ListPreference
+                            android:defaultValue="0"
+                            android:entries="@array/pref_twitterlogin_mode_entries"
+                            android:entryValues="@array/pref_twitterlogin_mode_entryvalues"
+                            android:key="pref_twitterlogin_mode"
+                            android:title="@string/twitterlogin_mode" />
+
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_enable_consumerkey"
+                            android:title="@string/enable_consumerkey" />
+
+                        <EditTextPreference
+                            android:key="pref_consumerkey"
+                            android:title="@string/consumerkey" />
+                        <EditTextPreference
+                            android:key="pref_consumersecret"
+                            android:title="@string/consumersecret" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+                <PreferenceScreen android:title="@string/develop" >
+                    <PreferenceCategory
+                        android:key="develop"
+                        android:title="@string/develop" >
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_enable_log"
+                            android:title="@string/enable_log" />
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_enable_log_write_sd"
+                            android:title="@string/enable_log_write_sd" />
+                        <CheckBoxPreference
+                            android:defaultValue="false"
+                            android:key="pref_enable_log_statuses"
+                            android:title="@string/enable_log_statuses" />
+
+                        <EditTextPreference
+                            android:key="pref_develop_bookmark"
+                            android:title="@string/develop_bookmark" />
+                    </PreferenceCategory>
+                </PreferenceScreen>
+            </PreferenceCategory>
+        </PreferenceScreen>
+    </PreferenceCategory>
+
+</PreferenceScreen> <!-- Copyright (c) 2013-2016 YA <ya.androidapp@gmail.com> All rights reserved. -->

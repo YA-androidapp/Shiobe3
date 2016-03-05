@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="jp.gr.java_conf.ya.shiobeforandroid3">
+
+    <uses-feature android:name="android.hardware.type.watch" />
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@android:style/Theme.DeviceDefault">
+        <uses-library
+            android:name="com.google.android.wearable"
+            android:required="false" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".WearActivity"
+            android:label="@string/app_name_short"
+            android:theme="@android:style/Theme.DeviceDefault.Light">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.google.android.voicesearch.SELF_NOTE"></category>
+
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.google.android.voicesearch.SELF_NOTE"></category>
+
+                <data android:mimeType="*/*" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.google.android.gm.action.AUTO_SEND"></action>
+
+                <category android:name="android.intent.category.DEFAULT"></category>
+
+                <data android:mimeType="*/*"></data>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".InputActivity"
+            android:label="@string/title_activity_input">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".InputKanaActivity"
+            android:label="@string/title_activity_input_kana">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="android.support.wearable.activity.ConfirmationActivity"></activity>
+    </application>
+
+</manifest><!-- Copyright (C) 2014-2016 YA<ya.androidapp@gmail.com> All rights reserved. -->

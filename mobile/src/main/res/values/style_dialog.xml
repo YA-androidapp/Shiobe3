@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.StyleDialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+</resources><!-- Copyright (c) 2013-2016 YA <ya.androidapp@gmail.com> All rights reserved. -->

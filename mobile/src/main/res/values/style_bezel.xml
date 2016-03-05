@@ -1,0 +1,10 @@
+<!-- http://edywrite.blogspot.jp/2014/10/android50material-design-2.html -->
+<resources>
+
+    <declare-styleable name="BezelImageView">
+        <attr name="maskDrawable" format="reference" />
+        <attr name="borderDrawable" format="reference" />
+        <attr name="desaturateOnPress" format="boolean" />
+    </declare-styleable>
+
+</resources>

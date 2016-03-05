@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TableLayout>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right" >
+
+        <CheckBox
+            android:id="@+id/checkBox_fav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fav" />
+
+        <CheckBox
+            android:id="@+id/checkBox_rt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rt" />
+
+        <CheckBox
+            android:id="@+id/checkBox_pak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pak" />
+
+        <Button
+            android:id="@+id/button_set_schedule"
+            android:layout_width="wrap_content"
+            android:layout_height="50dip"
+            android:layout_gravity="center_vertical"
+            android:text="@string/set_schedule"
+            android:textSize="14sp" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <EditText
+            android:id="@+id/editText1"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:autoLink="none"
+            android:freezesText="true"
+            android:hint="@string/id"
+            android:singleLine="true"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <requestFocus />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:shrinkColumns="1" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:lines="5"
+            android:minLines="5"
+            android:textStyle="bold" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:singleLine="true"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </TableRow>
+
+    <DatePicker
+        android:id="@+id/datePicker1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TimePicker
+        android:id="@+id/timePicker1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</TableLayout> <!-- Copyright (c) 2013-2016 YA <ya.androidapp@gmail.com> All rights reserved. -->

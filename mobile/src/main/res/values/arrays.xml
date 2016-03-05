@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE resources>
+<resources>
+
+    <string-array name="pref_fav_site_entries">
+        <item>Twitter(API)</item>
+        <item>全て</item>
+        <item>Twitter(Webパース)</item>
+        <item>Twistar</item>
+        <item>ふぁぼったー</item>
+        <item>Favstar</item>
+        <item>aclog</item>
+    </string-array>
+    <string-array name="pref_fav_site_entryvalues">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+    <string-array name="pref_hardkey_tl_volumeup_entries">
+        <item>なし</item>
+        <item>読込（↑）</item>
+        <item>移動（△）</item>
+        <item>移動（未読）</item>
+    </string-array>
+    <string-array name="pref_hardkey_tl_volumeup_entryvalues">
+        <item>-1</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="pref_hardkey_tl_volumedown_entries">
+        <item>なし</item>
+        <item>読込（↓）</item>
+        <item>移動（▽）</item>
+        <item>移動（未読）</item>
+    </string-array>
+    <string-array name="pref_hardkey_tl_volumedown_entryvalues">
+        <item>-1</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="pref_hardkey_updatetweet_volumeup_entries">
+        <item>なし</item>
+        <item>投稿</item>
+    </string-array>
+    <string-array name="pref_hardkey_updatetweet_volumeup_entryvalues">
+        <item>-1</item>
+        <item>0</item>
+    </string-array>
+    <string-array name="pref_hardkey_updatetweet_volumedown_entries">
+        <item>なし</item>
+        <item>投稿</item>
+    </string-array>
+    <string-array name="pref_hardkey_updatetweet_volumedown_entryvalues">
+        <item>-1</item>
+        <item>0</item>
+    </string-array>
+    <string-array name="pref_pictureuploadsite_entries">
+        <item>TWITTER</item>
+        <item>IMG_LY</item>
+        <item>LOCKERZ</item>
+        <item>MOBYPICTURE</item>
+        <item>PLIXI</item>
+        <item>POSTEROUS</item>
+        <item>TWIPPLE</item>
+        <item>TWITGOO</item>
+        <item>TWITPIC</item>
+        <item>YFROG</item>
+    </string-array>
+    <string-array name="pref_receivedintent_charset_entries">
+        <item>UTF-8</item>
+        <item>Shift_JIS</item>
+        <item>EUC-JP</item>
+    </string-array>
+    <string-array name="pref_tl_retweetedby_multiline_entries">
+        <item>1行</item>
+        <item>2行</item>
+        <item>3行</item>
+    </string-array>
+    <string-array name="pref_tl_retweetedby_multiline_entryvalues">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    <string-array name="pref_uri_shorten_site_entries">
+        <item>bit.ly</item>
+        <item>Google</item>
+        <item>TinyURL</item>
+    </string-array>
+    <string-array name="pref_screen_orientation_entries">
+        <item>縦</item>
+        <item>横</item>
+        <item>傾きに連動</item>
+        <item>起動時の向きに固定</item>
+    </string-array>
+    <string-array name="pref_screen_orientation_entryvalues">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    <string-array name="pref_twitterlogin_mode_entries">
+        <item>通常</item>
+        <item>Intent</item>
+    </string-array>
+    <string-array name="pref_twitterlogin_mode_entryvalues">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+    <string-array name="pref_tl_fontfamily_name_entries">
+        <item>DEFAULT</item>
+        <item>DEFAULT_BOLD</item>
+        <item>SANS_SERIF</item>
+        <item>SERIF</item>
+        <item>MONOSPACE</item>
+    </string-array>
+    <string-array name="pref_tl_fontfamily_name_entryvalues">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+    <string-array name="pref_tl_fontstyle_name_entries">
+        <item>NORMAL</item>
+        <item>BOLD</item>
+        <item>ITALIC</item>
+        <item>BOLD_ITALIC</item>
+    </string-array>
+    <string-array name="pref_tl_fontstyle_name_entryvalues">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    <string-array name="pref_reversegeocoding_site_entries">
+        <item>Google</item>
+        <item>Yahoo!</item>
+        <item>農研機構</item>
+    </string-array>
+    <string-array name="pref_reversegeocoding_site_entryvalues">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="pref_map_site_entries">
+        <item>Google</item>
+        <item>OpenStreetMap</item>
+        <item>地理院地図(電子国土Web)</item>
+    </string-array>
+    <string-array name="pref_map_site_entryvalues">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+</resources> <!-- Copyright (c) 2013-2016 YA <ya.androidapp@gmail.com> All rights reserved. -->

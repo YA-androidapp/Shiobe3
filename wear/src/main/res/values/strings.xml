@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Shiobe3</string>
+    <string name="app_name_short">Shio</string>
+    <string name="sent_message">Message Sent</string>
+    <string name="title_activity_input">Shio InputText</string>
+    <string name="title_activity_input_kana">Shio InputText(Kana)</string>
+    <string name="tweet">Tweet</string>
+
+</resources><!-- Copyright (C) 2014 YA<ya.androidapp@gmail.com> All rights reserved. -->

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TableLayout>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/tableLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <AutoCompleteTextView
+            android:id="@+id/editText1"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:autoLink="none"
+            android:freezesText="true"
+            android:hint="@string/prefix"
+            android:singleLine="true"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <requestFocus />
+
+        <Button
+            android:id="@+id/button_tweet"
+            android:layout_width="50dip"
+            android:layout_height="50dip"
+            android:layout_gravity="center_vertical"
+            android:text="@string/zero"
+            android:textSize="14sp" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <AutoCompleteTextView
+            android:id="@+id/editText2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:autoLink="none"
+            android:freezesText="true"
+            android:hint="@string/suffix"
+            android:singleLine="true"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <EditText
+            android:id="@+id/editText3"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:autoLink="web"
+            android:freezesText="true"
+            android:gravity="left|top"
+            android:hint="@string/one"
+            android:linksClickable="false"
+            android:minLines="1"
+            android:singleLine="false"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </TableRow>
+
+</TableLayout><!-- Copyright (c) 2013-2016 YA <ya.androidapp@gmail.com> All rights reserved. -->

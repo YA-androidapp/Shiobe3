@@ -1,0 +1,47 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        applicationId "jp.gr.java_conf.ya.shiobeforandroid3"
+        minSdkVersion 16
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+
+        multiDexEnabled true
+    }
+    dexOptions{
+        javaMaxHeapSize "2g"
+    }
+    packagingOptions {
+        pickFirst  'META-INF/LICENSE.txt'
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    wearApp project(':wear')
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:support-v4:23.2.0'
+    compile 'com.android.support:appcompat-v7:23.2.0'
+    compile 'com.android.support:design:23.2.0'
+    compile 'com.android.support:multidex:1.0.1'
+    compile 'com.google.android.gms:play-services-gcm:8.4.0'
+    compile 'com.google.android.gms:play-services-maps:8.4.0'
+    compile 'com.google.android.gms:play-services-wearable:8.4.0'
+    compile 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
+    compile 'org.twitter4j:twitter4j-async:4.0.4'
+    compile 'org.twitter4j:twitter4j-core:4.0.4'
+    compile 'org.twitter4j:twitter4j-media-support:4.0.4'
+    compile 'org.twitter4j:twitter4j-stream:4.0.4'
+    compile project(':modules:volley')
+}
