@@ -1290,6 +1290,11 @@
                             android:maxLength="3"
                             android:title="@string/tl_imagesize" />
                         <EditTextPreference
+                            android:defaultValue="32,32,32,32"
+                            android:key="pref_fab_margins"
+                            android:maxLength="20"
+                            android:title="@string/fab_margins" />
+                        <EditTextPreference
                             android:defaultValue="-1"
                             android:inputType="numberSigned"
                             android:key="pref_header_height"

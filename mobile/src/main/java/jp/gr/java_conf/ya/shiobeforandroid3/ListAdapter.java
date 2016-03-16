@@ -767,153 +767,184 @@ public class ListAdapter extends BaseAdapter {
     }
 
     private final String checkAllRelationship(final String screenName) {
-        final int sbInitSize = 510; // 4(=default_user_index_size) * 94 * 4/3;
-        final StringBuilder relationshipBuilder = new StringBuilder(sbInitSize);
+        try {
+            final int sbInitSize = 510; // 4(=default_user_index_size) * 94 * 4/3;
+            final StringBuilder relationshipBuilder = new StringBuilder(sbInitSize);
 
-        for (int indx = 0; indx < pref_user_index_size; indx++) {
-            if (isConnected(pref_twtr.getString("status_" + indx, ""))) {
-                if (screenName.equals(pref_twtr.getString("screen_name_" + indx, "")) == false) {
-                    if (checkUniq(indx)) {
-                        try {
-                            final Relationship relationship =
-                                    getTwitter(checkIndexFromScreenname(pref_twtr.getString("screen_name_" + indx, "")), false).showFriendship(pref_twtr.getString("screen_name_" + indx, ""), screenName);
+            for (int indx = 0; indx < pref_user_index_size; indx++) {
+                if (isConnected(pref_twtr.getString("status_" + indx, ""))) {
+                    if (screenName.equals(pref_twtr.getString("screen_name_" + indx, "")) == false) {
+                        if (checkUniq(indx)) {
+                            try {
+                                final Relationship relationship =
+                                        getTwitter(checkIndexFromScreenname(pref_twtr.getString("screen_name_" + indx, "")), false).showFriendship(pref_twtr.getString("screen_name_" + indx, ""), screenName);
 
-                            relationshipBuilder.append(SP4 + "@");
-                            relationshipBuilder.append(screenName);
-                            relationshipBuilder.append(" ");
-                            relationshipBuilder.append(relationship.isSourceFollowingTarget() ? "&lt;" : "X");
-                            relationshipBuilder.append("=");
-                            relationshipBuilder.append(relationship.isSourceBlockingTarget() ? "B" : "");
-                            relationshipBuilder.append("=");
-                            relationshipBuilder.append(relationship.isSourceFollowedByTarget() ? "&gt;" : "X");
-                            relationshipBuilder.append(" @");
-                            relationshipBuilder.append(pref_twtr.getString("screen_name_" + indx, ""));
+                                relationshipBuilder.append(SP4 + "@");
+                                relationshipBuilder.append(screenName);
+                                relationshipBuilder.append(" ");
+                                relationshipBuilder.append(relationship.isSourceFollowingTarget() ? "&lt;" : "X");
+                                relationshipBuilder.append("=");
+                                relationshipBuilder.append(relationship.isSourceBlockingTarget() ? "B" : "");
+                                relationshipBuilder.append("=");
+                                relationshipBuilder.append(relationship.isSourceFollowedByTarget() ? "&gt;" : "X");
+                                relationshipBuilder.append(" @");
+                                relationshipBuilder.append(pref_twtr.getString("screen_name_" + indx, ""));
 
-                            if (relationship.isSourceNotificationsEnabled()) {
-                                relationshipBuilder.append(" Noti");
+                                if (relationship.isSourceNotificationsEnabled()) {
+                                    relationshipBuilder.append(" Noti");
+                                }
+                                if (relationship.isSourceWantRetweets()) {
+                                    relationshipBuilder.append(" RT");
+                                }
+                                relationshipBuilder.append(BR);
+                            } catch (final TwitterException e) {
+                                twitterException(e);
+                            } catch (final Exception e) {
+                                WriteLog.write(context, e);
                             }
-                            if (relationship.isSourceWantRetweets()) {
-                                relationshipBuilder.append(" RT");
-                            }
-                            relationshipBuilder.append(BR);
-                        } catch (final TwitterException e) {
-                            twitterException(e);
                         }
                     }
                 }
             }
-        }
 
-        return relationshipBuilder.toString();
+            return relationshipBuilder.toString();
+        } catch (final Exception e) {
+            WriteLog.write(context, e);
+        }
+        return "";
     }
 
     final int checkIndex(final int index, final boolean saveIndex) {
-        for (int i = index; i < pref_user_index_size; i++) {
-            if (isConnected(pref_twtr.getString("status_" + i, ""))) {
-                pref_twtr = context.getSharedPreferences("Twitter_setting", 0);
-                if (saveIndex) {
-                    final SharedPreferences.Editor editor = pref_twtr.edit();
-                    editor.putString("index", Integer.toString(index));
-                    editor.commit();
+        try {
+            for (int i = index; i < pref_user_index_size; i++) {
+                if (isConnected(pref_twtr.getString("status_" + i, ""))) {
+                    pref_twtr = context.getSharedPreferences("Twitter_setting", 0);
+                    if (saveIndex) {
+                        final SharedPreferences.Editor editor = pref_twtr.edit();
+                        editor.putString("index", Integer.toString(index));
+                        editor.commit();
+                    }
+                    return i;
                 }
-                return i;
             }
+            toast(context.getString(R.string.notconnected_all));
+        } catch (final Exception e) {
+            WriteLog.write(context, e);
         }
-        toast(context.getString(R.string.notconnected_all));
         return -1;
     }
 
     final int checkIndexFromListname(final String listName) {
-        int idx = 0;
-        final String listOwner = ((listName.replace("@", "").replace("/lists/", "/")).split("/", 0))[0];
-        if (listOwner.equals("") == false) {
-            try {
+        try {
+            final String listOwner = ((listName.replace("@", "").replace("/lists/", "/")).split("/", 0))[0];
+            if (listOwner.equals("") == false) {
                 for (int i = pref_user_index_offset; i < pref_user_index_size; i++) {
                     if (isConnected(pref_twtr.getString("status_" + i, ""))) {
                         if (listOwner.equals(pref_twtr.getString("screen_name_" + i, ""))) {
-                            idx = i;
+                            return i;
                         }
                     }
                 }
-            } catch (final Exception e) {
-                WriteLog.write(context, e);
             }
+        } catch (final Exception e) {
+            WriteLog.write(context, e);
         }
-        return idx;
+        return 0;
     }
 
     final int checkIndexFromPrefTwtr() {
-        pref_twtr = context.getSharedPreferences("Twitter_setting", 0);
         try {
-            return Integer.parseInt(pref_twtr.getString("index", "0"));
-        } catch (final NumberFormatException e) {
-        } catch (final Exception e) {
-        }
-
-        for (int i = pref_user_index_offset; i < pref_user_index_size; i++) {
-            if (isConnected(pref_twtr.getString("status_" + i, ""))) {
-                return i;
+            pref_twtr = context.getSharedPreferences("Twitter_setting", 0);
+            try {
+                return Integer.parseInt(pref_twtr.getString("index", "0"));
+            } catch (final NumberFormatException e) {
+            } catch (final Exception e) {
             }
+
+            for (int i = pref_user_index_offset; i < pref_user_index_size; i++) {
+                if (isConnected(pref_twtr.getString("status_" + i, ""))) {
+                    return i;
+                }
+            }
+            toast(context.getString(R.string.notconnected_all));
+        } catch (final Exception e) {
+            WriteLog.write(context, e);
         }
-        toast(context.getString(R.string.notconnected_all));
-        return -1;
+        return 0;
     }
 
     final int checkIndexFromPrefTwtr(int retry) {
-        final int idx = checkIndexFromPrefTwtr();
+        try {
+            final int idx = checkIndexFromPrefTwtr();
 
-        for (int i = pref_user_index_offset; i < pref_user_index_size; i++) {
-            if (i != idx) {
-                if (isConnected(pref_twtr.getString("status_" + i, ""))) {
-                    if ((pref_twtr.getString("status_" + Integer.toString(idx), "")).equals(pref_twtr.getString("screen_name_" + i, ""))) {
-                        if (retry == 0) {
-                            return i;
-                        } else {
-                            retry--;
+            for (int i = pref_user_index_offset; i < pref_user_index_size; i++) {
+                if (i != idx) {
+                    if (isConnected(pref_twtr.getString("status_" + i, ""))) {
+                        if ((pref_twtr.getString("status_" + Integer.toString(idx), "")).equals(pref_twtr.getString("screen_name_" + i, ""))) {
+                            if (retry == 0) {
+                                return i;
+                            } else {
+                                retry--;
+                            }
                         }
                     }
                 }
             }
+            toast(context.getString(R.string.notconnected_all));
+        } catch (final Exception e) {
+            WriteLog.write(context, e);
         }
-        toast(context.getString(R.string.notconnected_all));
-        return -1;
+        return 0;
     }
 
     final int checkIndexFromScreenname(String screenName) {
-        screenName = screenName.replace("@", "");
-        int idx = 0;
-        for (int i = pref_user_index_offset; i < pref_user_index_size; i++) {
-            if (isConnected(pref_twtr.getString("status_" + i, ""))) {
-                if (screenName.equals(pref_twtr.getString("screen_name_" + i, ""))) {
-                    idx = i;
+        try {
+            screenName = screenName.replace("@", "");
+            int idx = 0;
+            for (int i = pref_user_index_offset; i < pref_user_index_size; i++) {
+                if (isConnected(pref_twtr.getString("status_" + i, ""))) {
+                    if (screenName.equals(pref_twtr.getString("screen_name_" + i, ""))) {
+                        idx = i;
+                    }
                 }
             }
+            return idx;
+        } catch (final Exception e) {
+            WriteLog.write(context, e);
         }
-        return idx;
+        return 0;
     }
 
     private final boolean checkMute(final Status status) {
-        if ((checkMuteSource(pref_mute_source, status)) || (checkMuteTimeScreenname(status)) || (checkMuteScreenname(status)) || (checkMuteText(pref_mute_text, status))) {
-            return true;
-        } else {
-            return false;
+        try {
+            if ((checkMuteSource(pref_mute_source, status)) || (checkMuteTimeScreenname(status)) || (checkMuteScreenname(status)) || (checkMuteText(pref_mute_text, status))) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (final Exception e) {
+            WriteLog.write(context, e);
         }
+        return false;
     }
 
     private final boolean checkMuteScreenname(final Status status) {
-        if (pref_mute_screenname.indexOf("," + (status.getUser().getScreenName()) + ",") > -1) {
-            return true;
-        }
-
-        if (status.isRetweet()) {
-            try {
-                if (pref_mute_screenname.indexOf("," + (status.getRetweetedStatus().getUser().getScreenName()) + ",") > -1) {
-                    return true;
-                }
-            } catch (final Exception e) {
+        try {
+            if (pref_mute_screenname.indexOf("," + (status.getUser().getScreenName()) + ",") > -1) {
+                return true;
             }
-        }
 
+            if (status.isRetweet()) {
+                try {
+                    if (pref_mute_screenname.indexOf("," + (status.getRetweetedStatus().getUser().getScreenName()) + ",") > -1) {
+                        return true;
+                    }
+                } catch (final Exception e) {
+                }
+            }
+        } catch (final Exception e) {
+            WriteLog.write(context, e);
+        }
         return false;
     }
 
@@ -921,13 +952,15 @@ public class ListAdapter extends BaseAdapter {
         // pref_mute_source
         // pref_search_unread_mylastfav_mute_source
         // pref_search_unread_mylasttweet_mute_source
-
-        if (muteSource.equals(",,") == false) {
-            if (muteSource.indexOf("," + (status.getSource()).replaceAll("<a[^>]+?>", "").replaceAll("</a[^>]*?>", "") + ",") > -1) {
-                return true;
+        try {
+            if (muteSource.equals(",,") == false) {
+                if (muteSource.indexOf("," + (status.getSource()).replaceAll("<a[^>]+?>", "").replaceAll("</a[^>]*?>", "") + ",") > -1) {
+                    return true;
+                }
             }
+        } catch (final Exception e) {
+            WriteLog.write(context, e);
         }
-
         return false;
     }
 
@@ -935,38 +968,42 @@ public class ListAdapter extends BaseAdapter {
         // pref_mute_text
         // pref_search_unread_mylastfav_mute_text
         // pref_search_unread_mylasttweet_mute_text
-
-        if (muteText.equals(",,") == false) {
-            final String[] muteTextArray = muteText.split(",");
-            for (final String pref_mute_text_part : muteTextArray) {
-                if ((pref_mute_text_part.equals("") == false) && (status.getText().indexOf(pref_mute_text_part) > -1)) {
-                    return true;
+        try {
+            if (muteText.equals(",,") == false) {
+                final String[] muteTextArray = muteText.split(",");
+                for (final String pref_mute_text_part : muteTextArray) {
+                    if ((pref_mute_text_part.equals("") == false) && (status.getText().indexOf(pref_mute_text_part) > -1)) {
+                        return true;
+                    }
                 }
             }
+        } catch (final Exception e) {
+            WriteLog.write(context, e);
         }
-
         return false;
     }
 
     private final boolean checkMuteTimeScreenname(final Status status) {
-        if (pref_mute_time > 0) {
-            if ((pref_mute_time_screenname.indexOf("," + (status.getUser().getScreenName()) + ",") > -1)
-                    && ((System.currentTimeMillis() - status.getCreatedAt().getTime()) > pref_mute_time * 1000)) {
-                return true;
+        try {
+            if (pref_mute_time > 0) {
+                if ((pref_mute_time_screenname.indexOf("," + (status.getUser().getScreenName()) + ",") > -1)
+                        && ((System.currentTimeMillis() - status.getCreatedAt().getTime()) > pref_mute_time * 1000)) {
+                    return true;
+                }
             }
+        } catch (final Exception e) {
+            WriteLog.write(context, e);
         }
-
         return false;
     }
 
     private final String checkPostRateLimit(final int idx, final boolean showScreenname) {
-        final StringBuilder postRateLimitStr = new StringBuilder();
-        postRateLimitStr.append("Update" + (showScreenname ? (" (@" + pref_twtr.getString("screen_name_" + idx, "") + ")") : "") + ":" + System.getProperty("line.separator") + "  ");
-
-        final Paging pagingCheckPostRateLimit = new Paging();
-        pagingCheckPostRateLimit.setCount(200);
-
         try {
+            final StringBuilder postRateLimitStr = new StringBuilder();
+            postRateLimitStr.append("Update" + (showScreenname ? (" (@" + pref_twtr.getString("screen_name_" + idx, "") + ")") : "") + ":" + System.getProperty("line.separator") + "  ");
+
+            final Paging pagingCheckPostRateLimit = new Paging();
+            pagingCheckPostRateLimit.setCount(200);
             ResponseList<Status> statuses = getTwitter(idx, false).getUserTimeline(pref_twtr.getString("screen_name_" + idx, ""), pagingCheckPostRateLimit);
             loop1:
             for (int i = 0; i < (statuses.size() - 1); i++) {
@@ -994,10 +1031,13 @@ public class ListAdapter extends BaseAdapter {
                     break loop1;
                 }
             }
+            return postRateLimitStr.toString();
         } catch (final TwitterException e) {
             twitterException(e);
+        } catch (final Exception e) {
+            WriteLog.write(context, e);
         }
-        return postRateLimitStr.toString();
+        return "";
     }
 
     private final ArrayList<String> checkRateLimit(final int idx, final boolean showScreenname) {
@@ -1010,31 +1050,42 @@ public class ListAdapter extends BaseAdapter {
                 rateLimitArray.add(endpoint + (showScreenname ? (" (@" + pref_twtr.getString("screen_name_" + idx, "") + ")") : "") + ":" + System.getProperty("line.separator") + "  "
                         + status.getRemaining() + "/" + status.getLimit() + " (" + DF.format(status.getResetTimeInSeconds() * 1000L) + ")" + System.getProperty("line.separator"));
             }
+            Collections.sort(rateLimitArray);
         } catch (final TwitterException e) {
             twitterException(e);
+        } catch (final Exception e) {
+            WriteLog.write(context, e);
         }
-        Collections.sort(rateLimitArray);
         return rateLimitArray;
     }
 
     final String checkScreennameFromIndex(final int index) {
-        return pref_twtr.getString("screen_name_" + index, "");
+        try {
+            return pref_twtr.getString("screen_name_" + index, "");
+        } catch (final Exception e) {
+            WriteLog.write(context, e);
+        }
+        return "";
     }
 
     private final boolean checkUniq(final int idx) {
-        for (int j = 0; j < idx; j++) {
-            if (isConnected(pref_twtr.getString("status_" + j, ""))) {
-                if (pref_twtr.getString("screen_name_" + idx, "").equals(pref_twtr.getString("screen_name_" + j, ""))) {
-                    return false;
+        try {
+            for (int j = 0; j < idx; j++) {
+                if (isConnected(pref_twtr.getString("status_" + j, ""))) {
+                    if (pref_twtr.getString("screen_name_" + idx, "").equals(pref_twtr.getString("screen_name_" + j, ""))) {
+                        return false;
+                    }
                 }
             }
+        } catch (final Exception e) {
+            WriteLog.write(context, e);
         }
         return true;
     }
 
     final ProgressDialog createDialog(final int id) {
-        if ((context.getString(id)).equals("") == false) {
-            try {
+        try {
+            if ((context.getString(id)).equals("") == false) {
                 final Context context1 = (((Activity) context).getParent() != null) ? ((Activity) context).getParent() : ((Activity) context);
                 final ProgressDialog pDialog = new ProgressDialog(context1);
                 try {
@@ -1046,15 +1097,15 @@ public class ListAdapter extends BaseAdapter {
                 pDialog.setMessage("Loading...");
 
                 return pDialog;
-            } catch (final Exception e) {
             }
+        } catch (final Exception e) {
+            WriteLog.write(context, e);
         }
         return null;
     }
 
     private final String del(final Status tweet, final String screenName) {
         try {
-
             String tweetScreenName = screenName;
             try {
                 tweetScreenName = tweet.getUser().getScreenName();
@@ -1408,9 +1459,8 @@ public class ListAdapter extends BaseAdapter {
     }
 
     final Status getjustbefore(int index) {
-        if ((pref_user_index_size <= index) || (index <= -1)) {
+        if ((pref_user_index_size <= index) || (index <= -1))
             index = checkIndexFromPrefTwtr();
-        }
         WriteLog.write(context, "getjustbefore(" + index + ")");
 
         final Twitter twtr = getTwitter(index, false);
@@ -1438,7 +1488,7 @@ public class ListAdapter extends BaseAdapter {
             }
         }
         WriteLog.write(context, deljustbeforeTweet);
-        return deljustbeforeTweet;
+        return null;
     }
 
     private final LightingColorFilter getLightingColorFilter(final String filterName) {
@@ -1964,63 +2014,87 @@ public class ListAdapter extends BaseAdapter {
     }
 
     final Twitter getTwitter(final int index, final boolean saveIndex) {
-        pref_twtr = context.getSharedPreferences("Twitter_setting", 0);
-        if (isConnected(pref_twtr.getString("status_" + index, ""))) {
-            if ((twitter == null) || (index != index_pre)) {
-                if (saveIndex) {
-                    final SharedPreferences.Editor editor = pref_twtr.edit();
-                    editor.putString("index", Integer.toString(index));
-                    editor.commit();
+        try {
+            pref_twtr = context.getSharedPreferences("Twitter_setting", 0);
+            if (isConnected(pref_twtr.getString("status_" + index, ""))) {
+                if ((twitter == null) || (index != index_pre)) {
+                    if (saveIndex) {
+                        final SharedPreferences.Editor editor = pref_twtr.edit();
+                        editor.putString("index", Integer.toString(index));
+                        editor.commit();
+                    }
+                    conf = getConf(index);
+                    if (conf != null)
+                        twitter = new TwitterFactory(conf).getInstance();
+                    index_pre = index;
                 }
-                conf = getConf(index);
-                twitter = new TwitterFactory(conf).getInstance();
-                index_pre = index;
+                return twitter;
             }
-            return twitter;
+            toast(context.getString(R.string.notconnected));
+        } catch (final Exception e) {
+            WriteLog.write(context, e);
         }
-        toast(context.getString(R.string.notconnected));
         return null;
     }
 
     final TwitterStream getTwitterStream(final int index, final boolean saveIndex) {
-        if (isConnected(pref_twtr.getString("status_" + index, ""))) {
-            TwitterStream twitterStream = null;
-            if (index != index_pre_s) {
-                if (saveIndex) {
-                    pref_twtr = context.getSharedPreferences("Twitter_setting", 0);
-                    final SharedPreferences.Editor editor = pref_twtr.edit();
-                    editor.putString("index", Integer.toString(index));
-                    editor.commit();
+        try {
+            if (isConnected(pref_twtr.getString("status_" + index, ""))) {
+                try {
+                    TwitterStream twitterStream = null;
+                    if (index != index_pre_s) {
+                        if (saveIndex) {
+                            pref_twtr = context.getSharedPreferences("Twitter_setting", 0);
+                            final SharedPreferences.Editor editor = pref_twtr.edit();
+                            editor.putString("index", Integer.toString(index));
+                            editor.commit();
+                        }
+                        conf = getConf(index);
+                        if (conf != null) {
+                            TwitterStreamFactory twitterStreamFactory = new TwitterStreamFactory(conf);
+                            if (twitterStreamFactory != null)
+                                twitterStream = twitterStreamFactory.getInstance();
+                            }
+                        index_pre_s = index;
+                    }
+                    return twitterStream;
+                } catch (final Exception e) {
+                    WriteLog.write(context, e);
                 }
-                conf = getConf(index);
-                TwitterStreamFactory twitterStreamFactory = new TwitterStreamFactory(conf);
-                twitterStream = twitterStreamFactory.getInstance();
-                index_pre_s = index;
             }
-            return twitterStream;
+        } catch (final Exception e) {
+            WriteLog.write(context, e);
         }
         return null;
     }
 
     private final User getUser() {
-        final int idx = checkIndexFromPrefTwtr();
-        final Twitter twtr = getTwitter(idx, false);
         try {
-            return getUser(idx, twtr.getScreenName());
+            final int idx = checkIndexFromPrefTwtr();
+            return getUser(idx, getTwitter(idx, false).getScreenName());
         } catch (IllegalStateException e) {
             WriteLog.write(context, e);
         } catch (final TwitterException e) {
             twitterException(e);
+        } catch (final Exception e) {
+            WriteLog.write(context, e);
         }
         return null;
     }
 
-    private final User getUser(final int index, String screenname) {
-        if (screenname.equals("")) {
-            screenname = checkScreennameFromIndex(checkIndexFromPrefTwtr());
-        }
+    private final User getUser(int index, String screenname) {
         try {
+            if (index < 0)
+                index = checkIndexFromPrefTwtr();
+            if (screenname.equals(""))
+                screenname = checkScreennameFromIndex(checkIndexFromPrefTwtr());
             return getTwitter(index, false).showUser(screenname);
+        } catch (final TwitterException e) {
+            try {
+                twitterException(e);
+            } catch (Exception ex) {
+                    toast(context.getString(R.string.cannot_access_twitter));
+            }
         } catch (final Exception e) {
             WriteLog.write(context, e);
         }
@@ -2998,7 +3072,11 @@ public class ListAdapter extends BaseAdapter {
                 }
             }).create().show();
         } catch (final TwitterException e) {
-            twitterException(e);
+            try {
+                twitterException(e);
+            } catch (Exception ex) {
+                toast(context.getString(R.string.cannot_access_twitter));
+            }
         } catch (final Exception e) {
             WriteLog.write(context, e);
         }
@@ -3328,10 +3406,15 @@ public class ListAdapter extends BaseAdapter {
                 editor.putString("screen_name_" + Integer.toString(index), scrName);
                 editor.commit();
             } catch (final TwitterException e) {
-                twitterException(e);
+                try {
+                    twitterException(e);
+                } catch (Exception ex) {
+                    toast(context.getString(R.string.cannot_access_twitter));
+                }
             } catch (final Exception e) {
-                WriteLog.write(context, e);
                 toast(context.getString(R.string.cannot_access_twitter) + System.getProperty("line.separator") + context.getString(R.string.tryagain_oauth));
+
+                WriteLog.write(context, e);
             }
             try {
                 final User user = twtr.showUser(scrName);
@@ -3343,10 +3426,15 @@ public class ListAdapter extends BaseAdapter {
                 editor.putString("profile_image_url_" + Integer.toString(index), profile_image_url);
                 editor.commit();
             } catch (final TwitterException e) {
-                twitterException(e);
+                try {
+                    twitterException(e);
+                } catch (Exception ex) {
+                    toast(context.getString(R.string.cannot_access_twitter));
+                }
             } catch (final Exception e) {
-                WriteLog.write(context, e);
                 toast(context.getString(R.string.exception) + System.getProperty("line.separator") + context.getString(R.string.tryagain_oauth));
+
+                WriteLog.write(context, e);
             }
         }
         screenName = scrName;
@@ -3382,7 +3470,13 @@ public class ListAdapter extends BaseAdapter {
 
                 return (context.getString(R.string.done_list_add) + ": " + listName + ": @" + uScreenname + " [@" + checkScreennameFromIndex(idx) + "]");
             } catch (final TwitterException e) {
-                twitterException(e);
+                try {
+                    twitterException(e);
+                } catch (Exception ex) {
+                    toast(context.getString(R.string.cannot_access_twitter));
+                }
+            } catch (final Exception e) {
+                WriteLog.write(context, e);
             }
         } else {
             try {
@@ -3390,7 +3484,13 @@ public class ListAdapter extends BaseAdapter {
 
                 return (context.getString(R.string.done_list_remove) + ": " + listName + ": @" + uScreenname + " [@" + checkScreennameFromIndex(idx) + "]");
             } catch (final TwitterException e) {
-                twitterException(e);
+                try {
+                    twitterException(e);
+                } catch (Exception ex) {
+                    toast(context.getString(R.string.cannot_access_twitter));
+                }
+            } catch (final Exception e) {
+                WriteLog.write(context, e);
             }
         }
 
@@ -3639,7 +3739,13 @@ public class ListAdapter extends BaseAdapter {
 
             return (context.getString(R.string.done_pak) + ": @" + statusUserScreenname + ": " + statusText + " " + " [@" + checkScreennameFromIndex(index) + "]");
         } catch (final TwitterException e) {
-            twitterException(e);
+            try {
+                twitterException(e);
+            } catch (Exception ex) {
+                toast(context.getString(R.string.cannot_access_twitter));
+            }
+        } catch (final Exception e) {
+            WriteLog.write(context, e);
         }
         return "";
     }
@@ -3941,7 +4047,13 @@ public class ListAdapter extends BaseAdapter {
         } catch (final NumberFormatException e) {
             WriteLog.write(context, e);
         } catch (final TwitterException e) {
-            twitterException(e);
+            try {
+                twitterException(e);
+            } catch (Exception ex) {
+                toast(context.getString(R.string.cannot_access_twitter));
+            }
+        } catch (final Exception e) {
+            WriteLog.write(context, e);
         }
         return "";
     }
@@ -4556,9 +4668,8 @@ public class ListAdapter extends BaseAdapter {
         String loc_encoded = "";
         final User user = getUser(idx, uScreenname);
         final User myUser = getUser();
-        pref_userinfo_show_my_profile = (myUser.getScreenName().equals("")) ? false : true;
 
-        if (user != null) {
+        if ((user != null)&&(myUser != null)) {
             final boolean pref_hide_item_myicon_userEqualsMyuser = (myUser.getScreenName().equals("")) ? false : (pref_hide_item_myicon && (user.getScreenName().equals(myUser.getScreenName())));
 
             new Thread(new Runnable() {
@@ -4621,6 +4732,8 @@ public class ListAdapter extends BaseAdapter {
         }
 
         try {
+            pref_userinfo_show_my_profile = (myUser.getScreenName().equals("")) ? false : true;
+
             final int sbInitSize = 4815; // 3611 * 4/3
             final StringBuilder userinfoBuilder = new StringBuilder(sbInitSize);
             if ((pref_hide_item_myname == false) || (((user.getScreenName()).equals(myUser.getScreenName())) == false)) {
@@ -4650,21 +4763,19 @@ public class ListAdapter extends BaseAdapter {
                 userinfoBuilder.append("\">User Id: ");
                 userinfoBuilder.append(user.getId());
                 userinfoBuilder.append("</font></small>");
-                if (myUser != null) {
-                    if (pref_userinfo_show_my_profile) {
-                        userinfoBuilder.append(SP4);
-                        userinfoBuilder.append("<small><font color=\"");
-                        userinfoBuilder.append(pref_header_fontcolor);
-                        userinfoBuilder.append("\">[ </font><font color=\"");
-                        userinfoBuilder.append(pref_userinfo_fontcolor_my_profile);
-                        userinfoBuilder.append("\"><a href=\"https://twitter.com/");
-                        userinfoBuilder.append(myUser.getScreenName());
-                        userinfoBuilder.append("\">@");
-                        userinfoBuilder.append(myUser.getScreenName());
-                        userinfoBuilder.append("</a></font><font color=\"");
-                        userinfoBuilder.append(pref_header_fontcolor);
-                        userinfoBuilder.append("\"> ]</font></small>");
-                    }
+                if (pref_userinfo_show_my_profile) {
+                    userinfoBuilder.append(SP4);
+                    userinfoBuilder.append("<small><font color=\"");
+                    userinfoBuilder.append(pref_header_fontcolor);
+                    userinfoBuilder.append("\">[ </font><font color=\"");
+                    userinfoBuilder.append(pref_userinfo_fontcolor_my_profile);
+                    userinfoBuilder.append("\"><a href=\"https://twitter.com/");
+                    userinfoBuilder.append(myUser.getScreenName());
+                    userinfoBuilder.append("\">@");
+                    userinfoBuilder.append(myUser.getScreenName());
+                    userinfoBuilder.append("</a></font><font color=\"");
+                    userinfoBuilder.append(pref_header_fontcolor);
+                    userinfoBuilder.append("\"> ]</font></small>");
                 }
                 userinfoBuilder.append(BR);
             }
@@ -4677,7 +4788,6 @@ public class ListAdapter extends BaseAdapter {
             userinfoBuilder.append("\">");
             userinfoBuilder.append(user.getStatusesCount());
             userinfoBuilder.append("(twilog)</a></font>");
-            if (myUser != null) {
                 if (pref_userinfo_show_my_profile) {
                     userinfoBuilder.append(SP4);
                     userinfoBuilder.append("<small><font color=\"");
@@ -4686,7 +4796,6 @@ public class ListAdapter extends BaseAdapter {
                     userinfoBuilder.append(myUser.getStatusesCount());
                     userinfoBuilder.append(" ]</font></small>");
                 }
-            }
             userinfoBuilder.append(SP8);
             userinfoBuilder.append("<font color=\"");
             userinfoBuilder.append(pref_header_fontcolor);
@@ -4697,7 +4806,6 @@ public class ListAdapter extends BaseAdapter {
             userinfoBuilder.append("/favorites\">");
             userinfoBuilder.append(user.getFavouritesCount());
             userinfoBuilder.append("</a></font>");
-            if (myUser != null) {
                 if (pref_userinfo_show_my_profile) {
                     userinfoBuilder.append(SP4);
                     userinfoBuilder.append("<small><font color=\"");
@@ -4712,7 +4820,6 @@ public class ListAdapter extends BaseAdapter {
                     userinfoBuilder.append(pref_userinfo_fontcolor_my_profile);
                     userinfoBuilder.append("\"> ]</font></small>");
                 }
-            }
             userinfoBuilder.append(SP8);
             userinfoBuilder.append("<font color=\"");
             userinfoBuilder.append(pref_header_fontcolor);
@@ -4723,7 +4830,6 @@ public class ListAdapter extends BaseAdapter {
             userinfoBuilder.append("/lists/memberships\">");
             userinfoBuilder.append(user.getListedCount());
             userinfoBuilder.append("</a></font>");
-            if (myUser != null) {
                 if (pref_userinfo_show_my_profile) {
                     userinfoBuilder.append(SP4);
                     userinfoBuilder.append("<small><font color=\"");
@@ -4738,7 +4844,6 @@ public class ListAdapter extends BaseAdapter {
                     userinfoBuilder.append(pref_userinfo_fontcolor_my_profile);
                     userinfoBuilder.append("\"> ]</font></small>");
                 }
-            }
             userinfoBuilder.append(BR);
             userinfoBuilder.append("<font color=\"");
             userinfoBuilder.append(pref_header_fontcolor);
@@ -4762,7 +4867,6 @@ public class ListAdapter extends BaseAdapter {
             userinfoBuilder.append("\"> (");
             userinfoBuilder.append(getFFRatio(user.getFollowersCount(), user.getFriendsCount()));
             userinfoBuilder.append(")</font>");
-            if (myUser != null) {
                 if (pref_userinfo_show_my_profile) {
                     userinfoBuilder.append(SP4);
                     userinfoBuilder.append("<small><font color=\"");
@@ -4789,7 +4893,6 @@ public class ListAdapter extends BaseAdapter {
                     userinfoBuilder.append(pref_userinfo_fontcolor_my_profile);
                     userinfoBuilder.append("\"> ]</font></small>");
                 }
-            }
 
             if (!pref_enable_singleline) {
                 userinfoBuilder.append(BR);
@@ -4849,7 +4952,6 @@ public class ListAdapter extends BaseAdapter {
                 userinfoBuilder.append(DF.format(user.getCreatedAt()));
                 userinfoBuilder.append("</font>");
                 userinfoBuilder.append(pref_tl_fontsize_small_createdat ? "</small>" : "");
-                if (myUser != null) {
                     if (pref_userinfo_show_my_profile) {
                         userinfoBuilder.append(SP4);
                         userinfoBuilder.append("<small><font color=\"");
@@ -4858,7 +4960,6 @@ public class ListAdapter extends BaseAdapter {
                         userinfoBuilder.append(DF.format(myUser.getCreatedAt()));
                         userinfoBuilder.append(" ]</font></small>");
                     }
-                }
 
                 userinfoBuilder.append(BR);
                 userinfoBuilder.append("<font color=\"");
@@ -4998,9 +5099,8 @@ public class ListAdapter extends BaseAdapter {
         }
 
         final User myUser = getUser();
-        pref_userinfo_show_my_profile = (myUser.getScreenName().equals("")) ? false : true;
 
-        if (usrlist != null) {
+        if ((usrlist != null)&&(myUser != null)) {
             final boolean pref_hide_item_myicon_userEqualsMyuser =
                     (myUser.getScreenName().equals("")) ? false : (pref_hide_item_myicon && (usrlist.getUser().getScreenName().equals(myUser.getScreenName())));
 
@@ -5212,9 +5312,16 @@ public class ListAdapter extends BaseAdapter {
                                                 ourScreenNamesBlock.add("@" + itemname + context.getString(R.string.block_create_by));
                                             }
                                         } catch (final TwitterException e) {
-                                            twitterException(e);
                                             ourScreenNamesBlock.add("@" + itemname + context.getString(R.string.block_create_by) + " *");
                                             ourScreenNamesBlock.add("@" + itemname + context.getString(R.string.block_destroy_by) + " *");
+
+                                            try {
+                                                twitterException(e);
+                                            } catch (Exception ex) {
+                                                toast(context.getString(R.string.cannot_access_twitter));
+                                            }
+                                        } catch (final Exception e) {
+                                            WriteLog.write(context, e);
                                         }
                                     }
                                 }
@@ -5288,9 +5395,16 @@ public class ListAdapter extends BaseAdapter {
                                             ourScreenNamesFollow.add("@" + itemname + context.getString(R.string.follow_create_by));
                                         }
                                     } catch (final TwitterException e) {
-                                        twitterException(e);
                                         ourScreenNamesFollow.add("@" + itemname + context.getString(R.string.follow_create_by) + " *");
                                         ourScreenNamesFollow.add("@" + itemname + context.getString(R.string.follow_destroy_by) + " *");
+
+                                        try {
+                                            twitterException(e);
+                                        } catch (Exception ex) {
+                                            toast(context.getString(R.string.cannot_access_twitter));
+                                        }
+                                    } catch (final Exception e) {
+                                        WriteLog.write(context, e);
                                     }
                                 }
                             }
@@ -5800,7 +5914,6 @@ public class ListAdapter extends BaseAdapter {
                     if (e.exceededRateLimitation()) {
                         toast(context.getString(R.string.ratelimit_exhausted));
                     } else {
-                        WriteLog.write(context, e);
                         updatedstatus = null;
                         ((Activity) context).runOnUiThread(new Runnable() {
                             @Override
@@ -5824,6 +5937,8 @@ public class ListAdapter extends BaseAdapter {
                                 }
                             }
                         });
+
+                        WriteLog.write(context, e);
                     }
                 }
                 if (updatedstatus != null) {
@@ -5845,6 +5960,14 @@ public class ListAdapter extends BaseAdapter {
     final void twitterException(final TwitterException e) {
         if (e.exceededRateLimitation()) {
             toast(context.getString(R.string.ratelimit_exhausted));
+        } else if (e.isCausedByNetworkIssue()) {
+            toast(context.getString(R.string.network_issue));
+        } else if (e.isErrorMessageAvailable()) {
+            toast(context.getString(R.string.api_is_unavailable));
+        } else if (e.resourceNotFound()) {
+            toast(context.getString(R.string.resource_notfound));
+        } else if (e.getErrorCode() == 404) {
+            toast(context.getString(R.string.tweet_notfound));
         } else {
             toast(context.getString(R.string.twitterexception) + e.getStatusCode());
             WriteLog.write(context, e);
@@ -5956,6 +6079,8 @@ public class ListAdapter extends BaseAdapter {
             return (context.getString(R.string.done_userrt) + ": " + newStatusText + " [@" + checkScreennameFromIndex(index) + "]");
         } catch (final TwitterException e) {
             twitterException(e);
+        } catch (final Exception e) {
+            WriteLog.write(context, e);
         }
         return "";
     }

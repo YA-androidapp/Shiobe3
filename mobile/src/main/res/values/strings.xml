@@ -22,6 +22,7 @@
     <string name="all_accounts">All Accounts</string>
     <string name="allform">全フォーム</string>
     <string name="androidwear">Wear</string>
+    <string name="api_is_unavailable">twitterのサーバがダウンしています</string>
     <string name="app_name">Shiobe3</string>
     <string name="app_name_batterywidget">Shiobe3 BatteryWidget</string>
     <string name="app_name_home">Shiobe3 Home</string>
@@ -339,6 +340,7 @@
     <string name="exif_show">EXIFを見る</string>
     <string name="extsubj_suffix_tweetcaster">Tweetcasterで共有</string>
     <string name="extsubj_twipple">ついっぷるで共有</string>
+    <string name="fab_margins">FloatingActionButtonのマージン</string>
     <string name="failure_pictureupload">画像のアップロードに失敗しました</string>
     <string name="fav">ふぁぼ</string>
     <string name="fav_at_the_same_time_pak">パクツイ時にふぁぼる</string>
@@ -477,6 +479,7 @@
     <string name="my_ad_unit_id">ca-app-pub-4782740873496240/1512291617</string>
     <string name="network">ネットワーク</string>
     <string name="network_error">ネットワークエラー</string>
+    <string name="network_issue">ネットワークに問題があります</string>
     <string name="network_wifi_ssid_exception">このSSIDのWi-Fiを利用しない</string>
     <string name="networkcheck">ネットワークタイプ判定</string>
     <string name="networkcheck_wifi_mobile_as_wifi_linkspeed_threshold">Wi-Fiリンク速度の閾値(Mbps)</string>
@@ -566,6 +569,7 @@
     <string name="receiveintent">Intentの受信</string>
     <string name="remove_space_left">空白/タブ+改行→改行</string>
     <string name="remove_space_right">改行+空白/タブ→改行</string>
+    <string name="resource_notfound">リソースが見つかりません</string>
     <string name="retweet_at_the_same_time_fav">ふぁぼ追加時に公式リツイートする</string>
     <string name="retweet_at_the_same_time_pak">パクツイ時に公式リツイートする</string>
     <string name="reversegeocoding">逆ジオコーディング</string>
@@ -835,6 +839,7 @@
     <string name="tts_streamingtl_on">音声読み上げON</string>
     <string name="tweet">ツイート</string>
     <string name="tweet_current_account">現在のアカウントでツイート</string>
+    <string name="tweet_notfound">ツイートが削除されています</string>
     <string name="tweetmenu">ツイートメニュー</string>
     <string name="tweetmenu_check_favednum">ふぁぼ数を取得</string>
     <string name="tweetmenu_check_retweetednum">リツイート数を取得</string>

@@ -888,8 +888,8 @@ public final class UpdateTweet extends AppCompatActivity implements LocationList
 
                 adapter.toast(getString(R.string.done_get_colors));
             } catch (final TwitterException e) {
+                adapter.twitterException(e);
                 WriteLog.write(this, e);
-                adapter.toast(getString(R.string.cannot_access_twitter));
             } catch (final Exception e) {
                 WriteLog.write(this, e);
                 adapter.toast(getString(R.string.exception));
@@ -1359,8 +1359,8 @@ public final class UpdateTweet extends AppCompatActivity implements LocationList
                                                 adapter.toast("intent: Status URLを受け取りました");
                                                 break INTENT;
                                             } catch (final TwitterException e) {
+                                                adapter.twitterException(e);
                                                 WriteLog.write(UpdateTweet.this, e);
-                                                adapter.toast(getString(R.string.cannot_access_twitter));
                                             } catch (final Exception e) {
                                                 WriteLog.write(UpdateTweet.this, e);
                                                 adapter.toast(getString(R.string.exception));
@@ -1457,8 +1457,8 @@ public final class UpdateTweet extends AppCompatActivity implements LocationList
                                                 adapter.toast("intent: Twitter OfficialからIntentを受け取りました");
                                                 break INTENT;
                                             } catch (final TwitterException e) {
+                                                adapter.twitterException(e);
                                                 WriteLog.write(UpdateTweet.this, e);
-                                                adapter.toast(getString(R.string.cannot_access_twitter));
                                             } catch (final Exception e) {
                                                 WriteLog.write(UpdateTweet.this, e);
                                                 adapter.toast(getString(R.string.exception));
@@ -1597,8 +1597,8 @@ public final class UpdateTweet extends AppCompatActivity implements LocationList
                                                 adapter.toast("intent: JanetterからIntentを受け取りました");
                                                 break INTENT;
                                             } catch (final TwitterException e) {
+                                                adapter.twitterException(e);
                                                 WriteLog.write(UpdateTweet.this, e);
-                                                adapter.toast(getString(R.string.cannot_access_twitter));
                                             } catch (final Exception e) {
                                                 WriteLog.write(UpdateTweet.this, e);
                                                 adapter.toast(getString(R.string.exception));
@@ -1728,8 +1728,8 @@ public final class UpdateTweet extends AppCompatActivity implements LocationList
                                             adapter.toast("intent: Hamooon/TwitRocker2からIntentを受け取りました");
                                             break INTENT;
                                         } catch (final TwitterException e) {
+                                            adapter.twitterException(e);
                                             WriteLog.write(UpdateTweet.this, e);
-                                            adapter.toast(getString(R.string.cannot_access_twitter));
                                         } catch (final Exception e) {
                                             WriteLog.write(UpdateTweet.this, e);
                                             adapter.toast(getString(R.string.exception));
@@ -2385,7 +2385,13 @@ public final class UpdateTweet extends AppCompatActivity implements LocationList
             pref_short_url_length = adapter.getTwitter(index, false).getAPIConfiguration().getShortURLLength();
         } catch (final TwitterException e) {
             pref_short_url_length = Integer.parseInt(ListAdapter.default_short_url_length_string);
-            adapter.toast(getString(R.string.cannot_access_twitter));
+
+            try {
+                adapter.twitterException(e);
+            } catch (Exception ex) {
+                if(adapter != null)
+                    adapter.toast(getString(R.string.cannot_access_twitter));
+            }
         } catch (final Exception e) {
             pref_short_url_length = Integer.parseInt(ListAdapter.default_short_url_length_string);
             adapter.toast(getString(R.string.exception));
@@ -2409,6 +2415,7 @@ public final class UpdateTweet extends AppCompatActivity implements LocationList
         final String screenName = init_user_oauth(index);
         if (screenName.equals("")) {
             WriteLog.write(this, "screenName.equals(\"\")");
+
             adapter.toast(getString(R.string.cannot_access_twitter) + System.getProperty("line.separator") + getString(R.string.tryagain_oauth));
             // finish();
         } else {
@@ -2446,7 +2453,12 @@ public final class UpdateTweet extends AppCompatActivity implements LocationList
                     text1 = text1.concat(",").concat(nonUsernamePaths);
                     //					WriteLog.write(this, "text1: " + text1);
                 } catch (final TwitterException e) {
-                    adapter.toast(getString(R.string.cannot_access_twitter));
+                    try {
+                        adapter.twitterException(e);
+                    } catch (Exception ex) {
+                        if(adapter != null)
+                            adapter.toast(getString(R.string.cannot_access_twitter));
+                    }
                 } catch (final Exception e) {
                     adapter.toast(getString(R.string.exception));
                 }
@@ -2551,8 +2563,11 @@ public final class UpdateTweet extends AppCompatActivity implements LocationList
                 editor.putString("screen_name_" + Integer.toString(index), screenName);
                 editor.commit();
             } catch (final TwitterException e) {
-                WriteLog.write(this, e);
-                adapter.toast(getString(R.string.cannot_access_twitter) + System.getProperty("line.separator") + getString(R.string.tryagain_oauth));
+                try {
+                    adapter.twitterException(e);
+                } catch (Exception ex) {
+                    adapter.toast(getString(R.string.cannot_access_twitter) + System.getProperty("line.separator") + getString(R.string.tryagain_oauth));
+                }
             } catch (final Exception e) {
                 WriteLog.write(this, e);
                 adapter.toast(getString(R.string.exception) + System.getProperty("line.separator") + getString(R.string.tryagain_oauth));
@@ -2569,8 +2584,11 @@ public final class UpdateTweet extends AppCompatActivity implements LocationList
                     editor.putString("profile_image_url_" + Integer.toString(index), profile_image_url);
                     editor.commit();
                 } catch (final TwitterException e) {
-                    WriteLog.write(this, e);
-                    adapter.toast(getString(R.string.cannot_access_twitter) + System.getProperty("line.separator") + getString(R.string.tryagain_oauth));
+                    try {
+                        adapter.twitterException(e);
+                    } catch (Exception ex) {
+                        adapter.toast(getString(R.string.cannot_access_twitter) + System.getProperty("line.separator") + getString(R.string.tryagain_oauth));
+                    }
                 } catch (final Exception e) {
                     WriteLog.write(this, e);
                     adapter.toast(getString(R.string.exception) + System.getProperty("line.separator") + getString(R.string.tryagain_oauth));
@@ -3705,8 +3723,12 @@ public final class UpdateTweet extends AppCompatActivity implements LocationList
                                                 + java.net.URLEncoder.encode(MyCrypt.encrypt(UpdateTweet.this, oauthToken, oauthToken)) + "&text="
                                                 + java.net.URLEncoder.encode(MyCrypt.encrypt(UpdateTweet.this, oauthToken, editText1.getText().toString()));
                             } catch (final TwitterException e) {
-                                WriteLog.write(UpdateTweet.this, e);
-                                adapter.toast(getString(R.string.cannot_access_twitter));
+                                try {
+                                    adapter.twitterException(e);
+                                } catch (Exception ex) {
+                                    if(adapter != null)
+                                        adapter.toast(getString(R.string.cannot_access_twitter));
+                                }
                             } catch (final Exception e) {
                                 WriteLog.write(UpdateTweet.this, e);
                                 adapter.toast(getString(R.string.cannot_access_twitter) + System.getProperty("line.separator") + getString(R.string.tryagain_oauth));
@@ -3725,7 +3747,12 @@ public final class UpdateTweet extends AppCompatActivity implements LocationList
                                                 + java.net.URLEncoder.encode(MyCrypt.encrypt(UpdateTweet.this, oauthToken, oauthToken)) + "&text="
                                                 + java.net.URLEncoder.encode(MyCrypt.encrypt(UpdateTweet.this, oauthToken, editText3.getText().toString()));
                             } catch (final TwitterException e) {
-                                adapter.toast(getString(R.string.cannot_access_twitter));
+                                try {
+                                    adapter.twitterException(e);
+                                } catch (Exception ex) {
+                                    if(adapter != null)
+                                        adapter.toast(getString(R.string.cannot_access_twitter));
+                                }
                             } catch (final Exception e) {
                                 adapter.toast(getString(R.string.exception));
                             }
@@ -4326,8 +4353,12 @@ public final class UpdateTweet extends AppCompatActivity implements LocationList
                             allBlockedUsersStr.append(blockedUsersStr.toString());
                         }
                     } catch (final TwitterException e) {
-                        WriteLog.write(this, e);
-                        adapter.toast(getString(R.string.cannot_access_twitter));
+                        try {
+                            adapter.twitterException(e);
+                        } catch (Exception ex) {
+                            if(adapter != null)
+                                adapter.toast(getString(R.string.cannot_access_twitter));
+                        }
                     } catch (final Exception e) {
                         WriteLog.write(this, e);
                         adapter.toast(getString(R.string.exception));
@@ -4382,8 +4413,12 @@ public final class UpdateTweet extends AppCompatActivity implements LocationList
                     editor1.commit();
                     adapter.toast(getString(R.string.short_url_length) + ": " + pref_short_url_length_string);
                 } catch (final TwitterException e) {
-                    WriteLog.write(this, e);
-                    adapter.toast(getString(R.string.cannot_access_twitter));
+                    try {
+                        adapter.twitterException(e);
+                    } catch (Exception ex) {
+                        if(adapter != null)
+                            adapter.toast(getString(R.string.cannot_access_twitter));
+                    }
                 } catch (final Exception e) {
                     WriteLog.write(this, e);
                     adapter.toast(getString(R.string.exception));
@@ -5275,7 +5310,7 @@ public final class UpdateTweet extends AppCompatActivity implements LocationList
             public final void run() {
                 final String tweetstrOriginal = StringUtil.getTweetString(adapter.getTweetHeader(pref_app, str1), str2, adapter.getTweetfooter(pref_app, str3));
                 String tweetstr = tweetstrOriginal;
-                if ((tweetstrOriginal.equals("")) && (imagePaths != null)) {
+                if ((tweetstrOriginal.equals("")) && (imagePaths == null)) {
                     adapter.toast(getString(R.string.empty_tweettext));
                     return;
                 }
@@ -5541,8 +5576,8 @@ public final class UpdateTweet extends AppCompatActivity implements LocationList
                                 updatedstatus = adapter.getTwitter(adapter.checkIndexFromPrefTwtr(), false).updateStatus(statusUpdate2);
                                 WriteLog.write(UpdateTweet.this, "twitter.updateStatus()");
                             } catch (final TwitterException e) {
+                                adapter.twitterException(e);
                                 WriteLog.write(UpdateTweet.this, e);
-                                adapter.toast(getString(R.string.cannot_access_twitter));
                             } catch (final Exception e) {
                                 WriteLog.write(UpdateTweet.this, e);
                                 adapter.toast(getString(R.string.exception));

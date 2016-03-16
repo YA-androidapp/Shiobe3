@@ -200,9 +200,14 @@ public class ShiobeForAndroidActivity extends AppCompatActivity {
                 try {
                     requestToken = twitter.getOAuthRequestToken(CALLBACK_URL);
                 } catch (final TwitterException e) {
-                    adapter.twitterException(e);
+                    try {
+                        adapter.twitterException(e);
+                    } catch (Exception ex) {
+                        if(adapter != null)
+                            adapter.toast(getString(R.string.cannot_access_twitter));
+                    }
                 } catch (final Exception e) {
-                    WriteLog.write(this, e);
+                    WriteLog.write(ShiobeForAndroidActivity.this, e);
                 }
                 if (requestToken != null) {
                     String authorizationUrl = "";
@@ -377,6 +382,14 @@ public class ShiobeForAndroidActivity extends AppCompatActivity {
                         this.startActivityForResult(intent2, 0);
                     }
                 } catch (final TwitterException e) {
+                    try {
+                        adapter.twitterException(e);
+                    } catch (Exception ex) {
+                        if(adapter != null)
+                            adapter.toast(getString(R.string.cannot_access_twitter));
+                    }
+                } catch (final Exception e) {
+                    WriteLog.write(ShiobeForAndroidActivity.this, e);
                 }
             }
         }
@@ -392,12 +405,21 @@ public class ShiobeForAndroidActivity extends AppCompatActivity {
 
         crpKey = getString(R.string.app_name);
         final TelephonyManager telephonyManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
-        crpKey += telephonyManager.getDeviceId();
-        crpKey += telephonyManager.getSimSerialNumber();
+        try {
+            crpKey += telephonyManager.getDeviceId();
+        } catch (final Exception e) {
+            WriteLog.write(this, e);
+        }
+        try {
+            crpKey += telephonyManager.getSimSerialNumber();
+        } catch (final Exception e) {
+            WriteLog.write(this, e);
+        }
         try {
             final PackageInfo packageInfo = getPackageManager().getPackageInfo("jp.gr.java_conf.ya.shiobeforandroid3", PackageManager.GET_META_DATA);
             crpKey += Long.toString(packageInfo.firstInstallTime);
         } catch (final NameNotFoundException e) {
+            WriteLog.write(this, e);
         }
 
         adapter = new ListAdapter(this, crpKey, null, null);
@@ -433,6 +455,7 @@ public class ShiobeForAndroidActivity extends AppCompatActivity {
                     try {
                         updateVer = Long.parseLong(updateVerStr);
                     } catch (final NumberFormatException e) {
+                        WriteLog.write(this, e);
                     }
                     try {
                         final PackageInfo packageInfo = getPackageManager().getPackageInfo("jp.gr.java_conf.ya.shiobeforandroid3", PackageManager.GET_META_DATA);
@@ -445,6 +468,7 @@ public class ShiobeForAndroidActivity extends AppCompatActivity {
                             download(HttpsClient.https2data(this, pref_update_check_url + "index.php?mode=updateuri", pref_timeout_connection, pref_timeout_so, ListAdapter.default_charset));
                         }
                     } catch (NameNotFoundException e) {
+                        WriteLog.write(this, e);
                     }
                 }
             }
@@ -469,6 +493,8 @@ public class ShiobeForAndroidActivity extends AppCompatActivity {
             index = Integer.parseInt(pref_twtr.getString("index", "0"));
         } catch (final Exception e) {
             index = 0;
+
+            WriteLog.write(this, e);
         }
         Status = pref_twtr.getString("status_" + Integer.toString(index), "");
 
@@ -530,6 +556,7 @@ public class ShiobeForAndroidActivity extends AppCompatActivity {
                                             try {
                                                 Thread.sleep(pref_timeout_connection2);
                                             } catch (final InterruptedException e) {
+                                                WriteLog.write(ShiobeForAndroidActivity.this, e);
                                             }
                                             if (timeout) {
                                                 WriteLog.write(ShiobeForAndroidActivity.this, getString(R.string.timeout));
@@ -709,6 +736,14 @@ public class ShiobeForAndroidActivity extends AppCompatActivity {
                     }
                 }
             } catch (final TwitterException e) {
+                try {
+                    adapter.twitterException(e);
+                } catch (Exception ex) {
+                    if(adapter != null)
+                        adapter.toast(getString(R.string.cannot_access_twitter));
+                }
+            } catch (final Exception e) {
+                WriteLog.write(this, e);
             }
         }
     }
@@ -768,6 +803,14 @@ public class ShiobeForAndroidActivity extends AppCompatActivity {
                             try {
                                 connectTwitter();
                             } catch (final TwitterException e) {
+                                try {
+                                    adapter.twitterException(e);
+                                } catch (Exception ex) {
+                                    if(adapter != null)
+                                        adapter.toast(getString(R.string.cannot_access_twitter));
+                                }
+                            } catch (final Exception e) {
+                                WriteLog.write(ShiobeForAndroidActivity.this, e);
                             }
                         }
                     }
@@ -794,6 +837,14 @@ public class ShiobeForAndroidActivity extends AppCompatActivity {
                             try {
                                 connectTwitter();
                             } catch (final TwitterException e) {
+                                try {
+                                    adapter.twitterException(e);
+                                } catch (Exception ex) {
+                                    if(adapter != null)
+                                        adapter.toast(getString(R.string.cannot_access_twitter));
+                                }
+                            } catch (final Exception e) {
+                                WriteLog.write(ShiobeForAndroidActivity.this, e);
                             }
                         }
                     }
@@ -820,6 +871,14 @@ public class ShiobeForAndroidActivity extends AppCompatActivity {
                             try {
                                 connectTwitter();
                             } catch (final TwitterException e) {
+                                try {
+                                    adapter.twitterException(e);
+                                } catch (Exception ex) {
+                                    if(adapter != null)
+                                        adapter.toast(getString(R.string.cannot_access_twitter));
+                                }
+                            } catch (final Exception e) {
+                                WriteLog.write(ShiobeForAndroidActivity.this, e);
                             }
                         }
                     }
@@ -850,6 +909,14 @@ public class ShiobeForAndroidActivity extends AppCompatActivity {
                             try {
                                 connectTwitter();
                             } catch (final TwitterException e) {
+                                try {
+                                    adapter.twitterException(e);
+                                } catch (Exception ex) {
+                                    if(adapter != null)
+                                        adapter.toast(getString(R.string.cannot_access_twitter));
+                                }
+                            } catch (final Exception e) {
+                                WriteLog.write(ShiobeForAndroidActivity.this, e);
                             }
                         }
                     }
@@ -876,6 +943,14 @@ public class ShiobeForAndroidActivity extends AppCompatActivity {
                             try {
                                 connectTwitter();
                             } catch (final TwitterException e) {
+                                try {
+                                    adapter.twitterException(e);
+                                } catch (Exception ex) {
+                                    if(adapter != null)
+                                        adapter.toast(getString(R.string.cannot_access_twitter));
+                                }
+                            } catch (final Exception e) {
+                                WriteLog.write(ShiobeForAndroidActivity.this, e);
                             }
                         }
                     }
@@ -902,6 +977,14 @@ public class ShiobeForAndroidActivity extends AppCompatActivity {
                             try {
                                 connectTwitter();
                             } catch (final TwitterException e) {
+                                try {
+                                    adapter.twitterException(e);
+                                } catch (Exception ex) {
+                                    if(adapter != null)
+                                        adapter.toast(getString(R.string.cannot_access_twitter));
+                                }
+                            } catch (final Exception e) {
+                                WriteLog.write(ShiobeForAndroidActivity.this, e);
                             }
                         }
                     }
@@ -928,6 +1011,14 @@ public class ShiobeForAndroidActivity extends AppCompatActivity {
                             try {
                                 connectTwitter();
                             } catch (final TwitterException e) {
+                                try {
+                                    adapter.twitterException(e);
+                                } catch (Exception ex) {
+                                    if(adapter != null)
+                                        adapter.toast(getString(R.string.cannot_access_twitter));
+                                }
+                            } catch (final Exception e) {
+                                WriteLog.write(ShiobeForAndroidActivity.this, e);
                             }
                         }
                     }
@@ -954,6 +1045,14 @@ public class ShiobeForAndroidActivity extends AppCompatActivity {
                             try {
                                 connectTwitter();
                             } catch (final TwitterException e) {
+                                try {
+                                    adapter.twitterException(e);
+                                } catch (Exception ex) {
+                                    if(adapter != null)
+                                        adapter.toast(getString(R.string.cannot_access_twitter));
+                                }
+                            } catch (final Exception e) {
+                                WriteLog.write(ShiobeForAndroidActivity.this, e);
                             }
                         }
                     }
@@ -1022,15 +1121,19 @@ public class ShiobeForAndroidActivity extends AppCompatActivity {
                 try {
                     connectTwitter();
                 } catch (final TwitterException e) {
+                    try {
+                        adapter.twitterException(e);
+                    } catch (Exception ex) {
+                        if(adapter != null)
+                            adapter.toast(getString(R.string.cannot_access_twitter));
+                    }
+                } catch (final Exception e) {
+                    WriteLog.write(ShiobeForAndroidActivity.this, e);
                 }
 
             }
         }).create().show();
     }
-
-//    <string name="app_name_update">Shiobe3 投稿画面</string>
-//    <string name="app_name_updatedrive">Shiobe3 現在地投稿</string>
-//    <string name="app_name_updatemultiple">Shiobe3 連続投稿</string>
 
     private final void startUpdateTweet() {
         final Intent intent = new Intent(Intent.ACTION_VIEW);

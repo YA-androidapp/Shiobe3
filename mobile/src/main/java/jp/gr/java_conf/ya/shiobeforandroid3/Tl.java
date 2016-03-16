@@ -83,6 +83,7 @@ public class Tl extends AppCompatActivity implements ConnectionReceiver.Observer
     private final Handler handler = new Handler();
 
     private int currentIndex = 0;
+    private final int pref_fab_margin_default = 32;
     private static final int WC = LinearLayout.LayoutParams.WRAP_CONTENT, MP = LinearLayout.LayoutParams.MATCH_PARENT;
 
     private ListAdapter adapter;
@@ -122,6 +123,8 @@ public class Tl extends AppCompatActivity implements ConnectionReceiver.Observer
     private SharedPreferences pref_twtr;
 
     private String crpKey = "";
+    private final String pref_fab_margins_default = "32,32,32,32";
+    private String pref_fab_margins = pref_fab_margins_default;
     private String uriString = "";
 
     private boolean enabled_tts = false;
@@ -188,11 +191,46 @@ public class Tl extends AppCompatActivity implements ConnectionReceiver.Observer
         }
     }
 
+    private final void fabSetMargin(final FloatingActionButton fab, final String pref_fab_margins) {
+        try {
+            android.view.ViewGroup.LayoutParams lp = fab.getLayoutParams();
+            android.view.ViewGroup.MarginLayoutParams mlp = (android.view.ViewGroup.MarginLayoutParams) lp;
+
+            String[] pref_fab_margins_list = pref_fab_margins.split(",");
+            // mlp.setMargins(左上右下)
+            // CSSのmarginと同じ順で http://www.htmq.com/style/margin.shtml
+            if (pref_fab_margins_list.length == 1) {
+                mlp.setMargins(Integer.parseInt(pref_fab_margins_list[0]), Integer.parseInt(pref_fab_margins_list[0]), Integer.parseInt(pref_fab_margins_list[0]), Integer.parseInt(pref_fab_margins_list[0]));
+            } else if (pref_fab_margins_list.length == 2) {
+                mlp.setMargins(Integer.parseInt(pref_fab_margins_list[1]), Integer.parseInt(pref_fab_margins_list[0]), Integer.parseInt(pref_fab_margins_list[1]), Integer.parseInt(pref_fab_margins_list[0]));
+            } else if (pref_fab_margins_list.length == 3) {
+                mlp.setMargins(Integer.parseInt(pref_fab_margins_list[1]), Integer.parseInt(pref_fab_margins_list[0]), Integer.parseInt(pref_fab_margins_list[1]), Integer.parseInt(pref_fab_margins_list[0]));
+            } else if (pref_fab_margins_list.length == 4) {
+                mlp.setMargins(Integer.parseInt(pref_fab_margins_list[3]), Integer.parseInt(pref_fab_margins_list[0]), Integer.parseInt(pref_fab_margins_list[1]), Integer.parseInt(pref_fab_margins_list[2]));
+            }
+
+            fab.setLayoutParams(mlp);
+        } catch (final Exception e) {
+            android.view.ViewGroup.LayoutParams lp = fab.getLayoutParams();
+            android.view.ViewGroup.MarginLayoutParams mlp = (android.view.ViewGroup.MarginLayoutParams) lp;
+            mlp.setMargins(pref_fab_margin_default,pref_fab_margin_default,pref_fab_margin_default,pref_fab_margin_default);
+            fab.setLayoutParams(mlp);
+        }
+    }
+
     private final String getCrpKey() {
         String crpKey = getString(R.string.app_name);
         final TelephonyManager telephonyManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
-        crpKey += telephonyManager.getDeviceId();
-        crpKey += telephonyManager.getSimSerialNumber();
+        try {
+            crpKey += telephonyManager.getDeviceId();
+        } catch (Exception e) {
+            WriteLog.write(Tl.this, e);
+        }
+        try {
+            crpKey += telephonyManager.getSimSerialNumber();
+        } catch (Exception e) {
+            WriteLog.write(Tl.this, e);
+        }
         try {
             final PackageInfo packageInfo = getPackageManager().getPackageInfo("jp.gr.java_conf.ya.shiobeforandroid3", PackageManager.GET_META_DATA);
             crpKey += Long.toString(packageInfo.firstInstallTime);
@@ -327,7 +365,13 @@ public class Tl extends AppCompatActivity implements ConnectionReceiver.Observer
                                 status = adapter.getTwitter(index, false).showStatus(status.getInReplyToStatusId());
                             } catch (final TwitterException e) {
                                 status = null;
-                                WriteLog.write(Tl.this, e);
+
+                                try {
+                                    adapter.twitterException(e);
+                                } catch (Exception ex) {
+                                    if(adapter != null)
+                                        adapter.toast(getString(R.string.cannot_access_twitter));
+                                }
                             } catch (final Exception e) {
                                 status = null;
                                 WriteLog.write(Tl.this, e);
@@ -348,7 +392,12 @@ public class Tl extends AppCompatActivity implements ConnectionReceiver.Observer
         } catch (final NumberFormatException e) {
             WriteLog.write(Tl.this, e);
         } catch (final TwitterException e) {
-            WriteLog.write(Tl.this, e);
+            try {
+                adapter.twitterException(e);
+            } catch (Exception ex) {
+                if(adapter != null)
+                    adapter.toast(getString(R.string.cannot_access_twitter));
+            }
         }
         return null;
     }
@@ -421,6 +470,8 @@ public class Tl extends AppCompatActivity implements ConnectionReceiver.Observer
                 adapter.showUpdateTweetLiteDialog(-1);
             }
         });
+        pref_fab_margins = pref_app.getString("pref_fab_margins",pref_fab_margins_default);
+        fabSetMargin(fab, pref_fab_margins);
 
         // リストビューの生成
         final DisplayMetrics metrics = new DisplayMetrics();
@@ -503,6 +554,9 @@ public class Tl extends AppCompatActivity implements ConnectionReceiver.Observer
         // リストビューの生成
 
         adapter = new ListAdapter(this, crpKey, listView, null);
+		if(adapter == null)
+			return;
+
         listView.setAdapter(adapter);
         WriteLog.write(this, "adapter");
 
@@ -538,8 +592,10 @@ public class Tl extends AppCompatActivity implements ConnectionReceiver.Observer
         final String stts = pref_twtr.getString("status_" + Integer.toString(currentIndex), "");
         if (isConnected(stts)) {
             twitterStream = adapter.getTwitterStream(currentIndex, true);
-            twitterStream.addListener(mMyUserStreamAdapter);
-            twitterStream.addConnectionLifeCycleListener(mMyConnectionLifeCycleListener);
+            if(twitterStream != null){
+            	twitterStream.addListener(mMyUserStreamAdapter);
+            	twitterStream.addConnectionLifeCycleListener(mMyConnectionLifeCycleListener);
+			}
 
             // ステータスの更新
             adapter.setInfo(uriString);
@@ -968,8 +1024,12 @@ public class Tl extends AppCompatActivity implements ConnectionReceiver.Observer
                             allBlockedUsersStr.append(blockedUsersStr.toString());
                         }
                     } catch (final TwitterException e) {
-                        WriteLog.write(this, e);
-                        adapter.toast(getString(R.string.cannot_access_twitter));
+                        try {
+                            adapter.twitterException(e);
+                        } catch (Exception ex) {
+                            if(adapter != null)
+                                adapter.toast(getString(R.string.cannot_access_twitter));
+                        }
                     } catch (final Exception e) {
                         WriteLog.write(this, e);
                         adapter.toast(getString(R.string.exception));
@@ -1024,8 +1084,12 @@ public class Tl extends AppCompatActivity implements ConnectionReceiver.Observer
                     editor1.commit();
                     adapter.toast(getString(R.string.short_url_length) + ": " + pref_short_url_length_string);
                 } catch (final TwitterException e) {
-                    WriteLog.write(this, e);
-                    adapter.toast(getString(R.string.cannot_access_twitter));
+                    try {
+                        adapter.twitterException(e);
+                    } catch (Exception ex) {
+                        if(adapter != null)
+                            adapter.toast(getString(R.string.cannot_access_twitter));
+                    }
                 } catch (final Exception e) {
                     WriteLog.write(this, e);
                     adapter.toast(getString(R.string.exception));
@@ -1433,8 +1497,12 @@ public class Tl extends AppCompatActivity implements ConnectionReceiver.Observer
 
                 adapter.toast(getString(R.string.done_get_colors));
             } catch (final TwitterException e) {
-                WriteLog.write(this, e);
-                adapter.toast(getString(R.string.cannot_access_twitter));
+                try {
+                    adapter.twitterException(e);
+                } catch (Exception ex) {
+                    if(adapter != null)
+                        adapter.toast(getString(R.string.cannot_access_twitter));
+                }
             } catch (final Exception e) {
                 WriteLog.write(this, e);
                 adapter.toast(getString(R.string.exception));
