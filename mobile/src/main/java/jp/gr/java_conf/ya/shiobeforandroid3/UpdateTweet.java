@@ -1900,26 +1900,29 @@ public final class UpdateTweet extends AppCompatActivity implements LocationList
                 pagesource = HttpsClient.https2data(this, uri, pref_timeout_connection, pref_timeout_so, pref_receivedintent_charset);
             }
         }
+        WriteLog.write(this, "pagesource: " + pagesource);
 
-        Pattern pattern_title = Pattern.compile("<title[^>]*?>\\s*?(.+?)\\s*?</title[^>]*?>", Pattern.DOTALL);
-        Matcher matcher_title = pattern_title.matcher(pagesource);
-        if (matcher_title.find()) {
+        if(pagesource.equals("") == false) {
+            Pattern pattern_title = Pattern.compile("<title[^>]*?>\\s*?(.+?)\\s*?</title[^>]*?>", Pattern.DOTALL);
+            Matcher matcher_title = pattern_title.matcher(pagesource);
+            if (matcher_title.find()) {
 
-            if ((matcher_title.group(1)).equals("") == false) {
-                WriteLog.write(this, "title[1]: " + matcher_title.group(1));
-                return matcher_title.group(1);
-            } else {
-                pattern_title = Pattern.compile("<h[1-6][^>]*?>([^<]+?)</h[1-6][^>]*?>", Pattern.DOTALL);
-                matcher_title = pattern_title.matcher(pagesource);
-                if (matcher_title.find()) {
-                    if ((matcher_title.group(1)).equals("") == false) {
-                        WriteLog.write(this, "title[2]: " + matcher_title.group(1));
-                        return matcher_title.group(1);
+                if ((matcher_title.group(1)).equals("") == false) {
+                    WriteLog.write(this, "title[1]: " + matcher_title.group(1));
+                    return matcher_title.group(1);
+                } else {
+                    pattern_title = Pattern.compile("<h[1-6][^>]*?>([^<]+?)</h[1-6][^>]*?>", Pattern.DOTALL);
+                    matcher_title = pattern_title.matcher(pagesource);
+                    if (matcher_title.find()) {
+                        if ((matcher_title.group(1)).equals("") == false) {
+                            WriteLog.write(this, "title[2]: " + matcher_title.group(1));
+                            return matcher_title.group(1);
+                        }
                     }
                 }
             }
+            WriteLog.write(this, "title: \"\"");
         }
-        WriteLog.write(this, "title: \"\"");
         return "";
     }
 
@@ -2380,28 +2383,33 @@ public final class UpdateTweet extends AppCompatActivity implements LocationList
     }
 
     private final void init_short_url_length(final int index) {
-        int pref_short_url_length;
-        try {
-            pref_short_url_length = adapter.getTwitter(index, false).getAPIConfiguration().getShortURLLength();
-        } catch (final TwitterException e) {
-            pref_short_url_length = Integer.parseInt(ListAdapter.default_short_url_length_string);
-
+        pref_twtr = getSharedPreferences("Twitter_setting", 0); // MODE_PRIVATE == 0
+        final String pref_short_url_length_pre = pref_twtr.getString("pref_short_url_length_pre", new java.text.SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+        if((new java.text.SimpleDateFormat("yyyy-MM-dd").format(new Date())).equals(pref_short_url_length_pre) == false) {
+            int pref_short_url_length;
             try {
-                adapter.twitterException(e);
-            } catch (Exception ex) {
-                if(adapter != null)
-                    adapter.toast(getString(R.string.cannot_access_twitter));
+                pref_short_url_length = adapter.getTwitter(index, false).getAPIConfiguration().getShortURLLength();
+            } catch (final TwitterException e) {
+                pref_short_url_length = Integer.parseInt(ListAdapter.default_short_url_length_string);
+
+                try {
+                    adapter.twitterException(e);
+                } catch (Exception ex) {
+                    if (adapter != null)
+                        adapter.toast(getString(R.string.cannot_access_twitter));
+                }
+            } catch (final Exception e) {
+                pref_short_url_length = Integer.parseInt(ListAdapter.default_short_url_length_string);
+                adapter.toast(getString(R.string.exception));
             }
-        } catch (final Exception e) {
-            pref_short_url_length = Integer.parseInt(ListAdapter.default_short_url_length_string);
-            adapter.toast(getString(R.string.exception));
-        }
-        final String pref_short_url_length_string = Integer.toString(pref_short_url_length);
-        if (pref_short_url_length_string.equals(pref_app.getString("pref_short_url_length", "")) == false) {
-            final SharedPreferences.Editor editor1 = pref_twtr.edit();
-            editor1.putString("pref_short_url_length", pref_short_url_length_string);
-            editor1.commit();
-            adapter.toast(getString(R.string.short_url_length) + ": " + pref_short_url_length_string);
+            final String pref_short_url_length_string = Integer.toString(pref_short_url_length);
+            if (pref_short_url_length_string.equals(pref_app.getString("pref_short_url_length", "")) == false) {
+                final SharedPreferences.Editor editor1 = pref_twtr.edit();
+                editor1.putString("pref_short_url_length", pref_short_url_length_string);
+                editor1.putString("pref_short_url_length_pre", new java.text.SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+                editor1.commit();
+                adapter.toast(getString(R.string.short_url_length) + ": " + pref_short_url_length_string);
+            }
         }
     }
 
@@ -2420,16 +2428,16 @@ public final class UpdateTweet extends AppCompatActivity implements LocationList
             // finish();
         } else {
             WriteLog.write(this, "!screenName.equals(\"\")");
-            init_user_profimage(index);
-            WriteLog.write(this, "init_user_profimage(\"" + index + "\")");
-            init_user_autocomplete(index);
-            WriteLog.write(this, "init_user_autocomplete(\"" + index + "\")");
+            setUserProfimage(index);
+            WriteLog.write(this, "setUserProfimage(\"" + index + "\")");
+            initUserAutocomplete(index);
+            WriteLog.write(this, "initUserAutocomplete(\"" + index + "\")");
             init_short_url_length(index);
             WriteLog.write(this, "init_short_url_length(\"" + index + "\")");
         }
     }
 
-    private final void init_user_autocomplete(final int index) {
+    private final void initUserAutocomplete(final int index) {
         pref_app = PreferenceManager.getDefaultSharedPreferences(this);
         final boolean pref_enable_cooperation_url = pref_app.getBoolean("pref_enable_cooperation_url", false);
         if (pref_enable_cooperation_url) {
@@ -2576,13 +2584,19 @@ public final class UpdateTweet extends AppCompatActivity implements LocationList
             if (screenName.equals("") == false) {
                 try {
                     User user = twtr.showUser(screenName);
-                    final String profile_image_url = user.getProfileImageURL().toString();
-                    //					WriteLog.write(this, "profile_image_url: " + profile_image_url);
+                    if(user != null) {
+                        final String profile_image_url = user.getProfileImageURL().toString();
+                        //					WriteLog.write(this, "profile_image_url: " + profile_image_url);
 
-                    pref_twtr = getSharedPreferences("Twitter_setting", MODE_PRIVATE);
-                    final SharedPreferences.Editor editor = pref_twtr.edit();
-                    editor.putString("profile_image_url_" + Integer.toString(index), profile_image_url);
-                    editor.commit();
+                        if (profile_image_url.equals("") == false) {
+                            pref_twtr = getSharedPreferences("Twitter_setting", MODE_PRIVATE);
+                            if (profile_image_url.equals(pref_twtr.getString("profile_image_url_" + Integer.toString(index), "")) == false) {
+                                final SharedPreferences.Editor editor = pref_twtr.edit();
+                                editor.putString("profile_image_url_" + Integer.toString(index), profile_image_url);
+                                editor.commit();
+                            }
+                        }
+                    }
                 } catch (final TwitterException e) {
                     try {
                         adapter.twitterException(e);
@@ -2598,7 +2612,7 @@ public final class UpdateTweet extends AppCompatActivity implements LocationList
         return screenName;
     }
 
-    private final void init_user_profimage(final int index) {
+    private final void setUserProfimage(final int index) {
         URL url = null;
         try {
             url = new URL(pref_twtr.getString("profile_image_url_" + index, ""));
@@ -2828,25 +2842,31 @@ public final class UpdateTweet extends AppCompatActivity implements LocationList
         lp.width = capture_thumbnail_webview_width;
         lp.height = capture_thumbnail_webview_height;
         webView1.setLayoutParams(lp);
-        webView1.getSettings().setJavaScriptEnabled(true);
+        WebSettings webSettings = webView1.getSettings();
+        webSettings.setJavaScriptEnabled(true);
         if (pref_useragent.equals("")) {
-            webView1.getSettings().setUserAgentString(getString(R.string.useragent_ff));
+            webSettings.setUserAgentString(getString(R.string.useragent_ff));
         } else {
-            webView1.getSettings().setUserAgentString(pref_useragent);
+            webSettings.setUserAgentString(pref_useragent);
         }
-        webView1.getSettings().setPluginState(WebSettings.PluginState.ON);
-        webView1.getSettings().setBuiltInZoomControls(true);
-        webView1.getSettings().setSupportZoom(true);
-        try {
-            final Field nameField = webView1.getSettings().getClass().getDeclaredField("mBuiltInZoomControls");
-            nameField.setAccessible(true);
-            nameField.set(webView1.getSettings(), false);
-        } catch (final Exception e) {
-            WriteLog.write(UpdateTweet.this, e);
-            webView1.getSettings().setBuiltInZoomControls(false);
+        webSettings.setPluginState(WebSettings.PluginState.ON);
+        webSettings.setBuiltInZoomControls(true);
+        webSettings.setSupportZoom(true);
+        webSettings.setLoadWithOverviewMode(true);
+        webSettings.setUseWideViewPort(true);
+        webSettings.setBuiltInZoomControls(true);
+        if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB ) {
+            webSettings.setDisplayZoomControls(false);
+        } else {
+            try{
+                Field nameField = webSettings.getClass().getDeclaredField("mBuiltInZoomControls");
+                nameField.setAccessible(true);
+                nameField.set(webSettings, false);
+            }catch(final Exception e){
+                webSettings.setBuiltInZoomControls(false);
+            }
         }
-        webView1.getSettings().setLoadWithOverviewMode(true);
-        webView1.getSettings().setUseWideViewPort(true);
+
         webView1.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         webView1.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
 
@@ -5327,8 +5347,8 @@ public final class UpdateTweet extends AppCompatActivity implements LocationList
                     index = adapter.checkIndexFromPrefTwtr();
                 }
 
-                init_user_oauth(index);
-                WriteLog.write(UpdateTweet.this, "tweet() userinit_oauth(" + indexStr + ")");
+                // init_user_oauth(index);
+                // WriteLog.write(UpdateTweet.this, "tweet() userinit_oauth(" + indexStr + ")");
 
                 final long pref_notification_duration_done_tweet =
                         ListAdapter.getPrefInt(UpdateTweet.this, "pref_notification_duration_done_tweet", Integer.toString(ListAdapter.default_notification_duration_done_tweet));
@@ -5700,12 +5720,12 @@ public final class UpdateTweet extends AppCompatActivity implements LocationList
                             new Thread(new Runnable() {
                                 @Override
                                 public final void run() {
-                                    try {
-                                        final String webpagetitle = get_webpagetitle(webView1);
-                                        if (webpagetitle.equals("") == false) {
-                                            runOnUiThread(new Runnable() {
-                                                @Override
-                                                public final void run() {
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public final void run() {
+                                            try {
+                                                final String webpagetitle = get_webpagetitle(webView1);
+                                                if (webpagetitle.equals("") == false) {
                                                     editText2.setText(StringUtil.getTweetString(webpagetitle, editText2.getText().toString()));
 
                                                     try {
@@ -5713,11 +5733,11 @@ public final class UpdateTweet extends AppCompatActivity implements LocationList
                                                     } catch (final IllegalArgumentException e) {
                                                     }
                                                 }
-                                            });
+                                            } catch (final Exception e) {
+                                                WriteLog.write(UpdateTweet.this, e);
+                                            }
                                         }
-                                    } catch (final Exception e) {
-                                        WriteLog.write(UpdateTweet.this, e);
-                                    }
+                                    });
                                 }
                             }).start();
                         }
