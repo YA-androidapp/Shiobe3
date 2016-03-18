@@ -1475,19 +1475,22 @@ public class ListAdapter extends BaseAdapter {
         } catch (final Exception e) {
             WriteLog.write(context, e);
         }
-        if (deljustbeforeTweet == null) {
+        if (deljustbeforeTweet != null) {
+            WriteLog.write(context, deljustbeforeTweet);
+            return deljustbeforeTweet;
+        }else{
             try {
                 WriteLog.write(context, "getjustbefore() twtr.lookupUsers(deljustbeforeScreennames).get(0)");
                 final String[] deljustbeforeScreennames = {deljustbeforeScreenname};
                 final User deljustbeforeUser = twtr.lookupUsers(deljustbeforeScreennames).get(0);
-                deljustbeforeTweet = deljustbeforeUser.getStatus();
+                WriteLog.write(context, deljustbeforeTweet);
+                return deljustbeforeUser.getStatus();
             } catch (final TwitterException e1) {
                 twitterException(e1);
             } catch (final Exception e1) {
                 WriteLog.write(context, e1);
             }
         }
-        WriteLog.write(context, deljustbeforeTweet);
         return null;
     }
 
