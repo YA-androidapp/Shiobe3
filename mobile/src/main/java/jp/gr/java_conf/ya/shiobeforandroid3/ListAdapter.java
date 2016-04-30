@@ -3280,7 +3280,7 @@ public class ListAdapter extends BaseAdapter {
         final ArrayList<String> screenNames = new ArrayList<String>(default_user_index_size);
 
         try {
-            final String[] url_fav = { // URL 
+            final String[] url_fav = { // URL
                     "https://twitter.com/" + tweet.getUser().getScreenName() + "/status/" + Long.toString(tweet.getId()), // Twitter
                     "http://aclog.koba789.com/api/tweets/show.json?id=" + Long.toString(tweet.getId()) // aclog
             };
@@ -5465,11 +5465,13 @@ public class ListAdapter extends BaseAdapter {
                 final ResponseList<UserList> lists = getSortedOurslist();
                 final ArrayList<String> listNames = new ArrayList<String>(default_user_index_size * 20);
 
+                int succeedCount = 0;
                 try {
                     for (final UserList list : lists) {
                         try {
                             getTwitter(checkIndexFromScreenname(list.getUser().getScreenName()), false).showUserListMembership(list.getId(), finalUsr.getId());
                             listNames.add(list.getFullName() + context.getString(R.string.list_user_remove_from));
+                            succeedCount++;
                         } catch (final TwitterException e) {
                             if (e.getStatusCode() == 404) {
                                 listNames.add(list.getFullName() + context.getString(R.string.list_user_add_to));
@@ -5488,6 +5490,7 @@ public class ListAdapter extends BaseAdapter {
                 }
 
                 final boolean[] checkedItems = new boolean[listNames.size()];
+                final int finalSucceedCount = succeedCount;
                 final String[] items = listNames.toArray(new String[listNames.size()]);
 
                 ((Activity) context).runOnUiThread(new Runnable() {
@@ -5503,12 +5506,21 @@ public class ListAdapter extends BaseAdapter {
                             public final void onClick(final DialogInterface dialog, final int which) {
                                 for (int i = 0; i < listNames.size(); i++) {
                                     if (checkedItems[i] == true) {
-                                        if (items[i].contains(context.getString(R.string.list_user_add_to))) {
-                                            afterAction("onaction_follow_create", listUser(true, lists.get(i).getId(), lists.get(i).getFullName(), finalUsr.getId(), finalUsr.getScreenName()));
-
-                                        } else if (items[i].contains(context.getString(R.string.list_user_remove_from))) {
-                                            afterAction("onaction_follow_destroy", listUser(false, lists.get(i).getId(), lists.get(i).getFullName(), finalUsr.getId(), finalUsr.getScreenName()));
+                                        if(i>finalSucceedCount){
+                                            final int i2 = finalSucceedCount + ( ( i - finalSucceedCount ) / 2 );
+                                            if (items[i].contains(context.getString(R.string.list_user_add_to))) {
+                                                afterAction("onaction_follow_create", listUser(true, lists.get(i2).getId(), lists.get(i2).getFullName(), finalUsr.getId(), finalUsr.getScreenName()));
+                                            } else if (items[i].contains(context.getString(R.string.list_user_remove_from))) {
+                                                afterAction("onaction_follow_destroy", listUser(false, lists.get(i2).getId(), lists.get(i2).getFullName(), finalUsr.getId(), finalUsr.getScreenName()));
+                                            }
+                                        }else{
+                                            if (items[i].contains(context.getString(R.string.list_user_add_to))) {
+                                                afterAction("onaction_follow_create", listUser(true, lists.get(i).getId(), lists.get(i).getFullName(), finalUsr.getId(), finalUsr.getScreenName()));
+                                            } else if (items[i].contains(context.getString(R.string.list_user_remove_from))) {
+                                                afterAction("onaction_follow_destroy", listUser(false, lists.get(i).getId(), lists.get(i).getFullName(), finalUsr.getId(), finalUsr.getScreenName()));
+                                            }
                                         }
+
                                     }
                                 }
                             }
