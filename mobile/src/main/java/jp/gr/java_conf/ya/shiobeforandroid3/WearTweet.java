@@ -33,7 +33,7 @@ import android.support.v4.app.RemoteInput;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 
-public final class WearTweet extends AppCompatActivity {
+public final class WearTweet extends Activity {
 	private static int index_pre = -1;
 	// private static final int NOTIFY_RUNNING = 0;
 	private static final int NOTIFY_DONE_TWEET = 2;

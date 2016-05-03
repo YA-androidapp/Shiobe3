@@ -30,6 +30,7 @@ public class InputActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         log("onCreate");
         setContentView(R.layout.activity_input);
 
@@ -68,7 +69,7 @@ public class InputActivity extends Activity {
                         }
                         editor.commit();
 
-                        final String message = tweetstr(editText1.getText().toString(),editText2.getText().toString(),editText3.getText().toString());
+                        final String message = tweetstr(editText1.getText().toString(), editText2.getText().toString(), editText3.getText().toString());
                         sendDataTask(message);
                     }
                 });
@@ -104,57 +105,65 @@ public class InputActivity extends Activity {
     }
 
     private void sendDataTask(final String message) {
-        log("sendDataTask");
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                init();
+        try{
+            log("sendDataTask");
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    init();
 
-                sendData(message);
+                    sendData(message);
 
-                Intent intent = new Intent(InputActivity.this, ConfirmationActivity.class);
-                intent.putExtra(ConfirmationActivity.EXTRA_ANIMATION_TYPE,
-                        ConfirmationActivity.SUCCESS_ANIMATION);
-                intent.putExtra(ConfirmationActivity.EXTRA_MESSAGE,
-                        getString(R.string.sent_message));
-                startActivity(intent);
+                    Intent intent = new Intent(InputActivity.this, ConfirmationActivity.class);
+                    intent.putExtra(ConfirmationActivity.EXTRA_ANIMATION_TYPE,
+                            ConfirmationActivity.SUCCESS_ANIMATION);
+                    intent.putExtra(ConfirmationActivity.EXTRA_MESSAGE,
+                            getString(R.string.sent_message));
+                    startActivity(intent);
 
-                finish();
-            }
-        }).start();
+                    finish();
+                }
+            }).start();
+        }catch (Exception e){
+            log(e.getMessage());
+        }
     }
 
     private void sendData(String message) {
-        log("sendData");
-        log("path: " + (message.equals("") ? "/notification" : "/updateStatus"));
-        log("data: " + message);
-        NodeApi.GetConnectedNodesResult nodes = Wearable.NodeApi.getConnectedNodes(client).await();
-        for (Node node : nodes.getNodes()) {
-            MessageApi.SendMessageResult result =null;
-            try {
-                result = Wearable.MessageApi.sendMessage(
-                        client,
-                        node.getId(),
-                        (message.equals("") ? "/notification" : "/updateStatus"),
-                        message.getBytes())
-                        .await();
-            }catch(Exception e){
-                log(e.getMessage());
-            }
-            if(result!=null) {
-                if (result.getStatus().isSuccess()) {
-                    log("done");
+        try{
+            log("sendData");
+            log("path: " + (message.equals("") ? "/notification" : "/updateStatus"));
+            log("data: " + message);
+            NodeApi.GetConnectedNodesResult nodes = Wearable.NodeApi.getConnectedNodes(client).await();
+            for (Node node : nodes.getNodes()) {
+                MessageApi.SendMessageResult result =null;
+                try {
+                    result = Wearable.MessageApi.sendMessage(
+                            client,
+                            node.getId(),
+                            (message.equals("") ? "/notification" : "/updateStatus"),
+                            message.getBytes())
+                            .await();
+                }catch(Exception e){
+                    log(e.getMessage());
+                }
+                if(result!=null) {
+                    if (result.getStatus().isSuccess()) {
+                        log("done");
+                    } else {
+                        log("failure");
+                    }
                 } else {
                     log("failure");
                 }
-            } else {
-                log("failure");
             }
+        }catch (Exception e){
+            log(e.getMessage());
         }
     }
 
     private void log(String str) {
-            Log.v("S4A InputActivity", str);
+        Log.v("S4A InputActivity", str);
     }
 
     private String tweetstr(String str1, String str2, String str3) {
