@@ -1478,7 +1478,7 @@ public class ListAdapter extends BaseAdapter {
         if (deljustbeforeTweet != null) {
             WriteLog.write(context, deljustbeforeTweet);
             return deljustbeforeTweet;
-        }else{
+        } else {
             try {
                 WriteLog.write(context, "getjustbefore() twtr.lookupUsers(deljustbeforeScreennames).get(0)");
                 final String[] deljustbeforeScreennames = {deljustbeforeScreenname};
@@ -2057,7 +2057,7 @@ public class ListAdapter extends BaseAdapter {
                             TwitterStreamFactory twitterStreamFactory = new TwitterStreamFactory(conf);
                             if (twitterStreamFactory != null)
                                 twitterStream = twitterStreamFactory.getInstance();
-                            }
+                        }
                         index_pre_s = index;
                     }
                     return twitterStream;
@@ -2096,7 +2096,7 @@ public class ListAdapter extends BaseAdapter {
             try {
                 twitterException(e);
             } catch (Exception ex) {
-                    toast(context.getString(R.string.cannot_access_twitter));
+                toast(context.getString(R.string.cannot_access_twitter));
             }
         } catch (final Exception e) {
             WriteLog.write(context, e);
@@ -2386,13 +2386,13 @@ public class ListAdapter extends BaseAdapter {
             final String[] finalITEM = getTweetMenuItemArray(finalTweet_menu, finalTweet_menu_RetweetedStatus);
 
             new AlertDialog.Builder(context).setIcon(android.R.drawable.ic_dialog_info).setTitle("@"
-                            + finalTweet_menu_screenName
-                            + ":"
-                            + System.getProperty("line.separator")
-                            + " "
-                            + finalTweet_menu.getText()
-                            + ((finalTweet_menu.isRetweet()) ? ("( @" + finalTweet_menu_RetweetedStatus_screenName + ":" + System.getProperty("line.separator") + " "
-                            + finalTweet_menu_RetweetedStatus.getText() + " )") : (""))
+                    + finalTweet_menu_screenName
+                    + ":"
+                    + System.getProperty("line.separator")
+                    + " "
+                    + finalTweet_menu.getText()
+                    + ((finalTweet_menu.isRetweet()) ? ("( @" + finalTweet_menu_RetweetedStatus_screenName + ":" + System.getProperty("line.separator") + " "
+                    + finalTweet_menu_RetweetedStatus.getText() + " )") : (""))
 
             ).setItems(finalITEM, new DialogInterface.OnClickListener() {
                 @Override
@@ -2973,7 +2973,7 @@ public class ListAdapter extends BaseAdapter {
                                                 // not finalTweet_menu2
                                                 .setMessage(context.getString(R.string.confirm_del) + ":" + NL + " @" + finalTweet_menu.getUser() // not finalTweet_menu2
                                                         .getScreenName() + ":" + NL + "  " + finalTweet_menu.getText())
-                                                        // not finalTweet_menu2
+                                                // not finalTweet_menu2
                                                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                                                     @Override
                                                     public final void onClick(final DialogInterface dialog, final int which) {
@@ -3484,6 +3484,7 @@ public class ListAdapter extends BaseAdapter {
         } else {
             try {
                 getTwitter(idx, false).destroyUserListMember(listId, userId);
+                WriteLog.write(context, context.getString(R.string.done_list_remove) + ": " + listName + ": @" + uScreenname + " [@" + checkScreennameFromIndex(idx) + "]");
 
                 return (context.getString(R.string.done_list_remove) + ": " + listName + ": @" + uScreenname + " [@" + checkScreennameFromIndex(idx) + "]");
             } catch (final TwitterException e) {
@@ -4672,7 +4673,7 @@ public class ListAdapter extends BaseAdapter {
         final User user = getUser(idx, uScreenname);
         final User myUser = getUser();
 
-        if ((user != null)&&(myUser != null)) {
+        if ((user != null) && (myUser != null)) {
             final boolean pref_hide_item_myicon_userEqualsMyuser = (myUser.getScreenName().equals("")) ? false : (pref_hide_item_myicon && (user.getScreenName().equals(myUser.getScreenName())));
 
             new Thread(new Runnable() {
@@ -4791,14 +4792,14 @@ public class ListAdapter extends BaseAdapter {
             userinfoBuilder.append("\">");
             userinfoBuilder.append(user.getStatusesCount());
             userinfoBuilder.append("(twilog)</a></font>");
-                if (pref_userinfo_show_my_profile) {
-                    userinfoBuilder.append(SP4);
-                    userinfoBuilder.append("<small><font color=\"");
-                    userinfoBuilder.append(pref_userinfo_fontcolor_my_profile);
-                    userinfoBuilder.append("\">[ ");
-                    userinfoBuilder.append(myUser.getStatusesCount());
-                    userinfoBuilder.append(" ]</font></small>");
-                }
+            if (pref_userinfo_show_my_profile) {
+                userinfoBuilder.append(SP4);
+                userinfoBuilder.append("<small><font color=\"");
+                userinfoBuilder.append(pref_userinfo_fontcolor_my_profile);
+                userinfoBuilder.append("\">[ ");
+                userinfoBuilder.append(myUser.getStatusesCount());
+                userinfoBuilder.append(" ]</font></small>");
+            }
             userinfoBuilder.append(SP8);
             userinfoBuilder.append("<font color=\"");
             userinfoBuilder.append(pref_header_fontcolor);
@@ -4809,20 +4810,20 @@ public class ListAdapter extends BaseAdapter {
             userinfoBuilder.append("/favorites\">");
             userinfoBuilder.append(user.getFavouritesCount());
             userinfoBuilder.append("</a></font>");
-                if (pref_userinfo_show_my_profile) {
-                    userinfoBuilder.append(SP4);
-                    userinfoBuilder.append("<small><font color=\"");
-                    userinfoBuilder.append(pref_userinfo_fontcolor_my_profile);
-                    userinfoBuilder.append("\">[ </font><font color=\"");
-                    userinfoBuilder.append(pref_userinfo_fontcolor_my_profile);
-                    userinfoBuilder.append("\"><a href=\"https://twitter.com/");
-                    userinfoBuilder.append(myUser.getScreenName());
-                    userinfoBuilder.append("/favorites\">");
-                    userinfoBuilder.append(myUser.getFavouritesCount());
-                    userinfoBuilder.append("</a></font><font color=\"");
-                    userinfoBuilder.append(pref_userinfo_fontcolor_my_profile);
-                    userinfoBuilder.append("\"> ]</font></small>");
-                }
+            if (pref_userinfo_show_my_profile) {
+                userinfoBuilder.append(SP4);
+                userinfoBuilder.append("<small><font color=\"");
+                userinfoBuilder.append(pref_userinfo_fontcolor_my_profile);
+                userinfoBuilder.append("\">[ </font><font color=\"");
+                userinfoBuilder.append(pref_userinfo_fontcolor_my_profile);
+                userinfoBuilder.append("\"><a href=\"https://twitter.com/");
+                userinfoBuilder.append(myUser.getScreenName());
+                userinfoBuilder.append("/favorites\">");
+                userinfoBuilder.append(myUser.getFavouritesCount());
+                userinfoBuilder.append("</a></font><font color=\"");
+                userinfoBuilder.append(pref_userinfo_fontcolor_my_profile);
+                userinfoBuilder.append("\"> ]</font></small>");
+            }
             userinfoBuilder.append(SP8);
             userinfoBuilder.append("<font color=\"");
             userinfoBuilder.append(pref_header_fontcolor);
@@ -4833,20 +4834,20 @@ public class ListAdapter extends BaseAdapter {
             userinfoBuilder.append("/lists/memberships\">");
             userinfoBuilder.append(user.getListedCount());
             userinfoBuilder.append("</a></font>");
-                if (pref_userinfo_show_my_profile) {
-                    userinfoBuilder.append(SP4);
-                    userinfoBuilder.append("<small><font color=\"");
-                    userinfoBuilder.append(pref_userinfo_fontcolor_my_profile);
-                    userinfoBuilder.append("\">[ </font><font color=\"");
-                    userinfoBuilder.append(pref_userinfo_fontcolor_my_profile);
-                    userinfoBuilder.append("\"><a href=\"https://twitter.com/");
-                    userinfoBuilder.append(myUser.getScreenName());
-                    userinfoBuilder.append("/lists/memberships\">");
-                    userinfoBuilder.append(myUser.getListedCount());
-                    userinfoBuilder.append("</a></font><font color=\"");
-                    userinfoBuilder.append(pref_userinfo_fontcolor_my_profile);
-                    userinfoBuilder.append("\"> ]</font></small>");
-                }
+            if (pref_userinfo_show_my_profile) {
+                userinfoBuilder.append(SP4);
+                userinfoBuilder.append("<small><font color=\"");
+                userinfoBuilder.append(pref_userinfo_fontcolor_my_profile);
+                userinfoBuilder.append("\">[ </font><font color=\"");
+                userinfoBuilder.append(pref_userinfo_fontcolor_my_profile);
+                userinfoBuilder.append("\"><a href=\"https://twitter.com/");
+                userinfoBuilder.append(myUser.getScreenName());
+                userinfoBuilder.append("/lists/memberships\">");
+                userinfoBuilder.append(myUser.getListedCount());
+                userinfoBuilder.append("</a></font><font color=\"");
+                userinfoBuilder.append(pref_userinfo_fontcolor_my_profile);
+                userinfoBuilder.append("\"> ]</font></small>");
+            }
             userinfoBuilder.append(BR);
             userinfoBuilder.append("<font color=\"");
             userinfoBuilder.append(pref_header_fontcolor);
@@ -4870,32 +4871,32 @@ public class ListAdapter extends BaseAdapter {
             userinfoBuilder.append("\"> (");
             userinfoBuilder.append(getFFRatio(user.getFollowersCount(), user.getFriendsCount()));
             userinfoBuilder.append(")</font>");
-                if (pref_userinfo_show_my_profile) {
-                    userinfoBuilder.append(SP4);
-                    userinfoBuilder.append("<small><font color=\"");
-                    userinfoBuilder.append(pref_userinfo_fontcolor_my_profile);
-                    userinfoBuilder.append("\">[ </font><font color=\"");
-                    userinfoBuilder.append(pref_userinfo_fontcolor_my_profile);
-                    userinfoBuilder.append("\"><a href=\"https://twitter.com/");
-                    userinfoBuilder.append(myUser.getScreenName());
-                    userinfoBuilder.append("/followers\">");
-                    userinfoBuilder.append(myUser.getFollowersCount());
-                    userinfoBuilder.append("</a></font><font color=\"");
-                    userinfoBuilder.append(pref_userinfo_fontcolor_my_profile);
-                    userinfoBuilder.append("\"> / </font><font color=\"");
-                    userinfoBuilder.append(pref_userinfo_fontcolor_my_profile);
-                    userinfoBuilder.append("\"><a href=\"https://twitter.com/");
-                    userinfoBuilder.append(myUser.getScreenName());
-                    userinfoBuilder.append("/following\">");
-                    userinfoBuilder.append(myUser.getFriendsCount());
-                    userinfoBuilder.append("</a></font><font color=\"");
-                    userinfoBuilder.append(pref_userinfo_fontcolor_my_profile);
-                    userinfoBuilder.append("\"> (");
-                    userinfoBuilder.append(getFFRatio(myUser.getFollowersCount(), myUser.getFriendsCount()));
-                    userinfoBuilder.append(")</font><font color=\"");
-                    userinfoBuilder.append(pref_userinfo_fontcolor_my_profile);
-                    userinfoBuilder.append("\"> ]</font></small>");
-                }
+            if (pref_userinfo_show_my_profile) {
+                userinfoBuilder.append(SP4);
+                userinfoBuilder.append("<small><font color=\"");
+                userinfoBuilder.append(pref_userinfo_fontcolor_my_profile);
+                userinfoBuilder.append("\">[ </font><font color=\"");
+                userinfoBuilder.append(pref_userinfo_fontcolor_my_profile);
+                userinfoBuilder.append("\"><a href=\"https://twitter.com/");
+                userinfoBuilder.append(myUser.getScreenName());
+                userinfoBuilder.append("/followers\">");
+                userinfoBuilder.append(myUser.getFollowersCount());
+                userinfoBuilder.append("</a></font><font color=\"");
+                userinfoBuilder.append(pref_userinfo_fontcolor_my_profile);
+                userinfoBuilder.append("\"> / </font><font color=\"");
+                userinfoBuilder.append(pref_userinfo_fontcolor_my_profile);
+                userinfoBuilder.append("\"><a href=\"https://twitter.com/");
+                userinfoBuilder.append(myUser.getScreenName());
+                userinfoBuilder.append("/following\">");
+                userinfoBuilder.append(myUser.getFriendsCount());
+                userinfoBuilder.append("</a></font><font color=\"");
+                userinfoBuilder.append(pref_userinfo_fontcolor_my_profile);
+                userinfoBuilder.append("\"> (");
+                userinfoBuilder.append(getFFRatio(myUser.getFollowersCount(), myUser.getFriendsCount()));
+                userinfoBuilder.append(")</font><font color=\"");
+                userinfoBuilder.append(pref_userinfo_fontcolor_my_profile);
+                userinfoBuilder.append("\"> ]</font></small>");
+            }
 
             if (!pref_enable_singleline) {
                 userinfoBuilder.append(BR);
@@ -4955,14 +4956,14 @@ public class ListAdapter extends BaseAdapter {
                 userinfoBuilder.append(DF.format(user.getCreatedAt()));
                 userinfoBuilder.append("</font>");
                 userinfoBuilder.append(pref_tl_fontsize_small_createdat ? "</small>" : "");
-                    if (pref_userinfo_show_my_profile) {
-                        userinfoBuilder.append(SP4);
-                        userinfoBuilder.append("<small><font color=\"");
-                        userinfoBuilder.append(pref_userinfo_fontcolor_my_profile);
-                        userinfoBuilder.append("\">[ ");
-                        userinfoBuilder.append(DF.format(myUser.getCreatedAt()));
-                        userinfoBuilder.append(" ]</font></small>");
-                    }
+                if (pref_userinfo_show_my_profile) {
+                    userinfoBuilder.append(SP4);
+                    userinfoBuilder.append("<small><font color=\"");
+                    userinfoBuilder.append(pref_userinfo_fontcolor_my_profile);
+                    userinfoBuilder.append("\">[ ");
+                    userinfoBuilder.append(DF.format(myUser.getCreatedAt()));
+                    userinfoBuilder.append(" ]</font></small>");
+                }
 
                 userinfoBuilder.append(BR);
                 userinfoBuilder.append("<font color=\"");
@@ -5103,7 +5104,7 @@ public class ListAdapter extends BaseAdapter {
 
         final User myUser = getUser();
 
-        if ((usrlist != null)&&(myUser != null)) {
+        if ((usrlist != null) && (myUser != null)) {
             final boolean pref_hide_item_myicon_userEqualsMyuser =
                     (myUser.getScreenName().equals("")) ? false : (pref_hide_item_myicon && (usrlist.getUser().getScreenName().equals(myUser.getScreenName())));
 
@@ -5465,21 +5466,26 @@ public class ListAdapter extends BaseAdapter {
                 final ResponseList<UserList> lists = getSortedOurslist();
                 final ArrayList<String> listNames = new ArrayList<String>(default_user_index_size * 20);
 
-                int succeedCount = 0;
                 try {
                     for (final UserList list : lists) {
                         try {
                             getTwitter(checkIndexFromScreenname(list.getUser().getScreenName()), false).showUserListMembership(list.getId(), finalUsr.getId());
+
+                            //  リストに追加済み
+                            listNames.add(list.getFullName() + " " + context.getString(R.string.list_user_add_to) + " *");
                             listNames.add(list.getFullName() + context.getString(R.string.list_user_remove_from));
-                            succeedCount++;
                         } catch (final TwitterException e) {
                             if (e.getStatusCode() == 404) {
+                                // リストに追加されていない
                                 listNames.add(list.getFullName() + context.getString(R.string.list_user_add_to));
+                                listNames.add(list.getFullName() + " " + context.getString(R.string.list_user_remove_from) + " *");
                             } else if (e.exceededRateLimitation()) {
+                                // 規制
                                 listNames.add(list.getFullName() + context.getString(R.string.list_user_add_to) + " *");
                                 listNames.add(list.getFullName() + context.getString(R.string.list_user_remove_from) + " *");
                             } else {
-                                listNames.add(list.getFullName() + context.getString(R.string.list_user_remove_from));
+                                listNames.add(list.getFullName() + context.getString(R.string.list_user_add_to) + " *");
+                                listNames.add(list.getFullName() + context.getString(R.string.list_user_remove_from) + " *");
                             }
                         } catch (final Exception e) {
                             WriteLog.write(context, e);
@@ -5490,7 +5496,6 @@ public class ListAdapter extends BaseAdapter {
                 }
 
                 final boolean[] checkedItems = new boolean[listNames.size()];
-                final int finalSucceedCount = succeedCount;
                 final String[] items = listNames.toArray(new String[listNames.size()]);
 
                 ((Activity) context).runOnUiThread(new Runnable() {
@@ -5506,21 +5511,12 @@ public class ListAdapter extends BaseAdapter {
                             public final void onClick(final DialogInterface dialog, final int which) {
                                 for (int i = 0; i < listNames.size(); i++) {
                                     if (checkedItems[i] == true) {
-                                        if(i>finalSucceedCount){
-                                            final int i2 = finalSucceedCount + ( ( i - finalSucceedCount ) / 2 );
-                                            if (items[i].contains(context.getString(R.string.list_user_add_to))) {
-                                                afterAction("onaction_follow_create", listUser(true, lists.get(i2).getId(), lists.get(i2).getFullName(), finalUsr.getId(), finalUsr.getScreenName()));
-                                            } else if (items[i].contains(context.getString(R.string.list_user_remove_from))) {
-                                                afterAction("onaction_follow_destroy", listUser(false, lists.get(i2).getId(), lists.get(i2).getFullName(), finalUsr.getId(), finalUsr.getScreenName()));
-                                            }
-                                        }else{
-                                            if (items[i].contains(context.getString(R.string.list_user_add_to))) {
-                                                afterAction("onaction_follow_create", listUser(true, lists.get(i).getId(), lists.get(i).getFullName(), finalUsr.getId(), finalUsr.getScreenName()));
-                                            } else if (items[i].contains(context.getString(R.string.list_user_remove_from))) {
-                                                afterAction("onaction_follow_destroy", listUser(false, lists.get(i).getId(), lists.get(i).getFullName(), finalUsr.getId(), finalUsr.getScreenName()));
-                                            }
+                                        final int i2 = i / 2;
+                                        if (items[i].contains(context.getString(R.string.list_user_add_to))) {
+                                            afterAction("onaction_follow_create", listUser(true, lists.get(i2).getId(), lists.get(i2).getFullName(), finalUsr.getId(), finalUsr.getScreenName()));
+                                        } else if (items[i].contains(context.getString(R.string.list_user_remove_from))) {
+                                            afterAction("onaction_follow_destroy", listUser(false, lists.get(i2).getId(), lists.get(i2).getFullName(), finalUsr.getId(), finalUsr.getScreenName()));
                                         }
-
                                     }
                                 }
                             }
@@ -6053,8 +6049,8 @@ public class ListAdapter extends BaseAdapter {
     }
 
     private final String userrt(final int index, final Status tweet) {
-        WriteLog.write(context,"userrt("+Integer.toString(index)+",");
-        WriteLog.write(context,tweet);
+        WriteLog.write(context, "userrt(" + Integer.toString(index) + ",");
+        WriteLog.write(context, tweet);
         try {
             pref_app = PreferenceManager.getDefaultSharedPreferences(context);
             final String pref_userrt_format = pref_app.getString("pref_userrt_format", "RT @%USER%: %TEXT%");
@@ -6071,7 +6067,7 @@ public class ListAdapter extends BaseAdapter {
                                 pref_userrt_format.replace("%USER%", tweet.getRetweetedStatus().getUser().getScreenName()).replace("%TEXT%", tweet.getRetweetedStatus().getText());
                     }
                     final StatusUpdate statusUpdate = new StatusUpdate((newStatusText.length() > 140) ? newStatusText.substring(0, 140) : newStatusText);
-                    WriteLog.write(context, "userrt() 公式RT "+(pref_enable_userrt_format_via?"":"!")+"pref_enable_userrt_format_via newStatusText: " + newStatusText);
+                    WriteLog.write(context, "userrt() 公式RT " + (pref_enable_userrt_format_via ? "" : "!") + "pref_enable_userrt_format_via newStatusText: " + newStatusText);
                     statusUpdate.setInReplyToStatusId(tweet.getRetweetedStatus().getId());
                     getTwitter(index, false).updateStatus(statusUpdate);
                     return (context.getString(R.string.done_userrt) + ": " + newStatusText + " [@" + checkScreennameFromIndex(index) + "]");
